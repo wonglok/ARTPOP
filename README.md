@@ -13,15 +13,6 @@ http://get.webgl.org
 WebGL Browsers:
 ======
 
-*   Abacus
-    * answer
-*   Bubbles
-    1.  bunk
-    2.  bupkis
-        * BELITTLER
-    3. burper
-*   Cunning
-
 
 
 * MacOSX, Windows, Linux Desktop Users:
