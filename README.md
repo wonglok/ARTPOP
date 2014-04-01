@@ -27,7 +27,7 @@ http://caniuse.com/webgl
 	1. Latest Chrome
 
 * iOS*:
-	1. Mpobile Safari Does not support WebGL.
+	1. WebGL Currently Not Supported by Mobile Safari.
 	2. Mobile iOS Chrome cannot support WebGL because of iOS JS engine restriction.
 
 * Other devices:
