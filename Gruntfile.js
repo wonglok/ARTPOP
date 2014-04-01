@@ -15,8 +15,26 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
+
+  grunt.loadNpmTasks('grunt-gh-pages');
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+    //grunt.loadNpmTasks('grunt-gh-pages');
+    'gh-pages': {
+      dist:{
+        //http://wonglok.github.io/FrameBudget.js/
+        options: {
+          user: {
+            name: 'Wong Lok',
+            email: 'wonglok@wonglok.com'
+          },
+          repo: 'git@github.com:wonglok/ARTPOP.git',
+          base: 'dist'
+        },
+        src: ['**']
+      }
+    },
 
     // Project settings
     yeoman: {

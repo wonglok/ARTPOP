@@ -1,10 +1,10 @@
 ARTPOP
 ======
-
 ARTPOP meets WEBGL
-WebGL version of ARTPOP app. Fan Made.
 
-WebGL on the edge of glory.
+Experimental WebGL version of ARTPOP app. Fan Made.
+All copyrights belong to their respective owners.
+
 
 Check WebGL Support
 =====
@@ -32,7 +32,7 @@ Other devices:
 FAQ
 =====
 	Some Desktop/Android Google Chrome users may have webgl support issue.
-	To force enable webgl, go to `chrome://flags/`
+	To force enable webgl, go to ```chrome://flags/```
 	Enable 'Override software rendering list'.
 
 

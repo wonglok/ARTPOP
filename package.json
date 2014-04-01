@@ -1,5 +1,8 @@
 {
-  "name": "artpop",
+  "name": "ARTPOP",
+  "author": "WONG LOK, and respective copyright owners",
+  "License": "Apache 2.0",
+  "description": "ARTPOP meets webgl. Fan Made. All copyrights belong to their respective owners.",
   "version": "0.0.0",
   "dependencies": {},
   "devDependencies": {
@@ -36,7 +39,8 @@
     "karma-chrome-launcher": "~0.1.2",
     "karma-webdriver-launcher": "~0.2.0",
     "karma-firefox-launcher": "~0.1.3",
-    "karma-safari-launcher": "~0.1.1"
+    "karma-safari-launcher": "~0.1.1",
+    "grunt-gh-pages": "~0.9.1"
   },
   "engines": {
     "node": ">=0.10.0"
