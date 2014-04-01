@@ -12,22 +12,34 @@ http://get.webgl.org
 
 WebGL Browsers:
 ======
-MacOSX, Windows, Linux Desktop Users:
-	Chrome,
-	Firefox,
-	IE11, (windows 8.1)
-	Safari, (with dev mode enabled)
 
-Android:
-	Chrome
+*   Abacus
+    * answer
+*   Bubbles
+    1.  bunk
+    2.  bupkis
+        * BELITTLER
+    3. burper
+*   Cunning
 
-iOS*:
-	Mpobile Safari Does not support WebGL.
-	Mobile iOS Chrome cannot support WebGL because of iOS JS engine restriction.
 
-Other devices:
-	Kindle Fire.
-	RIM Playbook.
+
+* MacOSX, Windows, Linux Desktop Users:
+	1. Latest Chrome,
+	2. Latest Firefox,
+	3. Latest IE11, (windows 8.1)
+	4. Latest Safari, (with dev mode enabled)
+
+* Android:
+	1. Latest Chrome
+
+* iOS*:
+	1. Mpobile Safari Does not support WebGL.
+	2. Mobile iOS Chrome cannot support WebGL because of iOS JS engine restriction.
+
+* Other devices:
+	1. Kindle Fire.
+	2. RIM Playbook.
 
 FAQ
 =====
