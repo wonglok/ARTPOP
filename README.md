@@ -2,7 +2,9 @@ ARTPOP
 ======
 ARTPOP meets WEBGL
 
-Experimental WebGL version of ARTPOP app. Fan Made.
+Experimental WebGL version of ARTPOP WebGL App. ~v~
+
+Fan Made.
 All copyrights belong to their respective owners.
 
 
@@ -10,10 +12,10 @@ Check WebGL Support
 =====
 http://get.webgl.org
 
-WebGL Browsers:
+
+Supported WebGL Browsers:
 ======
-
-
+http://caniuse.com/webgl
 
 * MacOSX, Windows, Linux Desktop Users:
 	1. Latest Chrome,
