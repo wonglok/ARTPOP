@@ -34,9 +34,11 @@ WebGL Browsers:
 
 FAQ
 =====
-	Some Desktop/Android Google Chrome users may have webgl support issue.
-	To force enable webgl, go to ```chrome://flags/```
-	Enable 'Override software rendering list'.
+Some Desktop/Android Google Chrome users may have webgl support issue.
+
+To force enable webgl, go to ```chrome://flags/```
+
+Enable 'Override software rendering list'.
 
 
 
