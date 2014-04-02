@@ -11,12 +11,17 @@ module.exports = function (grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
+  //
+  //
+  //
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
 
   grunt.loadNpmTasks('grunt-gh-pages');
+  grunt.loadNpmTasks('grunt-exec');
+  //grunt.loadNpmTasks('grunt-open');
   // Define the configuration for all the tasks
   grunt.initConfig({
 
@@ -35,7 +40,7 @@ module.exports = function (grunt) {
         src: ['**']
       }
     },
-
+    //http://apwgl.192.168.0.120.xip.io:9000/
     // Project settings
     yeoman: {
       // configurable paths
@@ -78,18 +83,21 @@ module.exports = function (grunt) {
         ]
       }
     },
-
+    open : {
+      dev: 'http://APWGL.192.168.0.120.xip.io:9000'
+    },
     // The actual grunt server settings
     connect: {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        //localhost
+        hostname: 'APWGL.192.168.0.120.xip.io',
         livereload: 35729
       },
       livereload: {
         options: {
-          open: true,
+          open: 'APWGL.192.168.0.120.xip.io:9000',
           base: [
             '.tmp',
             '<%= yeoman.app %>'
@@ -103,6 +111,14 @@ module.exports = function (grunt) {
             '.tmp',
             'test',
             '<%= yeoman.app %>'
+          ]
+        }
+      },
+      testDist: {
+        options: {
+          port: 9008,
+          base: [
+            '<%= yeoman.dist %>'
           ]
         }
       },
@@ -342,6 +358,11 @@ module.exports = function (grunt) {
       }
     },
 
+    exec: {
+      openDev: 'open http://apwgl.192.168.0.120.xip.io:9000',
+      openDistTest: 'open http://apwgl.192.168.0.120.xip.io:9008'
+    },
+
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
@@ -403,7 +424,10 @@ module.exports = function (grunt) {
       'bowerInstall',
       'concurrent:server',
       'autoprefixer',
+      'connect:testDist',
       'connect:livereload',
+      'exec:openDev',
+      'exec:openDistTest',
       'watch'
     ]);
   });
@@ -438,9 +462,18 @@ module.exports = function (grunt) {
     'htmlmin'
   ]);
 
-  grunt.registerTask('default', [
+  grunt.registerTask('gruntdefault', [
     'newer:jshint',
     'test',
     'build'
+  ]);
+  grunt.registerTask('deploy', [
+    'gruntdefault',
+    'gh-pages'
+  ]);
+
+  grunt.registerTask('default', [
+    'newer:jshint',
+    'serve'
   ]);
 };
