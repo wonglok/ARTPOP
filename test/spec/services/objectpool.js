@@ -19,21 +19,21 @@ describe('Service: ObjPool', function () {
   });
 
   it('should have defined props', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('defined props');
     expect(!!newPool).toBe(true);
     expect(!!newPool.pool).toBe(true);
     expect(!!newPool.options).toBe(true);
   });
 
   it('should be correct ObjPoolItem type', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('ObjPoolItem type');
     var newItem = newPool.alloc();
     expect(!!newItem).toBe(true);
     expect(newItem instanceof ObjPoolItem).toBe(true);
   });
 
   it('should be correct ObjPoolItem type and member', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('ObjPoolItem type and member');
     var newItem = newPool.alloc();
     expect(newItem instanceof ObjPoolItem).toBe(true);
     expect(!!newItem).toBe(true);
@@ -43,7 +43,7 @@ describe('Service: ObjPool', function () {
   });
 
   it('should alloc default object', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('default object');
     var newItem = newPool.alloc();
     expect(!!newItem.obj).toBe(true);
     expect(newItem.obj instanceof Image).toBe(true);
@@ -52,7 +52,7 @@ describe('Service: ObjPool', function () {
   });
 
   it('should alloc custom object', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('custom object');
     newPool.init({
       factory: function(){
         return document.createElement('canvas');
@@ -67,7 +67,7 @@ describe('Service: ObjPool', function () {
   });
 
   it('should alloc with correct id', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('correct id');
     var newItem = newPool.alloc();
     expect(newItem.id).toBe(1);
     var newItem2 = newPool.alloc();
@@ -75,14 +75,14 @@ describe('Service: ObjPool', function () {
   });
 
   it('should alloc with correct number of item', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('number of item');
     newPool.alloc();
     newPool.alloc();
     expect(newPool.pool.length).toBe(2);
   });
 
   it('should alloc with correct number of item after reuse', function () {
-    var newPool = new ObjPool();
+    var newPool = new ObjPool('correct number of item after reuse');
     var obj1 = newPool.alloc();
     newPool.reuse(obj1);
     newPool.alloc();

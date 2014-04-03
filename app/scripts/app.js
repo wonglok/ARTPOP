@@ -4,6 +4,7 @@ angular
   .module('artpopApp', [
     'ngCookies',
     'ngResource',
+    'ngTouch',
     'ngAnimate',
     'ngSanitize',
     'ngRoute'
@@ -27,6 +28,6 @@ angular
         controller: 'CreditCtrl'
       })
       .otherwise({
-        redirectTo: '/ARTPOP'
+        redirectTo: '/Electric-Chapel'
       });
   });

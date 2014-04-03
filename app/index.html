@@ -32,7 +32,7 @@
       <a ng-href="#ARTPOP">ARTPOP v0.1</a>
       <a ng-href="#Todos">Todos</a>
       <a ng-href="#Credit">Credit</a>
-      <doob-stat ng-if="false"></doob-stat>
+      <doob-stat ng-hide="$rootScope.isMobile"></doob-stat>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -78,6 +78,7 @@
     <script src="fonts/optimer_regular.typeface.js"></script>
 
     <!--Angular-Modules-->
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>

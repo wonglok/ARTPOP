@@ -1,7 +1,7 @@
 angular.module('artpopApp').run(['$templateCache', function($templateCache) {  'use strict';  'use strict';
 
   $templateCache.put('views/artpop.html',
-    "<artpop></artpop>"
+    "<artpop>Bummer :( Your browser doesn't seemd to support ARTPOP WebGL App.<br>You are supposed to see this image.<br><img ng-src=\"./images/supposeToSee2.jpg\" alt=\"\"></artpop>"
   );
 
 
@@ -21,7 +21,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
 
   $templateCache.put('views/main.html',
-    "<webgl-detector>Bummer :( Your browser doesn't seemd to support ARTPOP WebGL App.<br>You are supposed to see this image.<br><img ng-src=\"./images/supposeToSee.png\" alt=\"\"></webgl-detector>"
+    "<webgl-detector>Bummer :( Your browser doesn't seemd to support ARTPOP WebGL App.<br>You are supposed to see this image.<br><img ng-src=\"./images/supposeToSee2.jpg\" alt=\"\"></webgl-detector>"
   );
 
 

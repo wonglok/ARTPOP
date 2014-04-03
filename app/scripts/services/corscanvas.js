@@ -29,10 +29,12 @@ angular.module('artpopApp')
 			imgDom.onprogress = function(event){
 				deferred.notify(event);
 			};
+			//imgDom.crossOrigin = '';
 			imgDom.crossDomain = '';
 			imgDom.src = address;
 			return deferred.promise;
 		}
+
 
 		function paintCanvas(obj){
 			var deferred = $q.defer();
@@ -46,7 +48,7 @@ angular.module('artpopApp')
 				var ctx=canvas.getContext('2d');
 				ctx.drawImage(img,0,0, img.width, img.height);
 
-				deferred.resolve(canvas);
+				deferred.resolve(obj);
 			});
 
 			return deferred.promise;
@@ -62,9 +64,9 @@ angular.module('artpopApp')
 				canvas: newCanvas.obj
 			}, url)
 				.then(paintCanvas)
-				.then(function(){
-					imagePool.reuse(newImage);
-					return newCanvas;
+				.then(function(obj){
+					//imagePool.reuse(newImage);
+					return obj;
 				});
 		}
 

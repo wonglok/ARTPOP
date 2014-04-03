@@ -18,7 +18,8 @@
     "tween.js": "git@github.com:sole/tween.js.git",
     "typeface-0.15": "http://typeface.neocracy.org/typeface-0.15.js",
     "stats.js": "git@github.com:mrdoob/stats.js.git",
-    "angular-animate": "~1.2.15"
+    "angular-animate": "~1.2.15",
+    "angular-touch": "~1.2.15"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",
