@@ -3,9 +3,10 @@ angular.module('artpopApp')
 .factory('ObjPool', function (ObjPoolItem) {
 	// Service logic
 
-	function ObjPool(){
+	function ObjPool(name){
 		this.currentID = 0;
 		this.pool = [];
+		this.name = name || 'anonymous';
 		this.options = {
 			factory: function(){
 				return new Image();
@@ -40,10 +41,10 @@ angular.module('artpopApp')
 			itemSet = this.makeNewItemSet();
 		}
 		itemSet.inUse = true;
-		console.log(this.pool.length, this.currentID);
+		console.log(this.name,this.pool.length, this.currentID);
 		return itemSet;
 	};
-	ObjPool.prototype.reset = function(item){
+	ObjPool.prototype.reuse = function(item){
 		item.inUse = false;
 	};
 

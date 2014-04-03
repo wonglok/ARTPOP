@@ -26,6 +26,6 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
 
   $templateCache.put('views/todos.html',
-    "<p>Pre-Alpha ARTPOP WebGL.<br>Comming soon....</p><ul><li>Realtime Collaboration *o*</li><li>More Materials</li><li>More PostProcessing Effect</li><li>More OMG</li></ul>"
+    "<p>Pre-Alpha ARTPOP WebGL.</p><ul><li>Realtime Collaboration *o*</li><li>More Materials</li><li>More PostProcessing Effect</li><li>More OMG</li></ul>"
   );
 }]);

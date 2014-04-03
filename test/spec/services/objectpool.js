@@ -81,10 +81,10 @@ describe('Service: ObjPool', function () {
     expect(newPool.pool.length).toBe(2);
   });
 
-  it('should alloc with correct number of item after reset', function () {
+  it('should alloc with correct number of item after reuse', function () {
     var newPool = new ObjPool();
     var obj1 = newPool.alloc();
-    newPool.reset(obj1);
+    newPool.reuse(obj1);
     newPool.alloc();
     expect(newPool.pool.length).toBe(1);
   });

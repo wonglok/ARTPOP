@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE,TWEEN,Modernizr */
 angular.module('artpopApp')
-.directive('artpop', function ($rootScope, shaders, webGLRenderer, doobStat) {
+.directive('artpop', function ($rootScope, shaders, webGLRenderer, doobStat, CORSCanvas) {
 
 	var target,
 		scene,
@@ -89,12 +89,11 @@ angular.module('artpopApp')
 		);
 
 		var effecktStack = [
-			[icosahedronMesh, wireFrameMaterial],
+			// [icosahedronMesh, wireFrameMaterial],
 			[cylinderMesh, phongMaterial],
-			[cubeMesh, wireFrameMaterial],
-			[torusKnotMesh, phongMaterial]
+			// [cubeMesh, wireFrameMaterial],
+			// [torusKnotMesh, phongMaterial]
 		];
-
 
 		setMesh(object3D,effecktStack[0][0],effecktStack[0][1]);
 
@@ -115,6 +114,17 @@ angular.module('artpopApp')
 			object3D.rotation.x += 0.035;
 			object3D.rotation.y += 0.035;
 		});
+
+		var texture = null;
+		CORSCanvas
+		.getTexture('http://www.semicomplete.com/images/googledotcom.png')
+		.then(function(result){
+			texture = new THREE.Texture(result.obj);
+			texture.needsUpdate = true;
+			cylinderMesh.material.map = texture;
+			console.log(result);
+		});
+
 	}
 
 	function addLight(){

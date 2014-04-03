@@ -1,18 +1,21 @@
 'use strict';
 
 angular.module('artpopApp')
-	.factory('CORSCanvas', function (ObjectPool, $q) {
-		var corsCanvasPool = new ObjectPool();
-		//
-		corsCanvasPool.init({
+	.factory('CORSCanvas', function (
+		ObjPool, $q
+	) {
+		var canvasPool = new ObjPool('canvas');
+		canvasPool.init({
 			factory: function(){
-				return {
-					canvas: document.createElement('canvas'),
-					img: document.createElement('canvas'),
-				};
+				return document.createElement('canvas');
 			}
 		});
-
+		var imagePool = new ObjPool('image');
+		imagePool.init({
+			factory: function(){
+				return new Image();
+			}
+		});
 
 		function downloadImage(obj, address){
 			var deferred = $q.defer();
@@ -26,8 +29,9 @@ angular.module('artpopApp')
 			imgDom.onprogress = function(event){
 				deferred.notify(event);
 			};
+			imgDom.crossDomain = '';
 			imgDom.src = address;
-			return deferred.promise();
+			return deferred.promise;
 		}
 
 		function paintCanvas(obj){
@@ -42,24 +46,30 @@ angular.module('artpopApp')
 				var ctx=canvas.getContext('2d');
 				ctx.drawImage(img,0,0, img.width, img.height);
 
-				var result = canvas.toDataURI();
-
-				deferred.resolve(result);
+				deferred.resolve(canvas);
 			});
 
-			return deferred.promise();
+			return deferred.promise;
 		}
 
 
-		function getTextrue(url){
-			var newItem = corsCanvasPool.alloc();
-			return downloadImage(newItem.imgDom, url)
+		function getTexture(url){
+			var newImage = imagePool.alloc();
+			var newCanvas = canvasPool.alloc();
+
+			return downloadImage({
+				img: newImage.obj,
+				canvas: newCanvas.obj
+			}, url)
 				.then(paintCanvas)
-				.then(function(result){
-					newItem.reuse();
-					return result;
+				.then(function(){
+					imagePool.reuse(newImage);
+					return newCanvas;
 				});
 		}
 
-		return getTextrue;
+		// //return thenable
+		return {
+			getTexture: getTexture
+		};
 	});

@@ -9,7 +9,7 @@ angular.module('artpopApp')
 		this.inUse = inUse;
 		this.obj = obj;
 	}
-	ObjPoolItem.prototype.reset = function(){
+	ObjPoolItem.prototype.reuse = function(){
 		this.inUse = false;
 	};
 
