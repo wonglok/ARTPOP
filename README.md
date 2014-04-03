@@ -8,7 +8,7 @@ Fan Made.
 All copyrights belong to their respective owners.
 
 DesktopChrome.
-![alt tag](https://raw.githubusercontent.com/wonglok/ARTPOP/master/app/images/supposeToSee.png)
+![alt tag](https://raw.githubusercontent.com/wonglok/ARTPOP/master/app/images/desktop.png)
 
 GalaxyS4
 ![alt tag](https://raw.githubusercontent.com/wonglok/ARTPOP/master/app/images/supposeToSee2.jpg)
