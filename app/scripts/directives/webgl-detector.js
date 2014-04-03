@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE,TWEEN,Modernizr */
 angular.module('artpopApp')
-.directive('webglDetector', function ($rootScope, $templateCache, Shaders, WebGLRenderer, doobStat) {
+.directive('webglDetector', function ($rootScope, Shaders, WebGLRenderer, doobStat) {
 
 	var target,
 		scene,
@@ -37,120 +37,88 @@ angular.module('artpopApp')
 	function configDom($element){
 		target = $element.find('.gl-detector-container');
 		target.html(renderer.domElement);
-		renderer.setClearColor( 0x0000ff , 0);
+		renderer.setClearColor( 0xffffff , 0);
 	}
 
-
-
-	function genTweenMaterial(currentMaterial){
-		var materialTween = new TWEEN.Tween(currentMaterial);
-		var materialTween2 = new TWEEN.Tween(currentMaterial);
-		materialTween.to({
-			wireframeLinewidth:10,
-		},1000).chain(materialTween2).start();
-		materialTween2.to({
-			wireframeLinewidth:1
-		},1000).chain(materialTween);
-	}
-
-	function genTweenPos(meshPosition){
-		var materialTween = new TWEEN.Tween(meshPosition);
-		var materialTween2 = new TWEEN.Tween(meshPosition);
-		materialTween.to({
-			x:5,
-		},600).chain(materialTween2).start();
-		materialTween2.to({
-			x:-5
-		},600).chain(materialTween);
-	}
-
-
-
-	var lastMesh;
 	function addObjects(){
+		var lastMesh;
 		var object3D = new THREE.Object3D();
 
-		function setCurrent(object3D, mesh, material){
-			object3D.remove(lastMesh);
-			object3D.add(mesh);
-			lastMesh = mesh;
-			if (lastMesh.material !== material){
-				lastMesh.material = material;
-			}
-		}
-
 		var phongMaterial = new THREE.MeshPhongMaterial({
-			color: new THREE.Color(0xff00ff),
-			wireframe: true,
-			side: THREE.DoubleSide,
-			wireframeLinewidth: 1
+			color: new THREE.Color(0x0000ff),
 		});
-		var basicMaterial = new THREE.MeshPhongMaterial({
-			color: new THREE.Color(0x00ff00),
+		var wireFrameMaterial = new THREE.MeshLambertMaterial({
+			color: new THREE.Color(0x0000ff),
 			wireframe: true,
-			wireframeLinewidth: 1,
+			wireframeLinewidth: 3,
 			side: THREE.DoubleSide
 		});
 
 		var octahedronMesh = new THREE.Mesh(
-								new THREE.OctahedronGeometry(10,3)
-							);
-		var torusKnotMesh = new THREE.Mesh(
-								new THREE.TorusKnotGeometry( 6, 2, 100, 16 )
-							);
-
+			new THREE.OctahedronGeometry(10,2)
+		);
 		var sphereMesh = new THREE.Mesh(
-								new THREE.SphereGeometry(10, 32, 32 )
-							);
+			new THREE.SphereGeometry(10, 16, 16 )
+		);
+		var torusKnotMesh = new THREE.Mesh(
+			new THREE.TorusKnotGeometry( 6, 2, 100, 16 )
+		);
 
+		octahedronMesh.material = phongMaterial;
 
-		setCurrent(object3D, torusKnotMesh, phongMaterial);
-
-		setTimeout(function restartSwitch(){
-			setCurrent(object3D, sphereMesh, basicMaterial);
-
-			setTimeout(function(){
-				setCurrent(object3D, octahedronMesh, phongMaterial);
-
-				setTimeout(function(){
-					setCurrent(object3D, torusKnotMesh, basicMaterial);
-
-					setTimeout(restartSwitch,2000);
-				},2000);
-
-			},2000);
-
-		},2000);
-
-
-		genTweenMaterial(lastMesh.material);
-		genTweenPos(object3D.position);
-
-		var getLastMesh = function(){
-			return lastMesh;
-		};
-
-		var cubeUpdater = function (){
-			var lastMesh = getLastMesh();
-			if (lastMesh.material.color){
-				lastMesh.material.color.offsetHSL(0.001,0.0,0);
+		function setMesh(mesh, material){
+			if(object3D.lastMesh){
+				object3D.remove(object3D.lastMesh);
 			}
-			object3D.rotation.z += 0.005;
-			object3D.rotation.x += 0.005;
-			object3D.rotation.y += 0.005;
-		};
+			mesh.material = material;
+			object3D.add(mesh);
+			object3D.lastMesh = mesh;
+		}
+
+
+		var effecktStack = [
+			[sphereMesh, wireFrameMaterial],
+			[octahedronMesh, wireFrameMaterial],
+			[torusKnotMesh, phongMaterial]
+		];
+		setMesh(effecktStack[0][0],effecktStack[0][1]);
+
+
+		var effecktStackIndex = 0;
+		setInterval(function(){
+			if (effecktStackIndex > effecktStack.length -1){
+				effecktStackIndex = 0;
+			}
+			var curEffect = effecktStack[effecktStackIndex];
+			setMesh(curEffect[0],curEffect[1]);
+			effecktStackIndex++;
+		},1500);
 
 		scene.add(object3D);
-		updateStack.push(cubeUpdater);
+		updateStack.push(function cubeUpdater(){
+			var lastMesh = object3D.lastMesh;
+			var color = lastMesh.material.color;
+			if (color){
+				color.offsetHSL(0.001,0.0,0);
+			}
+			if (lastMesh.material && lastMesh.material.wireframeLinewidth && lastMesh.material.wireframeLinewidth < 0.5){
+				lastMesh.material.wireframeLinewidth += 1;
+			}
+
+			object3D.rotation.z += 0.035;
+			object3D.rotation.x += 0.035;
+			object3D.rotation.y += 0.035;
+		});
 	}
 
 	function addLight(){
-		// var ambineLight = new THREE.AmbientLight( 0xffffff ); // soft white light
-		// scene.add( ambineLight );
-
-		var lightCenter = new THREE.PointLight( 0xffffff, 1.5, 100 );
-		lightCenter.position.set( 0, 0, 20 );
+		var lightCenter = new THREE.PointLight( 0xffffff, 1, 100 );
+		lightCenter.position.set( 0, 0, 0 );
 		scene.add( lightCenter );
+
+		var lightFace = new THREE.PointLight( 0xffffff, 1, 100 );
+		lightFace.position.set( 0, 0, 30 );
+		scene.add( lightFace );
 	}
 
 

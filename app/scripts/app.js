@@ -10,21 +10,21 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/electric-chapel', {
+      .when('/Electric-Chapel', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/credit', {
+      .when('/Credit', {
         templateUrl: 'views/credit.html',
         controller: 'CreditCtrl'
-      })
-      .when('/artpop', {
-        templateUrl: 'views/artpop.html',
-        controller: 'ArtpopCtrl'
       })
       .when('/ARTPOP', {
         templateUrl: 'views/artpop.html',
         controller: 'ArtpopCtrl'
+      })
+      .when('/Todos', {
+        templateUrl: 'views/todos.html',
+        controller: 'TodosCtrl'
       })
       .otherwise({
         redirectTo: '/electric-chapel'

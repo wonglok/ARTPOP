@@ -1,7 +1,6 @@
 ARTPOP
 ======
 ARTPOP meets WEBGL
-
 Experimental WebGL version of ARTPOP WebGL App. ~v~
 
 Fan Made.
@@ -49,7 +48,7 @@ To force enable webgl, go to ```chrome://flags/```
 
 Enable 'Override software rendering list'.
 
-
+Click Restart Button. (Save webapp docs before do so.)
 
 
 

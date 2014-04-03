@@ -28,13 +28,11 @@
     <!-- Add your site or application content here -->
     <div class="ap-container view-animate" ng-view=""></div>
     <div class="ap-menu">
-      <a ng-href="#electric-chapel">Electric Chapel</a>
-      <a ng-href="#artpop">ARTPOP</a>
-      <a ng-href="#credit">Credit</a>
-      <doob-stat ng-hide="isMobile"></doob-stat>
+      <a ng-href="#Electric-Chapel">Electric Chapel</a>
+      <a ng-href="#ARTPOP">ARTPOP v0.1</a>
+      <a ng-href="#Credit">Credit</a>
+      <doob-stat ng-if="false"></doob-stat>
     </div>
-
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -42,7 +40,6 @@
        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
        ga('create', 'UA-49603107-1','wonglok.com');
        ga('send', 'pageview');
     </script>
@@ -52,16 +49,12 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-
-
     <!--
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
     -->
 
-
     <!-- _disable_endbuild -->
     <!-- _disable_build:js({.tmp,app}) scripts/loklok.js -->
-
 
     <!-- build:js scripts/apwgl.js -->
     <!--lib-->
@@ -90,7 +83,6 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
 
-
     <!--ARTPOP-WebGL-->
     <script src="scripts/app.js"></script>
 
@@ -109,14 +101,15 @@
     <!--webgl-->
     <script src="scripts/services/shaders.js"></script>
     <script src="scripts/services/webglrenderer.js"></script>
+    <script src="scripts/services/corscanvas.js"></script>
     <script src="scripts/directives/webgl-detector.js"></script>
 
     <!--stat-->
     <script src="scripts/services/doob-stat.js"></script>
     <script src="scripts/directives/doob-stat.js"></script>
 
-
-
+    <script src="scripts/controllers/todos.js"></script>
+    <script src="scripts/directives/artpop.js"></script>
     <!-- endbuild -->
 
 

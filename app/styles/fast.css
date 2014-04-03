@@ -105,12 +105,11 @@ div.ap-footer{
 }
 
 .view-animate.ng-enter, .view-animate.ng-leave {
-
-  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
-     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
-      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
-       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
-          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.89s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.89s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.89s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.89s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.89s;
 
   -webkit-transform: translate3d(0,0,0);
      -moz-transform: translate3d(0,0,0);
@@ -124,9 +123,8 @@ div.ap-footer{
   left:0;
   right:0;
   bottom:0;
-  z-index: 0;
-  opacity: 0.5;
-
+  /*z-index: 0;*/
+  /*opacity: 0.5;*/
 }
 
 .view-animate.ng-enter {
@@ -147,9 +145,9 @@ div.ap-footer{
 }
 .view-animate.ng-leave.ng-leave-active {
   opacity: 0;
-  -webkit-transform: translate3d(0,100%,0) scale(0.3);
-     -moz-transform: translate3d(0,100%,0) scale(0.3);
-      -ms-transform: translate3d(0,100%,0) scale(0.3);
-       -o-transform: translate3d(0,100%,0) scale(0.3);
-          transform: translate3d(0,100%,0) scale(0.3);
+  -webkit-transform: translate3d(0,100%,0) scale(0.5);
+     -moz-transform: translate3d(0,100%,0) scale(0.5);
+      -ms-transform: translate3d(0,100%,0) scale(0.5);
+       -o-transform: translate3d(0,100%,0) scale(0.5);
+          transform: translate3d(0,100%,0) scale(0.5);
 }
