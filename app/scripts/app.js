@@ -4,6 +4,7 @@ angular
   .module('artpopApp', [
     'ngCookies',
     'ngResource',
+    'ngAnimate',
     'ngSanitize',
     'ngRoute'
   ])
@@ -16,6 +17,14 @@ angular
       .when('/credit', {
         templateUrl: 'views/credit.html',
         controller: 'CreditCtrl'
+      })
+      .when('/artpop', {
+        templateUrl: 'views/artpop.html',
+        controller: 'ArtpopCtrl'
+      })
+      .when('/ARTPOP', {
+        templateUrl: 'views/artpop.html',
+        controller: 'ArtpopCtrl'
       })
       .otherwise({
         redirectTo: '/electric-chapel'

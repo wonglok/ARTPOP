@@ -3,48 +3,153 @@
 }
 
 
+/* ============================================
+    Ap-Canvas
+   ============================================ */
+
+.ap-container webgl-detector canvas{
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    z-index: 0;
+    padding: 0px;
+    margin: 0px;
+    position: fixed;
+}
+
+
+/* ============================================
+    Ap-Menu
+   ============================================ */
 .ap-menu {
-
-    position:absolute;
-    top:0;
+    /* font-family: Helvetiker; */
+    position: absolute;
+    top: 0px;
     right:0;
+    border: papayawhip dotted 1px;
     list-style: none;
-
     background-color: rgba(255, 255, 255, 1);
+    border-radius: 00px 0px 0px 00px;
+    box-shadow: 0px 0px 33px -4px rgb(0, 50, 155);
+    z-index: 1000;
 }
+    doob-stat{
+    }
+    doob-stat #stats{
+
+        margin-right: 25px;
+        margin-bottom: 11px;
+        margin-left: 24px;
+        box-shadow: 0px 0px 8px 0px rgba(11, 206, 255, 0.5);
+
+        display: block;
+        float: right;
+    }
 
 
-.ap-menu a:active,
-.ap-menu a:visited,
-.ap-menu a{
-	display: block;
-	margin: 10px;
-	border-bottom: #eee solid 1px;
-	text-decoration: none;
-	color: blue;
-	border: rgba(255,255,255,0.2);
-}
+    .ap-menu a:active,
+    .ap-menu a:visited,
+    .ap-menu a{
+    	display: block;
+    	margin: 10px;
+    	border-bottom: #eee solid 1px;
+    	text-decoration: none;
+    	color: blue;
+    	border: rgba(255,255,255,0.2);
+    }
 
 
 
+/* ============================================
+    Credits
+   ============================================ */
 
-div.ap-credit{
+
+.ap-credit{
     margin: 17px;
 }
 
-.ap-credit .panel-heading{
+.ap-credit .credit-title{
     border: #f0f0f0 solid 1px;
     display: block;
     padding: 19px;
     font-weight: bold;
 }
-.ap-credit a.list-group-item{
+.ap-credit a.credit-item{
     display: block;
     border-bottom: #f0f0f0 solid 1px;
     border-left: #f0f0f0 solid 1px;
     border-right: #f0f0f0 solid 1px;
     padding: 12px;
+
+    -webkit-transition: background-color 0.4s;
 }
-.ap-credit a.list-group-item:hover{
+.ap-credit a.credit-item:hover{
     background-color: #f2f2f2;
+}
+
+div.ap-footer{
+    margin: 10px 20px;
+    padding-bottom: 10px;
+    /* border-bottom: red solid 1px; */
+}
+
+
+/* ============================================
+    Angular Animations
+   ============================================ */
+
+.view-animate {
+
+}
+
+.view-animate.ng-enter, .view-animate.ng-leave {
+
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+
+  -webkit-transform: translate3d(0,0,0);
+     -moz-transform: translate3d(0,0,0);
+      -ms-transform: translate3d(0,0,0);
+       -o-transform: translate3d(0,0,0);
+          transform: translate3d(0,0,0);
+
+  /*overflow: hidden;*/
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index: 0;
+  opacity: 0.5;
+
+}
+
+.view-animate.ng-enter {
+  /*opacity: 0;*/
+  -webkit-transform: translate3d(0,-200%,0);
+     -moz-transform: translate3d(0,-200%,0);
+      -ms-transform: translate3d(0,-200%,0);
+       -o-transform: translate3d(0,-200%,0);
+          transform: translate3d(0,-200%,0);
+}
+.view-animate.ng-enter.ng-enter-active {
+  opacity: 1;
+  -webkit-transform: translate3d(0,0,0);
+     -moz-transform: translate3d(0,0,0);
+      -ms-transform: translate3d(0,0,0);
+       -o-transform: translate3d(0,0,0);
+          transform: translate3d(0,0,0);
+}
+.view-animate.ng-leave.ng-leave-active {
+  opacity: 0;
+  -webkit-transform: translate3d(0,100%,0) scale(0.3);
+     -moz-transform: translate3d(0,100%,0) scale(0.3);
+      -ms-transform: translate3d(0,100%,0) scale(0.3);
+       -o-transform: translate3d(0,100%,0) scale(0.3);
+          transform: translate3d(0,100%,0) scale(0.3);
 }

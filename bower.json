@@ -14,7 +14,11 @@
     "three.js": "*",
     "normalize-css": "~3.0.1",
     "dat.gui": "*",
-    "modernizr": "~2.7.2"
+    "modernizr": "~2.7.2",
+    "tween.js": "git@github.com:sole/tween.js.git",
+    "typeface-0.15": "http://typeface.neocracy.org/typeface-0.15.js",
+    "stats.js": "git@github.com:mrdoob/stats.js.git",
+    "angular-animate": "~1.2.15"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",

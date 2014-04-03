@@ -18,12 +18,72 @@ module.exports = function (grunt) {
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
-
+  grunt.loadNpmTasks('grunt-angular-templates');
   grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-exec');
-  //grunt.loadNpmTasks('grunt-open');
+  //grunt.loadNpmTasks('grunt-open');b
   // Define the configuration for all the tasks
   grunt.initConfig({
+
+
+    ngtemplates: {
+      shaders: {
+        cwd:        'app/',
+        src:        'shaders/**.*',
+        dest:       'app/scripts/ngTemplates/shaders.js',
+        options: {
+          bootstrap: function bootstrap(module, script) {
+            var moduleName = require('./bower.json').name || 'lok';
+            var str = '';
+            str += 'angular.module(\''+ moduleName +'App\').run([\'$templateCache\', function($templateCache) {';
+            str += '  \'use strict\';';
+            str += script;
+            str += '}]);';
+
+            return str;
+          },
+          prefix: '',
+          htmlmin:{
+            collapseBooleanAttributes:      false,
+            collapseWhitespace:             false,
+            removeAttributeQuotes:          false,
+            removeComments:                 false,
+            removeEmptyAttributes:          false,
+            removeRedundantAttributes:      false,
+            removeScriptTypeAttributes:     false,
+            removeStyleLinkTypeAttributes:  false
+          }
+        }
+      },
+      templates: {
+        cwd:        'app/',
+        src:        'views/**.html',
+        dest:       'app/scripts/ngTemplates/templates.js',
+        options: {
+          bootstrap: function bootstrap(module, script) {
+            var moduleName = require('./bower.json').name || 'lok';
+            var str = '';
+            str += 'angular.module(\''+ moduleName +'App\').run([\'$templateCache\', function($templateCache) {';
+            str += '  \'use strict\';';
+            str += script;
+            str += '}]);';
+
+            return str;
+          },
+          prefix: '',
+          htmlmin:{
+            collapseBooleanAttributes:      false,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          false,
+            removeComments:                 false,
+            removeEmptyAttributes:          false,
+            removeRedundantAttributes:      false,
+            removeScriptTypeAttributes:     false,
+            removeStyleLinkTypeAttributes:  false
+          }
+        }
+      },
+    },
 
     //grunt.loadNpmTasks('grunt-gh-pages');
     'gh-pages': {
@@ -50,6 +110,23 @@ module.exports = function (grunt) {
 
     // Watches files for changes and runs tasks based on the changed files
     watch: {
+      shaders: {
+        files: ['<%= yeoman.app%>/shaders/*.*'],
+        tasks: ['ngtemplates:shaders']
+      },
+      templates: {
+        files: ['<%= yeoman.app%>/views/*.*'],
+        tasks: ['ngtemplates:templates'],
+        options: {
+          livereload: true
+        }
+      },
+      // vanillaCss:{
+      //   files: ['<%= yeoman.app%>/styles/*.css'],
+      //   options: {
+      //     livereload: true
+      //   }
+      // },
       bower: {
         files: ['bower.json'],
         tasks: ['bowerInstall']
@@ -137,7 +214,9 @@ module.exports = function (grunt) {
       },
       all: [
         'Gruntfile.js',
-        '<%= yeoman.app %>/scripts/{,*/}*.js'
+        '<%= yeoman.app %>/scripts/{,*/}*.js',
+        '!<%= yeoman.app %>/scripts/ngTemplates/{,*/}*.js',
+        '!<%= yeoman.app %>/scripts/scene/{,*/}*.js'
       ],
       test: {
         options: {
@@ -421,13 +500,13 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'bowerInstall',
+      //'bowerInstall',
       'concurrent:server',
       'autoprefixer',
       'connect:testDist',
       'connect:livereload',
-      'exec:openDev',
       'exec:openDistTest',
+      'exec:openDev',
       'watch'
     ]);
   });
@@ -447,7 +526,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'bowerInstall',
+    //'bowerInstall',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

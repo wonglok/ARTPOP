@@ -12,6 +12,8 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'app/bower_components/stats.js/src/Stats.js',
+      'app/bower_components/tween.js/src/Tween.js',
       'app/bower_components/modernizr/modernizr.js',
       'app/bower_components/three.js/three.min.js',
       'app/bower_components/angular/angular.js',
@@ -20,6 +22,7 @@ module.exports = function(config) {
       'app/bower_components/angular-cookies/angular-cookies.js',
       'app/bower_components/angular-sanitize/angular-sanitize.js',
       'app/bower_components/angular-route/angular-route.js',
+      'app/bower_components/angular-animate/angular-animate.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',

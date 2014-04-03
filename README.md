@@ -7,6 +7,10 @@ Experimental WebGL version of ARTPOP WebGL App. ~v~
 Fan Made.
 All copyrights belong to their respective owners.
 
+DesktopChrome.
+![alt tag](https://raw.github.com/wonglok/ARTPOP/gh-pages/images/supposeToSee.png)
+GalaxyS4
+![alt tag](https://raw.github.com/wonglok/ARTPOP/gh-pages/images/supposeToSee2.jpg)
 
 Check WebGL Support
 =====

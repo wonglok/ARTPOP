@@ -9,12 +9,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
-    <!-- endbower -->
-    <!-- endbuild -->
+    <!-- _disable_build:css styles/vendor.css -->
+    <!-- _disable_bower:css -->
+    <!-- _disable_endbower -->
+    <!-- _disable_endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/fast.css">
     <!-- endbuild -->
@@ -26,13 +26,13 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
+    <div class="ap-container view-animate" ng-view=""></div>
     <div class="ap-menu">
       <a ng-href="#electric-chapel">Electric Chapel</a>
       <a ng-href="#artpop">ARTPOP</a>
       <a ng-href="#credit">Credit</a>
+      <doob-stat ng-hide="isMobile"></doob-stat>
     </div>
-
-    <div ng-view=""></div>
 
 
 
@@ -43,7 +43,7 @@
        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-XXXXX-X');
+       ga('create', 'UA-49603107-1','wonglok.com');
        ga('send', 'pageview');
     </script>
 
@@ -52,31 +52,72 @@
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
 
-    <!-- build:js scripts/ice-cream.js -->
-    <script src="bower_components/modernizr/modernizr.js"></script>
-    <script src="bower_components/three.js/three.min.js"></script>
+
+
+    <!--
+    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
+    -->
+
+
+    <!-- _disable_endbuild -->
+    <!-- _disable_build:js({.tmp,app}) scripts/loklok.js -->
+
+
+    <!-- build:js scripts/apwgl.js -->
+    <!--lib-->
     <!-- bower:js -->
+    <!-- endbower -->
+
+    <!--famework-->
+    <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
+
+    <!--webgl-->
+    <script src="bower_components/three.js/three.min.js"></script>
+    <script src="bower_components/tween.js/src/Tween.js"></script>
+    <script src="bower_components/stats.js/src/Stats.js"></script>
+    <script src="bower_components/dat.gui/dat.gui.js"></script>
+
+    <!--fontz-->
+    <script src="bower_components/typeface-0.15/index.js"></script>
+    <script src="fonts/optimer_regular.typeface.js"></script>
+
+    <!--Angular-Modules-->
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/dat.gui/dat.gui.js"></script>
-    <!-- endbower -->
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+
+    <!--ARTPOP-WebGL-->
+    <script src="scripts/app.js"></script>
+
+    <!--controllers-->
+    <script src="scripts/controllers/main.js"></script>
+    <script src="scripts/controllers/credit.js"></script>
+    <script src="scripts/controllers/artpop.js"></script>
+
+    <!--dom-tools-->
+    <script src="scripts/directives/active-link.js"></script>
+
+    <!--templates&shaders-->
+    <script src="scripts/ngTemplates/templates.js"></script>
+    <script src="scripts/ngTemplates/shaders.js"></script>
+
+    <!--webgl-->
+    <script src="scripts/services/shaders.js"></script>
+    <script src="scripts/services/webglrenderer.js"></script>
+    <script src="scripts/directives/webgl-detector.js"></script>
+
+    <!--stat-->
+    <script src="scripts/services/doob-stat.js"></script>
+    <script src="scripts/directives/doob-stat.js"></script>
+
+
+
     <!-- endbuild -->
-
-
-        <!-- build:js({.tmp,app}) scripts/ap-scripts.js -->
-        <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
-        <script src="scripts/controllers/credit.js"></script>
-        <script src="scripts/directives/webgl-detector.js"></script>
-        <script src="scripts/services/three.js"></script>
-        <script src="scripts/directives/active-link.js"></script>
-        <script src="scripts/services/modernizr.js"></script>
-        <!-- endbuild -->
 
 
 </body>
