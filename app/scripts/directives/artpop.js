@@ -1,13 +1,14 @@
 'use strict';
 /* global THREE,TWEEN,Modernizr */
 angular.module('artpopApp')
-.directive('artpop', function ($rootScope, Shaders, WebGLRenderer, doobStat) {
+.directive('artpop', function ($rootScope, shaders, webGLRenderer, doobStat) {
 
 	var target,
 		scene,
 		camera,
 		renderer,
 		frameID,
+		timerID,
 		updateStack,
 		state = {
 			system: {
@@ -25,7 +26,7 @@ angular.module('artpopApp')
 		updateStack = [];
 		scene = new THREE.Scene();
 		camera = new THREE.PerspectiveCamera( 75,  window.innerWidth/window.innerHeight, 0.1, 1000 );
-		renderer = WebGLRenderer;
+		renderer = webGLRenderer;
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		camera.aspect	= window.innerWidth / window.innerHeight;
@@ -40,58 +41,64 @@ angular.module('artpopApp')
 		renderer.setClearColor( 0xffffff , 0);
 	}
 
+	function setMesh(object3D, mesh, material){
+		if(object3D.lastMesh){
+			object3D.remove(object3D.lastMesh);
+		}
+		mesh.material = material;
+		object3D.add(mesh);
+		object3D.lastMesh = mesh;
+	}
+
+	function scheduleItem(object3D, effecktStack){
+		var effecktStackIndex = 0;
+		timerID = setInterval(function(){
+			if (effecktStackIndex > effecktStack.length -1){
+				effecktStackIndex = 0;
+			}
+			var curEffect = effecktStack[effecktStackIndex];
+			setMesh(object3D,curEffect[0],curEffect[1]);
+			effecktStackIndex++;
+		},2000);
+	}
+
 	function addObjects(){
 		var object3D = new THREE.Object3D();
 
 		var phongMaterial = new THREE.MeshPhongMaterial({
 			color: new THREE.Color(0x0000ff),
 		});
-		var wireFrameMaterial = new THREE.MeshLambertMaterial({
+		var wireFrameMaterial = new THREE.MeshBasicMaterial({
 			color: new THREE.Color(0x0000ff),
 			wireframe: true,
 			wireframeLinewidth: 3,
 			side: THREE.DoubleSide
 		});
 
-		var octahedronMesh = new THREE.Mesh(
-			new THREE.OctahedronGeometry(10,2)
+		var cubeMesh = new THREE.Mesh(
+			new THREE.CubeGeometry(10, 10, 10 )
 		);
-		var sphereMesh = new THREE.Mesh(
-			new THREE.SphereGeometry(10, 16, 16 )
+		var icosahedronMesh = new THREE.Mesh(
+			new THREE.IcosahedronGeometry(10,0)
 		);
 		var torusKnotMesh = new THREE.Mesh(
 			new THREE.TorusKnotGeometry( 6, 2, 100, 16 )
 		);
-
-		octahedronMesh.material = phongMaterial;
-
-		function setMesh(mesh, material){
-			if(object3D.lastMesh){
-				object3D.remove(object3D.lastMesh);
-			}
-			mesh.material = material;
-			object3D.add(mesh);
-			object3D.lastMesh = mesh;
-		}
-
+		var cylinderMesh = new THREE.Mesh(
+			new THREE.CylinderGeometry( 5, 5, 20, 32 )
+		);
 
 		var effecktStack = [
-			[sphereMesh, wireFrameMaterial],
-			[octahedronMesh, wireFrameMaterial],
+			[icosahedronMesh, wireFrameMaterial],
+			[cylinderMesh, phongMaterial],
+			[cubeMesh, wireFrameMaterial],
 			[torusKnotMesh, phongMaterial]
 		];
-		setMesh(effecktStack[0][0],effecktStack[0][1]);
 
 
-		var effecktStackIndex = 0;
-		setInterval(function(){
-			if (effecktStackIndex > effecktStack.length -1){
-				effecktStackIndex = 0;
-			}
-			var curEffect = effecktStack[effecktStackIndex];
-			setMesh(curEffect[0],curEffect[1]);
-			effecktStackIndex++;
-		},1500);
+		setMesh(object3D,effecktStack[0][0],effecktStack[0][1]);
+
+		scheduleItem(object3D, effecktStack);
 
 		scene.add(object3D);
 		updateStack.push(function cubeUpdater(){
@@ -136,7 +143,6 @@ angular.module('artpopApp')
 			}
 		}
 	}
-
 
 	function handleScreenResize(){
 		state.resize.invalidate = true;
@@ -191,6 +197,7 @@ angular.module('artpopApp')
 	}
 
 	if(Modernizr.webgl){
+		doobStat.begin();
 		initSystem();
 		addLight();
 		addObjects();
@@ -210,6 +217,7 @@ angular.module('artpopApp')
 					configDom($element);
 					setUpEvents($scope);
 					tryStartHeart();
+					doobStat.end();
 				}else{
 					showNotice($element, $transclude);
 				}

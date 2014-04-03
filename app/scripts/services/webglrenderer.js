@@ -1,6 +1,6 @@
 'use strict';
 /* global THREE */
 angular.module('artpopApp')
-  .factory('WebGLRenderer', function () {
+  .factory('webGLRenderer', function () {
     return new THREE.WebGLRenderer();
   });

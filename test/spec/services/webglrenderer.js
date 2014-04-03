@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: WebGLRenderer', function () {
+describe('Service: webGLRenderer', function () {
 
   // load the service's module
   beforeEach(module('artpopApp'));
 
   // instantiate service
-  var WebGLRenderer;
-  beforeEach(inject(function (_WebGLRenderer_) {
-    WebGLRenderer = _WebGLRenderer_;
+  var webGLRenderer;
+  beforeEach(inject(function (_webGLRenderer_) {
+    webGLRenderer = _webGLRenderer_;
   }));
 
   it('should do something', function () {
-    expect(!!WebGLRenderer).toBe(true);
+    expect(!!webGLRenderer).toBe(true);
   });
 
 });

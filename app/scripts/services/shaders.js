@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('artpopApp')
-.factory('Shaders', function ($templateCache) {
+.factory('shaders', function ($templateCache) {
 	return {
 		spiky :{
 			vs: $templateCache.get('shaders/spiky.vs'),

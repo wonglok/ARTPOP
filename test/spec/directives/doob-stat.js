@@ -15,7 +15,6 @@ describe('Directive: doobStat', function () {
   it('should make hidden element visible', inject(function ($compile) {
     element = angular.element('<doob-stat></doob-stat>');
     element = $compile(element)(scope);
-    console.log(element);
-    expect(element.length).toBe(1);
+    expect(element.length >= 1).toBe(true);
   }));
 });

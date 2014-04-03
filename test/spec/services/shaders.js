@@ -7,8 +7,8 @@ describe('Service: Shaders', function () {
 
   // instantiate service
   var Shaders;
-  beforeEach(inject(function (_Shaders_) {
-    Shaders = _Shaders_;
+  beforeEach(inject(function (_shaders_) {
+    Shaders = _shaders_;
   }));
 
   it('should do something', function () {

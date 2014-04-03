@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE,TWEEN,Modernizr */
 angular.module('artpopApp')
-.directive('webglDetector', function ($rootScope, Shaders, WebGLRenderer, doobStat) {
+.directive('webglDetector', function ($rootScope, doobStat) {
 
 	var target,
 		scene,
@@ -29,7 +29,7 @@ angular.module('artpopApp')
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		camera.aspect	= window.innerWidth / window.innerHeight;
-		camera.position.z = 20;
+		//camera.position.z = 20;
 
 		state.system.started = true;
 	}
@@ -37,14 +37,14 @@ angular.module('artpopApp')
 	function configDom($element){
 		target = $element.find('.gl-detector-container');
 		target.html(renderer.domElement);
-		renderer.setClearColor( 0xffffff , 0);
+		renderer.setClearColor( 0x0000ff * 0.5 , 1);
 	}
 
 	function addObject3D(){
 		var object3D = new THREE.Object3D();
 
 		var wireFrameMaterial = new THREE.MeshBasicMaterial({
-			color: new THREE.Color(0x0000ff),
+			color: new THREE.Color(0xff00ff),
 			wireframe: true,
 			wireframeLinewidth: 3,
 			side: THREE.DoubleSide
@@ -57,14 +57,13 @@ angular.module('artpopApp')
 		object3D.add(octahedronMesh);
 		scene.add(object3D);
 		updateStack.push(function cubeUpdater(){
-			var mesh = octahedronMesh;
-			var color = mesh.material.color;
+			var color = octahedronMesh.material.color;
 			if (color){
-				color.offsetHSL(0.001,0.0,0);
+				color.offsetHSL(0.0001,0.0,0);
 			}
-			mesh.rotation.z += 0.035;
-			mesh.rotation.x += 0.035;
-			mesh.rotation.y += 0.035;
+			octahedronMesh.rotation.z += 0.035;
+			octahedronMesh.rotation.x += 0.035;
+			octahedronMesh.rotation.y += 0.035;
 		});
 	}
 
