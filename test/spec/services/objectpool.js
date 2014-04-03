@@ -1,7 +1,5 @@
 'use strict';
-
 describe('Service: ObjPool', function () {
-
   // load the service's module
   beforeEach(module('artpopApp'));
 
@@ -9,6 +7,11 @@ describe('Service: ObjPool', function () {
   var ObjPool;
   beforeEach(inject(function (_ObjPool_) {
     ObjPool = _ObjPool_;
+  }));
+
+  var ObjPoolItem;
+  beforeEach(inject(function (_ObjPoolItem_) {
+    ObjPoolItem = _ObjPoolItem_;
   }));
 
   it('should do something', function () {
@@ -20,6 +23,23 @@ describe('Service: ObjPool', function () {
     expect(!!newPool).toBe(true);
     expect(!!newPool.pool).toBe(true);
     expect(!!newPool.options).toBe(true);
+  });
+
+  it('should be correct ObjPoolItem type', function () {
+    var newPool = new ObjPool();
+    var newItem = newPool.alloc();
+    expect(!!newItem).toBe(true);
+    expect(newItem instanceof ObjPoolItem).toBe(true);
+  });
+
+  it('should be correct ObjPoolItem type and member', function () {
+    var newPool = new ObjPool();
+    var newItem = newPool.alloc();
+    expect(newItem instanceof ObjPoolItem).toBe(true);
+    expect(!!newItem).toBe(true);
+    expect(!!newItem.id).toBe(true);
+    expect(!!newItem.inUse).toBe(true);
+    expect(!!newItem.obj).toBe(true);
   });
 
   it('should alloc default object', function () {
@@ -61,50 +81,13 @@ describe('Service: ObjPool', function () {
     expect(newPool.pool.length).toBe(2);
   });
 
-  it('should be able to reset', function () {
+  it('should alloc with correct number of item after reset', function () {
     var newPool = new ObjPool();
-    var item = newPool.alloc();
-    item.reset();
-    expect(newPool.pool.length).toBe(2);
+    var obj1 = newPool.alloc();
+    newPool.reset(obj1);
+    newPool.alloc();
+    expect(newPool.pool.length).toBe(1);
   });
-
-
-
-  // it('should generate new item with right default type', function () {
-  //   var newPool = new ObjPool();
-  //   var newItem = newPool.alloc();
-  //   expect(!!newItem.obj).toBe(true);
-  //   expect(newItem.obj instanceof Image).toBe(true);
-  //   expect(newItem.obj instanceof Object).toBe(true);
-  //   expect(newItem.obj instanceof String).toBe(false);
-  // });
-
-  // it('should generate right custom item type', function () {
-  //   var newPool = new ObjPool();
-  //   newPool.init({
-  //     itemFactory: function(){
-  //       return {};
-  //     }
-  //   });
-  //   var newItem = newPool.alloc();
-  //   expect(newItem.obj instanceof Object).toBe(true);
-  //   expect(newItem.obj instanceof String).toBe(false);
-  //   expect(newItem.obj instanceof Image).toBe(true);
-  // });
-
-  // it('should generate new item when new id', function () {
-  //   var newPool = new ObjPool();
-  //   var newItem = newPool.alloc();
-  //   expect(!!newItem.obj).toBe(true);
-  //   expect(newItem.id).toBe(1);
-  // });
-
-  // it('should generate new item when new id', function () {
-  //   var newPool = new ObjPool();
-  //   var newItem = newPool.alloc();
-  //   expect(!!newItem.obj).toBe(true);
-  //   expect(newItem.id).toBe(1);
-  // });
 
 
 

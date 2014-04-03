@@ -1,8 +1,8 @@
 'use strict';
-
 angular.module('artpopApp')
-.factory('ObjPool', function () {
+.factory('ObjPool', function (ObjPoolItem) {
 	// Service logic
+
 	function ObjPool(){
 		this.currentID = 0;
 		this.pool = [];
@@ -18,11 +18,11 @@ angular.module('artpopApp')
 	};
 	ObjPool.prototype.makeNewItemSet = function(){
 		this.currentID++;
-		var item = {
-			id: this.currentID,
-			inUse: false,
-			obj: this.options.factory()
-		};
+		var item = new ObjPoolItem(
+			this.currentID,
+			false,
+			this.options.factory()
+		);
 		this.pool.push(item);
 		return item;
 	};
@@ -39,8 +39,8 @@ angular.module('artpopApp')
 		if (itemSet === -1){
 			itemSet = this.makeNewItemSet();
 		}
-
 		itemSet.inUse = true;
+		console.log(this.pool.length, this.currentID);
 		return itemSet;
 	};
 	ObjPool.prototype.reset = function(item){
