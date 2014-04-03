@@ -14,10 +14,6 @@ angular
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
-      .when('/Credit', {
-        templateUrl: 'views/credit.html',
-        controller: 'CreditCtrl'
-      })
       .when('/ARTPOP', {
         templateUrl: 'views/artpop.html',
         controller: 'ArtpopCtrl'
@@ -26,7 +22,11 @@ angular
         templateUrl: 'views/todos.html',
         controller: 'TodosCtrl'
       })
+      .when('/Credit', {
+        templateUrl: 'views/credit.html',
+        controller: 'CreditCtrl'
+      })
       .otherwise({
-        redirectTo: '/electric-chapel'
+        redirectTo: '/ARTPOP'
       });
   });

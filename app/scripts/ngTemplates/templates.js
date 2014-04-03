@@ -1,7 +1,7 @@
 angular.module('artpopApp').run(['$templateCache', function($templateCache) {  'use strict';  'use strict';
 
   $templateCache.put('views/artpop.html',
-    ""
+    "<artpop></artpop>"
   );
 
 

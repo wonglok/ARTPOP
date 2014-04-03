@@ -2,7 +2,6 @@
 
 angular.module('artpopApp')
 .factory('Shaders', function ($templateCache) {
-
 	return {
 		spiky :{
 			vs: $templateCache.get('shaders/spiky.vs'),
