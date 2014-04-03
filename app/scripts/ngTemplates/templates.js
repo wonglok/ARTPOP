@@ -1,7 +1,7 @@
 angular.module('artpopApp').run(['$templateCache', function($templateCache) {  'use strict';  'use strict';
 
   $templateCache.put('views/artpop.html',
-    "PlaceHolder<br><p>Pre-Alpha ARTPOP WebGL.<br>Comming soon....</p>"
+    "PlaceHolder<br><p>Pre-Alpha ARTPOP WebGL.<br>Comming soon....</p><ul><li>Realtime Collaboration *o*</li><li>More Materials</li><li>More PostProcessing Effect</li><li>More OMG</li></ul>"
   );
 
 
