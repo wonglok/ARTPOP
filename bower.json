@@ -19,7 +19,8 @@
     "typeface-0.15": "http://typeface.neocracy.org/typeface-0.15.js",
     "stats.js": "git@github.com:mrdoob/stats.js.git",
     "angular-animate": "~1.2.15",
-    "angular-touch": "~1.2.15"
+    "angular-touch": "~1.2.15",
+    "webgl-debug": "https://raw.github.com/tparisi/WebGLBook/master/Chapter%207/webgl-debug.js"
   },
   "devDependencies": {
     "angular-mocks": "1.2.15",

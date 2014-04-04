@@ -113,6 +113,7 @@ angular.module('artpopApp')
 	// mesh.rotation.y += 0.005;
 
 
+	// WebGLDebugUtils
 
 	function addObjects(){
 
@@ -225,6 +226,9 @@ angular.module('artpopApp')
 	}
 	function setUpEvents($scope){
 		window.addEventListener('resize', handleScreenResize, false);
+
+		// renderer.domElement = WebGLDebugUtils.makeLostContextSimulatingCanvas(renderer.domElement);
+		// renderer.domElement.setRestoreTimeout(1000);
 
 		renderer.domElement.addEventListener('webglcontextlost', function(event) {
 			event.preventDefault();
