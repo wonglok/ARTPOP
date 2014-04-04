@@ -6,5 +6,3 @@ dist
 .sass-cache
 
 .grunt
-
-app/scripts/ngTemplates/
