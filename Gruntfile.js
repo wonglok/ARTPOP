@@ -39,7 +39,6 @@ module.exports = function (grunt) {
             str += '  \'use strict\';';
             str += script;
             str += '}]);';
-
             return str;
           },
           prefix: '',
@@ -67,7 +66,6 @@ module.exports = function (grunt) {
             str += '  \'use strict\';';
             str += script;
             str += '}]);';
-
             return str;
           },
           prefix: '',
@@ -332,7 +330,9 @@ module.exports = function (grunt) {
 
     // Performs rewrites based on rev and the useminPrepare configuration
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      html: [
+        '<%= yeoman.dist %>/{,*/}*.html'
+      ],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['<%= yeoman.dist %>']
@@ -532,6 +532,7 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     //'bowerInstall',
+    'ngtemplates',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

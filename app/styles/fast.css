@@ -123,9 +123,10 @@ div.ap-footer{
        -o-transform: translate3d(0,0,0);
           transform: translate3d(0,0,0);
 
-/* 	position:absolute;
+/*
+  position:absolute;
 	z-index: 0;
-    top:0;
+  top:0;
 	left:0;
 	right:0;
 	bottom:0;

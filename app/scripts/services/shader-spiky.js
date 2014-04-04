@@ -13,7 +13,7 @@ angular.module('artpopApp')
 			this.uniforms = {
 				amplitude: {
 					type: 'f',
-					value: 3.0
+					value: 2.0
 				},
 				color:     {
 					type: 'c',
@@ -78,6 +78,8 @@ angular.module('artpopApp')
 			this.mesh.material = null;
 			this.mesh = null;
 		};
+		SpikySahder.prototype.updateInput = function(){
+		};
 		SpikySahder.prototype.update = function (){
 			var uniforms = this.uniforms;
 			var attributes = this.attributes;
@@ -88,25 +90,44 @@ angular.module('artpopApp')
 			var time = clock.getElapsedTime() * 50;
 
 			mesh.rotation.x = 0.01 * time;
-			mesh.rotation.y = 0.01 * time;
-			mesh.rotation.z = 0.01 * time;
+			//mesh.rotation.y = 0.01 * time;
+			// mesh.rotation.z = 0.01 * time;
 
-			uniforms.amplitude.value = 2.5 * Math.sin( mesh.rotation.y * 0.125 );
+			//0~1 * 2.5 amplitude
+			uniforms.amplitude.value = 1.5 * Math.sin( 0.003 * time );
+
+			//color of item.
 			uniforms.color.value.offsetHSL( 0.0005, 0, 0 );
 
-			//
-			for ( var i = 0; i < attributes.displacement.value.length; i ++ ) {
-				attributes.displacement.value[ i ] = Math.sin( 0.1 * i + time );
-				noise[ i ] += 0.5 * ( 0.5 - Math.random() );
-				noise[ i ] = THREE.Math.clamp( noise[ i ], -5, 5 );
-				attributes.displacement.value[ i ] += noise[ i ];
+			//loop through displacement
+			var displacementArr = attributes.displacement.value;
+			var currNoise = 0;
+			for (var dv = 0; dv < displacementArr.length; dv++) {
+				//set displancement based on time within circular range
+				displacementArr[ dv ] = Math.sin( 0.1 * dv + time );
+
+
+				//add noise to displacement (spkie)
+				currNoise = noise[ dv ];
+				currNoise += 1 * ( 0.5 - Math.random() );
+				currNoise = THREE.Math.clamp( currNoise, -5, 5 );
+				displacementArr[ dv ] += currNoise;
 			}
-			mesh.position.x = Math.sin(noise[ 0 ]) * 5;
-			mesh.position.y = Math.sin(noise[ 1 ]) * 5;
-			mesh.position.z = Math.sin(noise[ 2 ]) * 5;
+			// for ( var i = 0; i < attributes.displacement.value.length; i ++ ) {
+			// 	//set displancement based on time within circular range
+			// 	attributes.displacement.value[ i ] = Math.sin( 0.1 * i + time );
 
+			// 	//add noise to displacement (spkie)
+			// 	noise[ i ] += 1 * ( 0.5 - Math.random() );
+			// 	noise[ i ] = THREE.Math.clamp( noise[ i ], -5, 5 );
+			// 	attributes.displacement.value[ i ] += noise[ i ];
+			// }
 
-			//
+			//shake the ball
+			mesh.position.x = Math.sin(noise[ 0 ]) * 2;
+			mesh.position.y = Math.sin(noise[ 1 ]) * 2;
+			mesh.position.z = Math.sin(noise[ 2 ]) * 2;
+
 			attributes.displacement.needsUpdate = true;
 
 		};

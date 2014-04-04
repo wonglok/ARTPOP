@@ -116,19 +116,32 @@ angular.module('artpopApp')
 
 	function addObjects(){
 
-		function meshFactory(param){
-			param = param || {};
-			var radius = param.radius || 50,
-				segments = param.segments || 128,
-				rings = param.rings || 64;
+		var meshFactory = {
+			eightFace: function (param){
+				param = param || {};
+				var radius = param.radius || 50,
+				detail = param.detail || 0;
 
-			var geometry = new THREE.SphereGeometry( radius, segments, rings );
-			geometry.dynamic = true;
-			var mesh = new THREE.Mesh( geometry );
-			return mesh;
-		}
+				var geometry = new THREE.IcosahedronGeometry(radius,detail);
+				geometry.dynamic = true;
+				var mesh = new THREE.Mesh( geometry );
+				return mesh;
+			},
+			ball: function (param){
+				param = param || {};
+				var radius = param.radius || 50,
+					segments = param.segments || 64,
+					rings = param.rings || 64;
 
-		var mesh = meshFactory();
+				var geometry = new THREE.SphereGeometry( radius, segments, rings );
+				geometry.dynamic = true;
+				var mesh = new THREE.Mesh( geometry );
+				return mesh;
+			}
+		};
+
+		var currentItem = 'ball';
+		var mesh = meshFactory[currentItem]();
 		var spiky = new ShaderSpiky();
 		spiky.init({
 			mesh: mesh,
@@ -195,8 +208,6 @@ angular.module('artpopApp')
 		}
 	}
 
-
-
 	function startLoop(){
 		if (!state.system.configured){
 			loop();
@@ -209,14 +220,21 @@ angular.module('artpopApp')
 	}
 
 
-
 	function handleScreenResize(){
 		state.resize.invalidate = true;
 	}
 	function setUpEvents($scope){
 		window.addEventListener('resize', handleScreenResize, false);
+
+		renderer.domElement.addEventListener('webglcontextlost', function(event) {
+			event.preventDefault();
+			stopLoop();
+			startLoop();
+		}, false);
+
 		$scope.$on('$destroy', function() {
 			stopLoop();
+			renderer.domElement.removeEventListener('webglcontextlost');
 			window.removeEventListener('resize');
 		});
 	}
@@ -231,6 +249,7 @@ angular.module('artpopApp')
 		var target = $element.find('.gl-canvas-container');
 		target.html(renderer.domElement);
 	}
+
 
 
 	if(Modernizr.webgl){
