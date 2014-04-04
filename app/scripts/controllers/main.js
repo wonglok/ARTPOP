@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('artpopApp')
-  .controller('MainCtrl', function ($scope) {
+  .controller('MainCtrl', function ($scope, $rootScope) {
     $scope.awesomeThings = [
       'ARTPOP',
       'WebGL',
@@ -11,4 +11,6 @@ angular.module('artpopApp')
       'AngularJS',
       'Karma'
     ];
+
+    $rootScope.needStats = true;
   });

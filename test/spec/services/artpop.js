@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Shaders', function () {
+describe('Service: ARTPOP', function () {
 
   // load the service's module
   beforeEach(module('artpopApp'));
 
   // instantiate service
-  var Shaders;
-  beforeEach(inject(function (_shaders_) {
-    Shaders = _shaders_;
+  var ARTPOP;
+  beforeEach(inject(function (_ARTPOP_) {
+    ARTPOP = _ARTPOP_;
   }));
 
   it('should do something', function () {
-    expect(!!Shaders).toBe(true);
+    expect(!!ARTPOP).toBe(true);
   });
 
 });

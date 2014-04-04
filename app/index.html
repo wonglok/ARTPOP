@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/fast.css">
     <!-- endbuild -->
-
   </head>
   <body ng-app="artpopApp">
     <!--[if lt IE 7]>
@@ -32,7 +31,7 @@
       <a ng-href="#ARTPOP">ARTPOP v0.1</a>
       <a ng-href="#Todos">Todos</a>
       <a ng-href="#Credit">Credit</a>
-      <doob-stat ng-hide="$rootScope.isMobile"></doob-stat>
+      <doob-stat ng-show="Modernizr.webgl && !Modernizr.touch"></doob-stat>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -102,7 +101,7 @@
     <script src="scripts/ngTemplates/shaders.js"></script>
 
     <!--webgl-->
-    <script src="scripts/services/shaders.js"></script>
+    <script src="scripts/services/shadertext.js"></script>
     <script src="scripts/services/webglrenderer.js"></script>
     <script src="scripts/services/corscanvas.js"></script>
     <script src="scripts/directives/webgl-detector.js"></script>
@@ -116,6 +115,10 @@
     <script src="scripts/services/objpool.js"></script>
 
     <script src="scripts/directives/artpop.js"></script>
+    <script src="scripts/controllers/menu.js"></script>
+    <script src="scripts/services/shaderbank.js"></script>
+    <script src="scripts/services/artpop.js"></script>
+    <script src="scripts/services/shader-spiky.js"></script>
     <!-- endbuild -->
 
 

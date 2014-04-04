@@ -1,5 +1,7 @@
 'use strict';
 
+
+/* global Modernizr */
 angular
   .module('artpopApp', [
     'ngCookies',
@@ -30,4 +32,7 @@ angular
       .otherwise({
         redirectTo: '/Electric-Chapel'
       });
+  })
+  .run(function($rootScope){
+    $rootScope.Modernizr = Modernizr;
   });

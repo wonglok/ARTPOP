@@ -142,10 +142,6 @@ angular.module('artpopApp')
 		addObject3D();
 	}
 
-	if(Modernizr.mobile){
-		$rootScope.isMobile = true;
-	}
-
 	return {
 		template: '<div class="gl-detector-container"></div>',
 		restrict: 'E',

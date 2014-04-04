@@ -7,17 +7,18 @@
     Ap-Canvas
    ============================================ */
 
-/*.ap-container webgl-detector canvas{
+.ap-container webgl-detector canvas,
+.ap-container artpop canvas
+{
     z-index: 0;
-    position: fixed;
+	position: absolute;
     top: 0px;
-    left: 0px;
     bottom: 0px;
+    left: 0px;
     right: 0px;
     padding: 0px;
     margin: 0px;
 }
-*/
 
 /* ============================================
     Ap-Menu
@@ -101,20 +102,20 @@ div.ap-footer{
    ============================================ */
 
 .view-animate {
-	z-index: 0;
-	position:fixed;
-	top:0;
-	left:0;
-	right:0;
-	bottom:0;
+	z-index: 1;
+	position:absolute;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 }
 
 .view-animate.ng-enter, .view-animate.ng-leave {
-  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.7s;
-     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.7s;
-      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.7s;
-       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.7s;
-          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.7s;
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.778s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.778s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.778s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.778s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.778s;
 
   -webkit-transform: translate3d(0,0,0);
      -moz-transform: translate3d(0,0,0);
@@ -122,8 +123,14 @@ div.ap-footer{
        -o-transform: translate3d(0,0,0);
           transform: translate3d(0,0,0);
 
-  /*overflow: hidden;*/
-
+/* 	position:absolute;
+	z-index: 0;
+    top:0;
+	left:0;
+	right:0;
+	bottom:0;
+ */
+  overflow: hidden;
   /*opacity: 0.5;*/
 }
 
