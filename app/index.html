@@ -29,25 +29,24 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="ap-container view-animate" ng-view=""></div>
-    <div class="ap-menu">
+    <!--content-->
+    <div class="apwlg-container">
+        <div class="view-animate" ng-view=""></div>
+    </div>
+
+    <!--topleft-->
+    <div id="apwgl-slider"></div>
+
+    <!--topright-->
+    <div class="apwgl-menu">
       <a ng-href="#Electric-Chapel">Electric Chapel</a>
       <a ng-href="#ARTPOP">ARTPOP v0.1</a>
       <a ng-href="#Todos">Todos</a>
       <a ng-href="#Credit">Credit</a>
-      <doob-stat ng-show="Modernizr.webgl && !Modernizr.touch"></doob-stat>
+      <div id="apwgl-stats"></div>
     </div>
 
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-     <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-       ga('create', 'UA-49603107-1','wonglok.com');
-       ga('send', 'pageview');
-    </script>
+
 
     <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
@@ -111,10 +110,8 @@
 
     <!--templateCache-->
     <script src="scripts/ngTemplates/shaders.js"></script>
-    <script src="scripts/ngTemplates/templates.js"></script>
-    <!--
-    -->
-    <!--templateCache-->
+
+    <!--shaders-->
     <script src="scripts/services/shader-spiky.js"></script>
     <script src="scripts/services/shaderbank.js"></script>
 
@@ -126,21 +123,31 @@
 
     <!--stat-->
     <script src="scripts/services/Stats.js"></script>
-    <script src="scripts/directives/doob-stat.js"></script>
 
     <!--objpool-->
     <script src="scripts/services/objpoolitem.js"></script>
     <script src="scripts/services/objpool.js"></script>
 
     <!--ap-->
-    <script src="scripts/services/artpop.js"></script>
     <script src="scripts/directives/artpop.js"></script>
 
     <script src="scripts/services/x3.js"></script>
     <script src="scripts/services/framebudgettaskmanager.js"></script>
     <script src="scripts/services/framebudgetestimator.js"></script>
     <script src="scripts/services/framebudget.js"></script>
+    <script src="scripts/services/datgui.js"></script>
     <!-- endbuild -->
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+    <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-49603107-1','wonglok.com');
+       ga('send', 'pageview');
+    </script>
 
 </body>
 </html>

@@ -2,6 +2,7 @@
 /* global THREE */
 angular.module('artpopApp')
 	.factory('ShaderSpiky', function (ShaderText) {
+
 		function SpikySahder(){
 			this.noise = [];
 			this.attributes = {
@@ -56,7 +57,9 @@ angular.module('artpopApp')
 			}
 
 			//uniforms
-			uniforms.color.value = param.color || new THREE.Color( 0xff2200 );
+			uniforms.color.value = param.color || new THREE.Color( 0xff00ff );
+			uniforms.color.value.offsetHSL( 0, 2, 0 );
+
 			uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/disturb.jpg' );
 			uniforms.texture.value.wrapS = THREE.RepeatWrapping;
 			uniforms.texture.value.wrapT = THREE.RepeatWrapping;

@@ -1,7 +1,7 @@
 'use strict';
-/* global THREE, TWEEN */
+/* global THREE, TWEEN, Modernizr */
 angular.module('artpopApp')
-	.factory('X3', function (frameBudget, stats) {
+	.factory('X3', function (frameBudget, stats, datGUI) {
 		// Service logic
 		// HamsterFace 3D Code Organiser
 		// Not an engine, just a pretty code organiser for this project.
@@ -41,6 +41,7 @@ angular.module('artpopApp')
 		//shortcut to the task service
 		X3.prototype.frbT = frameBudget.frbT;
 		X3.prototype.frbE = frameBudget.frbE;
+		X3.prototype.gui =  datGUI;
 
 		//stats
 		X3.prototype.stats = stats;
@@ -58,14 +59,13 @@ angular.module('artpopApp')
 		X3.prototype.init = function(param){
 			param = param || {};
 
+			//camera
 			this.clock = param.clock || new THREE.Clock();
 			this.scene = param.scene || new THREE.Scene();
 			this.camera = param.camera || new THREE.PerspectiveCamera( 75,  window.innerWidth/window.innerHeight, 0.1, 1000 );
 			this.renderer = param.renderer || new THREE.WebGLRenderer();
 			this.renderer.setClearColor( param.clearColor || 0xffffff ,  param.clearAlpha  || 0.5);
 			this.canvasContainer = param.canvasContainer || '.gl-canvas-container';
-
-			this.stats = param.stats || this.stats;
 
 			//camera
 			this.renderer.setSize( window.innerWidth, window.innerHeight );
@@ -100,46 +100,89 @@ angular.module('artpopApp')
 		   ===========================================  */
 		X3.prototype.reconfig = function($scope, $element){
 			//cache dom and context.
-			var container = $element[0].querySelector('.gl-canvas-container');
 			var that = this;
 			var cleanUpStack = [];
 
+			var glContainer = $element.find(this.canvasContainer);
+			var rendererDom = this.renderer.domElement;
 
-			container.appendChild(this.renderer.domElement);
-			window.addEventListener('resize', function(){
-				that.handleResizeEvent();
-			}, false);
-			this.startLoop();
-
-			// this.renderer.domElement.addEventListener('webglcontextlost', function (event) {
-			// 	//restartOnContextLost
-			// 	event.preventDefault();
-			// 	that.stopLoop();
-			// 	that.startLoop();
-			// }, false);
-			// cleanUpStack.push(function(){
-			// 	that.renderer.domElement.removeEventListener('webglcontextlost');
-			// });
+			//---------------------
+			//render dom
+			//---------------------
+			glContainer.html(rendererDom);
 			cleanUpStack.push(function(){
-				window.removeEventListener('resize');
+				setTimeout(function(){
+					$element.empty();
+				},500);
 			});
 
+			//---------------------
+			//render loop
+			//---------------------
+			this.startLoop();
 			cleanUpStack.push(function(){
 				that.stopLoop();
 			});
 
+			//---------------------
+			//resizer
+			//---------------------
+			window.addEventListener('resize', function(){
+				that.handleResizeEvent();
+			}, false);
 			cleanUpStack.push(function(){
-				container.removeChild(that.renderer.domElement);
+				window.removeEventListener('resize');
 			});
+
+			//---------------------
+			//webgl context lost
+			//---------------------
+			rendererDom.addEventListener('webglcontextlost', function (event) {
+				//restartOnContextLost
+				event.preventDefault();
+				that.stopLoop();
+				that.startLoop();
+			}, false);
+			cleanUpStack.push(function(){
+				rendererDom.removeEventListener('webglcontextlost');
+			});
+
+			//webgl
+			if (Modernizr.webgl){
+				//---------------------
+				//slider
+				//---------------------
+				var slideContainer = angular.element('#apwgl-slider');
+				slideContainer.html(this.gui.domElement);
+				cleanUpStack.push(function(){
+					slideContainer.empty();
+				});
+
+
+				//---------------------
+				//stats
+				//---------------------
+				if (Modernizr.touch){
+					var statsContainer = angular.element('#apwgl-stats');
+					statsContainer.html(stats.domElement);
+					cleanUpStack.push(function(){
+						statsContainer.empty();
+					});
+				}
+			}
 
 			//setup cleanup
 			if (typeof $scope.$on === 'function'){
-				$scope.$on('$destroy', function cleanUpOnDestroy() {
-					that.processTaskStackOrder(cleanUpStack);
-				});
 			}else{
 				throw new Error('You need to make sure it has cleanup adapter.');
 			}
+
+			//---------------------
+			//
+			//---------------------
+			$scope.$on('$destroy', function() {
+				that.shceduleTaskStackReverse(cleanUpStack);
+			});
 		};
 
 
@@ -159,7 +202,6 @@ angular.module('artpopApp')
 			TWEEN.update();
 			this.processTaskStackOrder(this.updateStack);
 
-			//this.frbT.requestTask(frameStartTime);
 			this.frbT.stepTask(frameStartTime);
 		};
 		X3.prototype.loop = function() {
@@ -196,7 +238,7 @@ angular.module('artpopApp')
 			this.camera.aspect = window.innerWidth / window.innerHeight;
 			this.camera.updateProjectionMatrix();
 			this.state.resize.timerID = null;
-			this.renderer.domElement.classList.remove('invalid');
+			this.renderer.domElement.classList.remove('resizing');
 			this.state.render.throttle = false;
 			this.state.resize.invalid = false;
 		};
@@ -205,7 +247,7 @@ angular.module('artpopApp')
 			if (!this.state.render.throttle && this.state.resize.invalid){
 				this.state.render.throttle = true;
 
-				this.renderer.domElement.classList.add('invalid');
+				this.renderer.domElement.classList.add('resizing');
 				clearTimeout(this.state.resize.timerID);
 
 				var that = this;

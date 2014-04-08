@@ -23,9 +23,10 @@ angular.module('artpopApp')
 							frbT.updateFrameBudget(
 								frbE.guess()
 							);
-						},
-						ctx: null,
-						args: null,
+						}
+						// ,
+						// ctx: null,
+						// args: null,
 					});
 					frbT.digest();
 					console.log('Finish FrameBudget Estimation');
@@ -38,4 +39,9 @@ angular.module('artpopApp')
 	serviceInstnace.init();
 
 	return serviceInstnace;
-});
+})
+.factory('frbT', function (frameBudget) {
+	return frameBudget.frbT;
+})
+;
+

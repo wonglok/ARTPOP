@@ -1,8 +1,4 @@
 /*
-* {
- outline: rgba(255,0,0,0.2) solid 1px;
-}
-
 */
 /* ============================================
     Ap-Canvas
@@ -17,21 +13,16 @@
   right: 0px;
   padding: 0px;
   margin: 0px;
-  /*opacity: 1;*/
-  /*display: none;*/
 }
 .gl-canvas-container canvas,
-.gl-canvas-container canvas.invalid{
+.gl-canvas-container canvas.resizing{
   -webkit-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
      -moz-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
       -ms-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
        -o-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
           transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
 }
-.gl-canvas-container canvas{
-  opacity: 1;
-}
-.gl-canvas-container canvas.invalid{
+.gl-canvas-container canvas.resizing{
   opacity: 0.5;
   -webkit-transform: scale(0.75);
      -moz-transform: scale(0.75);
@@ -39,11 +30,22 @@
        -o-transform: scale(0.75);
           transform: scale(0.75);
 }
+/* ============================================
+    Ap-Sliders
+   ============================================ */
+#apwgl-slider {
+    /* font-family: Helvetiker; */
+    position: absolute;
+    top: 0px;
+    left:0;
+    z-index: 1002;
+}
+
 
 /* ============================================
     Ap-Menu
    ============================================ */
-.ap-menu {
+.apwgl-menu {
     /* font-family: Helvetiker; */
     position: absolute;
     top: 0px;
@@ -55,10 +57,9 @@
     box-shadow: 0px 0px 33px -4px rgb(0, 50, 155);
     z-index: 1000;
 }
-    doob-stat{
+    #apwgl-stats{
     }
-    doob-stat #stats{
-
+    #apwgl-stats #stats{
         margin-right: 25px;
         margin-bottom: 11px;
         margin-left: 24px;
@@ -69,9 +70,9 @@
     }
 
 
-    .ap-menu a:active,
-    .ap-menu a:visited,
-    .ap-menu a{
+    .apwgl-menu a:active,
+    .apwgl-menu a:visited,
+    .apwgl-menu a{
     	display: block;
     	margin: 10px;
     	border-bottom: #eee solid 1px;
@@ -84,17 +85,17 @@
 /* ============================================
     Credits
    ============================================ */
-.ap-credit{
+.apwgl-credit{
     margin: 17px;
 }
 
-.ap-credit .credit-title{
+.apwgl-credit .credit-title{
     border: #f0f0f0 solid 1px;
     display: block;
     padding: 19px;
     font-weight: bold;
 }
-.ap-credit a.credit-item{
+.apwgl-credit a.credit-item{
     display: block;
     border-bottom: #f0f0f0 solid 1px;
     border-left: #f0f0f0 solid 1px;
@@ -103,11 +104,11 @@
 
     -webkit-transition: background-color 0.4s;
 }
-.ap-credit a.credit-item:hover{
+.apwgl-credit a.credit-item:hover{
     background-color: #f2f2f2;
 }
 
-div.ap-footer{
+div.apwgl-footer{
     margin: 10px 20px;
     padding-bottom: 10px;
     /* border-bottom: red solid 1px; */
@@ -118,9 +119,19 @@ div.ap-footer{
     Angular Animations
    ============================================ */
 
-body{
-  overflow: scroll;
+.apwgl-container {
+  z-index: 0;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 0px;
+  margin: 0px;
+  overflow: hidden;
 }
+
+
 .view-animate {
 	z-index: 0;
 	position:absolute;
@@ -132,17 +143,16 @@ body{
 
 .view-animate.ng-enter,
 .view-animate.ng-leave {
-
 }
 
 /*begin-enter*/
-.view-animate.ng-enter {
 /*entering should be faster*/
--webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
-   -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
-    -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
-     -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
-        transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
+.view-animate.ng-enter {
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 0.667s;
 
   opacity: 0;
   -webkit-transform: translate3d(0,-100%,0);
@@ -162,14 +172,14 @@ body{
 }
 
 /*being-leave*/
-.view-animate.ng-leave {
 /*leaving should be slower*/
--webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.334s;
-   -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.334s;
-    -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.334s;
-     -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.334s;
-        transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.334s;
-  overflow: hidden;
+.view-animate.ng-leave {
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.75s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.75s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.75s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.75s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1.75s;
+
   opacity: 1;
   -webkit-transform: translate3d(0,0,0);
      -moz-transform: translate3d(0,0,0);

@@ -12,6 +12,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
+      'app/bower_components/dat.gui/dat.gui.js',
       'app/bower_components/stats.js/src/Stats.js',
       'app/bower_components/tween.js/src/Tween.js',
       'app/bower_components/modernizr/modernizr.js',

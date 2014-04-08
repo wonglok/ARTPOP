@@ -12,8 +12,8 @@ angular.module('artpopApp')
       this.samples = [];
 
       this.config = {
-        validAmount: 128,
-        filterTimes: 10,
+        validAmount: 60,
+        filterTimes: 5,
         //sample is the samples taken.
         sample: 0,//to be calculated by the above factors
 
@@ -25,7 +25,6 @@ angular.module('artpopApp')
         //   args:null,
         // },
       };
-      this.config.filterTimes = this.config.validAmount / 5;
       this.config.sample = this.config.validAmount + this.config.filterTimes * 2;
       //console.log('new FrameBudgetEstimator');
     }
@@ -50,14 +49,14 @@ angular.module('artpopApp')
           this.samples.push(  parseFloat( (fst - this.lastSample).toFixed(2) ,10) );
           this.lastSample = fst;
         }
+
+        this.checkFinish();
       },
       requestTakeSample: function(frameStartTime){
-        if (!this.state.finished){
+        if (this.state.finished){
           return;
         }else{
-          if(!this.checkFinish()){
-            this.takeSample(frameStartTime);
-          }
+          this.takeSample(frameStartTime);
         }
       },
       checkFinish: function(){

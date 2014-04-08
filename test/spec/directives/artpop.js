@@ -12,10 +12,9 @@ describe('Directive: artpop', function () {
     scope = $rootScope.$new();
   }));
 
-  it('should make canvas element', inject(function ($compile) {
+  it('should make element', inject(function ($compile) {
     element = angular.element('<artpop></artpop>');
     element = $compile(element)(scope);
     expect(element.length >= 1).toBe(true);
-
   }));
 });
