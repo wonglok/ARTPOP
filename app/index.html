@@ -13,10 +13,15 @@
     <!-- _disable_bower:css -->
     <!-- _disable_endbower -->
     <!-- _disable_endbuild -->
+
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/fast.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/apwgl.js -->
+    <script src="bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
   </head>
   <body ng-app="artpopApp">
@@ -63,10 +68,14 @@
     <!-- bower:js -->
     <!-- endbower -->
 
+    <!--polyfill-->
+    <script src="scripts/polyfill/console.js"></script>
+    <script src="scripts/polyfill/rAF.js"></script>
+
     <!--famework-->
-    <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
+
 
     <!--webgl-->
     <script src="bower_components/three.js/three.min.js"></script>
@@ -87,7 +96,7 @@
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
 
-    <!--ARTPOP-WebGL-->
+    <!--*APWGL*-->
     <script src="scripts/app.js"></script>
 
     <!--controllers-->
@@ -95,34 +104,43 @@
     <script src="scripts/controllers/credit.js"></script>
     <script src="scripts/controllers/artpop.js"></script>
     <script src="scripts/controllers/todos.js"></script>
+    <script src="scripts/controllers/menu.js"></script>
 
-    <!--dom-tools-->
+    <!--dom-directives-->
     <script src="scripts/directives/active-link.js"></script>
 
-    <!--templates&shaders-->
+    <!--templateCache-->
     <script src="scripts/ngTemplates/shaders.js"></script>
+    <script src="scripts/ngTemplates/templates.js"></script>
+    <!--
+    -->
+    <!--templateCache-->
+    <script src="scripts/services/shader-spiky.js"></script>
+    <script src="scripts/services/shaderbank.js"></script>
+
 
     <!--webgl-->
     <script src="scripts/services/shadertext.js"></script>
-    <script src="scripts/services/webglrenderer.js"></script>
     <script src="scripts/services/corscanvas.js"></script>
     <script src="scripts/directives/webgl-detector.js"></script>
 
     <!--stat-->
-    <script src="scripts/services/doob-stat.js"></script>
+    <script src="scripts/services/Stats.js"></script>
     <script src="scripts/directives/doob-stat.js"></script>
 
-
+    <!--objpool-->
     <script src="scripts/services/objpoolitem.js"></script>
     <script src="scripts/services/objpool.js"></script>
 
-    <script src="scripts/directives/artpop.js"></script>
-    <script src="scripts/controllers/menu.js"></script>
-    <script src="scripts/services/shaderbank.js"></script>
+    <!--ap-->
     <script src="scripts/services/artpop.js"></script>
-    <script src="scripts/services/shader-spiky.js"></script>
-    <!-- endbuild -->
+    <script src="scripts/directives/artpop.js"></script>
 
+    <script src="scripts/services/x3.js"></script>
+    <script src="scripts/services/framebudgettaskmanager.js"></script>
+    <script src="scripts/services/framebudgetestimator.js"></script>
+    <script src="scripts/services/framebudget.js"></script>
+    <!-- endbuild -->
 
 </body>
 </html>

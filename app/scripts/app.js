@@ -1,7 +1,4 @@
 'use strict';
-
-
-/* global Modernizr */
 angular
   .module('artpopApp', [
     'ngCookies',
@@ -15,7 +12,7 @@ angular
     $routeProvider
       .when('/Electric-Chapel', {
         templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
       })
       .when('/ARTPOP', {
         templateUrl: 'views/artpop.html',
@@ -33,6 +30,17 @@ angular
         redirectTo: '/Electric-Chapel'
       });
   })
-  .run(function($rootScope){
-    $rootScope.Modernizr = Modernizr;
+  .run(function ($rootScope){
+    $rootScope.$on('$routeChangeSuccess', function () {
+      console.log('$routeChangeSuccess');
+    });
+    $rootScope.$on('$routeChangeStart', function () {
+      console.log('$routeChangeStart');
+
+    });
+    $rootScope.$on('$routeChangeError', function () {
+      console.log('$routeChangeError');
+
+    });
   });
+

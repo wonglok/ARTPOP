@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('artpopApp')
-  .directive('doobStat', function (doobStat) {
+  .directive('doobStat', function (stats) {
     return {
       template: '',
       restrict: 'E',
       controller: function($element) {
-        $element.html(doobStat.domElement);
+        $element.html(stats.domElement);
       }
     };
   });

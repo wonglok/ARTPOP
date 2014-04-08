@@ -50,7 +50,7 @@ angular.module('artpopApp')
 			//attribute data
 			var vertices = mesh.geometry.vertices;
 			var values = attributes.displacement.value;
-			for (var v = 0; v < vertices.length; v++) {
+			for (var v = vertices.length - 1; v >= 0; v--) {
 				values[ v ] = 0;
 				noise[ v ] = Math.random() * 5;
 			}
@@ -106,13 +106,12 @@ angular.module('artpopApp')
 				//set displancement based on time within circular range
 				displacementArr[ dv ] = Math.sin( 0.1 * dv + time );
 
-
 				//add noise to displacement (spkie)
 				currNoise = noise[ dv ];
 				currNoise += 1 * ( 0.5 - Math.random() );
 				currNoise = THREE.Math.clamp( currNoise, -5, 5 );
 				displacementArr[ dv ] += currNoise;
-			};
+			}
 
 			//shake the ball
 			mesh.position.x = Math.sin(noise[ 0 ]) * 2;

@@ -22,7 +22,7 @@ describe('Service: ObjPool', function () {
     var newPool = new ObjPool('defined props');
     expect(!!newPool).toBe(true);
     expect(!!newPool.pool).toBe(true);
-    expect(!!newPool.options).toBe(true);
+    expect(!!newPool.config).toBe(true);
   });
 
   it('should be correct ObjPoolItem type', function () {

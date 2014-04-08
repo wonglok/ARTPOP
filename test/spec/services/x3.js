@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: artPop', function () {
+describe('Service: X3', function () {
 
   // load the service's module
   beforeEach(module('artpopApp'));
 
   // instantiate service
-  var artPop;
-  beforeEach(inject(function (_artPop_) {
-    artPop = _artPop_;
+  var X3;
+  beforeEach(inject(function (_X3_) {
+    X3 = _X3_;
   }));
 
   it('should do something', function () {
-    expect(!!artPop).toBe(true);
+    expect(!!X3).toBe(true);
   });
 
 });

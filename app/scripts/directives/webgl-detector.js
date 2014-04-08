@@ -1,162 +1,64 @@
 'use strict';
-/* global THREE,TWEEN,Modernizr */
+/* global THREE,Modernizr */
 angular.module('artpopApp')
-.directive('webglDetector', function ($rootScope, doobStat) {
+.directive('webglDetector', function ($rootScope, X3) {
 
-	var target,
-		scene,
-		camera,
-		renderer,
-		frameID,
-		updateStack,
-		state = {
-			system: {
-				started: false,
-			},
-			render: {
-				throttle: false
-			},
-			resize: {
-				invalidate: false,
-			}
-		};
+	// function ARTPOP(){
+	// 	X3.apply(this,arguments);
+	// }
+	// ARTPOP.prototype = Object.create(X3.prototype);
 
-	function initSystem(){
-		updateStack = [];
-		scene = new THREE.Scene();
-		camera = new THREE.PerspectiveCamera( 75,  window.innerWidth/window.innerHeight, 0.1, 1000 );
-		renderer = new THREE.WebGLRenderer();
-
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		camera.aspect	= window.innerWidth / window.innerHeight;
-		//camera.position.z = 20;
-
-		state.system.started = true;
-	}
-
-	function configDom($element){
-		target = $element.find('.gl-detector-container');
-		target.html(renderer.domElement);
-		renderer.setClearColor( 0x0000ff * 0.5 , 1);
-	}
-
+	//hamster code organiser.
+	var wgld = new X3();
+	wgld.init();
 	function addObject3D(){
 		var object3D = new THREE.Object3D();
-
-		var wireFrameMaterial = new THREE.MeshBasicMaterial({
-			color: new THREE.Color(0xff00ff),
-			wireframe: true,
-			wireframeLinewidth: 3,
-			side: THREE.DoubleSide
+		wgld.updateStack.push(function(){
+			object3D.rotation.z += 0.004;
+			object3D.rotation.x += 0.004;
+			object3D.rotation.y += 0.004;
 		});
-
-		var octahedronMesh = new THREE.Mesh(
-			new THREE.OctahedronGeometry(10,2)
+		wgld.scene.add(object3D);
+		var inner = new THREE.Mesh(
+			new THREE.IcosahedronGeometry(38,2),
+				new THREE.MeshPhongMaterial({
+				color: new THREE.Color(0xff0000),
+				wireframe: true,
+				wireframeLinewidth: 2,
+				side: THREE.BackSide,
+				transparent: true,
+				opacity: 0.9,
+			})
 		);
-		octahedronMesh.material = wireFrameMaterial;
-		object3D.add(octahedronMesh);
-		scene.add(object3D);
-		updateStack.push(function cubeUpdater(){
-			var color = octahedronMesh.material.color;
-			if (color){
-				color.offsetHSL(0.0001,0.0,0);
-			}
-			octahedronMesh.rotation.z += 0.035;
-			octahedronMesh.rotation.x += 0.035;
-			octahedronMesh.rotation.y += 0.035;
+		wgld.updateStack.push(function(){
+			inner.material.color.offsetHSL(0.001,0.0,0);
 		});
+		object3D.add(inner);
 	}
-
+	function configCamera(){
+		wgld.camera.position.z = 20;
+	}
 	function addLight(){
-		var lightFace = new THREE.PointLight( 0xffffff, 1, 100 );
-		lightFace.position.set( 0, 0, 20 );
-		scene.add( lightFace );
+		var lightBack = new THREE.DirectionalLight( 0xffffff, 5, 1000 );
+		lightBack.position.set( 0, 0, 400 );
+		wgld.scene.add( lightBack );
 	}
+	configCamera();
+	addObject3D();
+	addLight();
 
-
-	function render(){
-		renderer.render(scene, camera);
-		processUpdateStack();
-		TWEEN.update();
-	}
-
-
-	function processUpdateStack(){
-		for (var i = updateStack.length - 1; i >= 0; i--) {
-			var updateFn = updateStack[i];
-			if (typeof updateFn === 'function'){
-				updateFn();
-			}
-		}
-	}
-
-	function handleScreenResize(){
-		state.resize.invalidate = true;
-	}
-	function resizeProc(){
-		renderer.setSize( window.innerWidth, window.innerHeight );
-		camera.aspect	= window.innerWidth / window.innerHeight;
-		camera.updateProjectionMatrix();
-
-		setTimeout(function(){
-			state.resize.invalidate = false;
-			state.render.throttle = false;
-		},100);
-	}
-	function processResize(){
-		if (state.resize.invalidate && !state.resize.throttle){
-			state.render.throttle = true;
-
-			setTimeout(resizeProc,500);
-		}
-	}
-	function startHeart(){
-		doobStat.begin();
-		frameID = window.requestAnimationFrame(startHeart);
-		processResize();
-		if (!state.render.throttle){
-			render();
-		}
-		doobStat.end();
-	}
-
-	function stopHeart(){
-		window.cancelAnimationFrame(frameID);
-	}
-
-	function setUpEvents($scope){
-		window.addEventListener('resize', handleScreenResize, false);
-		$scope.$on('$destroy', function() {
-			stopHeart();
-			window.removeEventListener('resize');
-		});
-	}
-
-	function showNotice($element,$transclude){
-		$element.html($transclude());
-	}
-
-	if(Modernizr.webgl){
-		initSystem();
-		addLight();
-		addObject3D();
-	}
 
 	return {
-		template: '<div class="gl-detector-container"></div>',
+		template: '<div class="gl-canvas-container"></div>',
 		restrict: 'E',
 		transclude: true,
 		controller: function ($scope, $element, $transclude) {
-			setTimeout(function(){
-				if (Modernizr.webgl){
-					configDom($element);
-					setUpEvents($scope);
-					startHeart();
-				}else{
-					showNotice($element, $transclude);
-				}
-			});
-
+			if (Modernizr.webgl){
+				wgld.reconfig($scope, $element);
+			}else{
+				$element.find('.gl-canvas-container').html($transclude());
+			}
 		}
 	};
+
 });

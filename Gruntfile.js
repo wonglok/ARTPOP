@@ -55,7 +55,16 @@ module.exports = function (grunt) {
         }
       },
       templates: {
-        cwd:        'app/',
+        //because of usemin.
+        //uses the dist's view to build app's tempalteCache.
+
+        //dev mode
+        //does not include.
+
+        //get templates from last build
+        //prodction mode
+        //might get old version.
+        cwd:        'dist/',
         src:        'views/**.html',
         dest:       'app/scripts/ngTemplates/templates.js',
         options: {
@@ -110,27 +119,39 @@ module.exports = function (grunt) {
     watch: {
       shaders: {
         files: ['<%= yeoman.app%>/shaders/*.*'],
-        tasks: ['ngtemplates:shaders']
-      },
-      templates: {
-        files: ['<%= yeoman.app%>/views/*.*'],
-        tasks: ['ngtemplates:templates'],
+        tasks: ['ngtemplates:shaders'],
         options: {
-          livereload: true
+          livereload: false
         }
       },
+
+      //usemin a8asd9asd8.haha.png makes template in app/ folder breaks
+      //use dist items.
+      templates: {
+        files: ['<%= yeoman.dist%>/views/*.*'],
+        tasks: ['ngtemplates:templates'],
+        options: {
+          livereload: false
+        }
+      },
+
       // vanillaCss:{
       //   files: ['<%= yeoman.app%>/styles/*.css'],
       //   options: {
       //     livereload: true
       //   }
       // },
+
       bower: {
         files: ['bower.json'],
         tasks: ['bowerInstall']
       },
       js: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
+        files: [
+          '<%= yeoman.app %>/scripts/{,*/}*.js',
+          '!<%= yeoman.app %>/scripts/ngTemplates/{,*/}*.js',
+          '!<%= yeoman.app %>/scripts/polyfill/{,*/}*.js'
+        ],
         tasks: ['newer:jshint:all'],
         options: {
           livereload: true
@@ -158,21 +179,21 @@ module.exports = function (grunt) {
         ]
       }
     },
-    open : {
-      dev: 'http://APWGL.192.168.0.120.xip.io:9000'
-    },
+    // open : {
+    //   dev: 'http://APWGL.192.168.0.120.xip.io:9000'
+    // },
     // The actual grunt server settings
     connect: {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         //localhost
-        hostname: 'APWGL.192.168.0.120.xip.io',
+        hostname: '192.168.0.120',
         livereload: 35729
       },
       livereload: {
         options: {
-          open: 'APWGL.192.168.0.120.xip.io:9000',
+          open: '192.168.0.120:9000',
           base: [
             '.tmp',
             '<%= yeoman.app %>'
@@ -214,6 +235,7 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js',
         '!<%= yeoman.app %>/scripts/ngTemplates/{,*/}*.js',
+        '!<%= yeoman.app %>/scripts/polyfill/{,*/}*.js',
         '!<%= yeoman.app %>/scripts/scene/{,*/}*.js'
       ],
       test: {
@@ -443,8 +465,8 @@ module.exports = function (grunt) {
     },
 
     exec: {
-      openDev: 'open http://apwgl.192.168.0.120.xip.io:9000',
-      openDistTest: 'open http://apwgl.192.168.0.120.xip.io:9008'
+      openDev: 'open http://dev-apwgl.192.168.0.120.xip.io:9000',
+      openDistTest: 'open http://dist-apwgl.192.168.0.120.xip.io:9008'
     },
 
     // Run some tasks in parallel to speed up the build process
@@ -478,14 +500,24 @@ module.exports = function (grunt) {
     // uglify: {
     //   dist: {
     //     files: {
-    //       '<%= yeoman.dist %>/scripts/scripts.js': [
-    //         '<%= yeoman.dist %>/scripts/scripts.js'
+    //       '<%= yeoman.dist %>/scripts/ngTemplates/templates.js': [
+    //         '<%= yeoman.dist %>/scripts/ngTemplates/templates.js'
     //       ]
     //     }
     //   }
     // },
     // concat: {
     //   dist: {}
+    // },
+
+    // concat: {
+    //   options: {
+    //     separator: ';',
+    //   },
+    //   postDist: {
+    //     src: ['dist/scripts/*.js', 'dist/scripts/*.js'],
+    //     dest: 'dist/built.js',
+    //   },
     // },
 
     // Test settings
@@ -526,25 +558,51 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma:unit'
   ]);
+
+  grunt.registerTask('testKeep', [
+    'clean:server',
+    'concurrent:test',
+    'autoprefixer',
+    'connect:test',
+    'karma:keep'
+  ]);
+
 
   grunt.registerTask('build', [
     'clean:dist',
     //'bowerInstall',
-    'ngtemplates',
+    'ngtemplates:shaders',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
     'concat',
-    'ngmin',
+    'ngmin:dist',
     'copy:dist',
     'cdnify',
     'cssmin',
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+  ]);
+
+  grunt.registerTask('buildTemplates', [
+    'clean:dist',
+    //'bowerInstall',
+    'useminPrepare',
+    'concurrent:dist',
+    // 'autoprefixer',
+    'concat',
+    // 'ngmin:dist',
+    'copy:dist',
+    'cdnify',
+    // 'cssmin',
+    // 'uglify',
+    'rev',
+    'usemin',
+    'htmlmin',
   ]);
 
   grunt.registerTask('gruntdefault', [
@@ -552,8 +610,12 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
   grunt.registerTask('deploy', [
-    'gruntdefault',
+    'newer:jshint',
+    'test',
+    'buildTemplates', //build twice makes sure it has the right template.
+    'build',
     'gh-pages'
   ]);
 
