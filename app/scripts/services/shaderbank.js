@@ -1,6 +1,14 @@
 'use strict';
 
 angular.module('artpopApp')
-  .factory('ShaderBank', function () {
-  return {};
+.factory('shaderBank', function () {
+
+	function switchTo(){
+
+	}
+
+	return {
+		switchTo: switchTo
+	};
+
 });

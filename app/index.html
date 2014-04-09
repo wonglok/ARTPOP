@@ -20,9 +20,6 @@
     <link rel="stylesheet" href="styles/fast.css">
     <!-- endbuild -->
 
-    <!-- build:js scripts/apwgl.js -->
-    <script src="bower_components/modernizr/modernizr.js"></script>
-    <!-- endbuild -->
   </head>
   <body ng-app="artpopApp">
     <!--[if lt IE 7]>
@@ -30,8 +27,14 @@
     <![endif]-->
 
     <!--content-->
-    <div class="apwlg-container">
-        <div class="view-animate" ng-view=""></div>
+    <div class="apwgl-container">
+        <div class="view-animate" ng-view="">
+            Downloading System... :) <br>
+            You are suppose to see this image: <br>
+            <img src="images/supposeToSee.gif" alt=""> <br>
+            P.S. Requires WebGL & JavaScript Enabled.<br>
+            Simply use desktop Google Chrome/ Latest 4.4 Andoird Google Chrome.
+        </div>
     </div>
 
     <!--topleft-->
@@ -61,20 +64,32 @@
     <!-- _disable_endbuild -->
     <!-- _disable_build:js({.tmp,app}) scripts/loklok.js -->
 
-
     <!-- build:js scripts/apwgl.js -->
     <!--lib-->
     <!-- bower:js -->
     <!-- endbower -->
 
+    <!--
+    -->
+
     <!--polyfill-->
     <script src="scripts/polyfill/console.js"></script>
     <script src="scripts/polyfill/rAF.js"></script>
 
+    <!--mohter effing animated gif-->
+    <!--
+    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js"></script>
+    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js"></script>
+    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js"></script>
+    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js"></script>
+    -->
     <!--famework-->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
+    <!--jquery&plugins-->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/jquery.base64.min.js"></script>
 
     <!--webgl-->
     <script src="bower_components/three.js/three.min.js"></script>
@@ -110,11 +125,11 @@
 
     <!--templateCache-->
     <script src="scripts/ngTemplates/shaders.js"></script>
+    <script src="scripts/ngTemplates/workers.js"></script>
 
     <!--shaders-->
     <script src="scripts/services/shader-spiky.js"></script>
     <script src="scripts/services/shaderbank.js"></script>
-
 
     <!--webgl-->
     <script src="scripts/services/shadertext.js"></script>
@@ -136,6 +151,11 @@
     <script src="scripts/services/framebudgetestimator.js"></script>
     <script src="scripts/services/framebudget.js"></script>
     <script src="scripts/services/datgui.js"></script>
+
+    <!--worker factory-->
+    <script src="scripts/services/workerfactory.js"></script>
+    <script src="scripts/services/inlineworkerfactory.js"></script>
+    <script src="scripts/services/mfanimatedgif.js"></script>
     <!-- endbuild -->
 
 

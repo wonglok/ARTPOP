@@ -20,8 +20,17 @@ angular.module('artpopApp')
 					//schedule the
 					frbT.addTask({
 						fn: function(){
-							frbT.updateFrameBudget(
-								frbE.guess()
+							var finalAnswer = frbE.guess();
+
+							var fps = 55;
+							if (finalAnswer > 1000/fps){
+								finalAnswer = 1000/fps*frbE.config.tightenFactor;
+							}
+
+							frbT.updateFrameBudget(finalAnswer);
+							console.log(
+								'Finish FrameBudget Estimation',
+								frbT.frameBudget.toFixed(2)
 							);
 						}
 						// ,
@@ -29,16 +38,16 @@ angular.module('artpopApp')
 						// args: null,
 					});
 					frbT.digest();
-					console.log('Finish FrameBudget Estimation');
 				}
 			});
 		}
 	};
-
-	var serviceInstnace = new FrameBudget();
-	serviceInstnace.init();
-
-	return serviceInstnace;
+	var obj = new FrameBudget();
+	obj.init();
+	return obj;
+})
+.factory('frbE', function (frameBudget) {
+	return frameBudget.frbE;
 })
 .factory('frbT', function (frameBudget) {
 	return frameBudget.frbT;

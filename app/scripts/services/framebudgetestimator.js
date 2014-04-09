@@ -6,24 +6,21 @@ angular.module('artpopApp')
       this.state = {
         finished: false,
         estimating: false,
+        currentSkip: 0
       };
       this.estimation = 0;
       this.lastSample = null;
       this.samples = [];
 
       this.config = {
+        skipSample: 120,
         validAmount: 60,
-        filterTimes: 5,
-        //sample is the samples taken.
+        filterTimes: 60/3,
         sample: 0,//to be calculated by the above factors
 
-        tightenFactor: 2/3,
+        tightenFactor: 0.6, //script time?
         doneSampleTask: null,
-        // {
-        //   fn:null,
-        //   ctx:null,
-        //   args:null,
-        // },
+
       };
       this.config.sample = this.config.validAmount + this.config.filterTimes * 2;
       //console.log('new FrameBudgetEstimator');
@@ -43,11 +40,17 @@ angular.module('artpopApp')
       },
       takeSample: function(frameStartTime){
         var fst = frameStartTime || window.performance.now();
+        if (this.config.skipSample < this.state.currentSkip){
+          this.state.currentSkip++;
+          return;
+        }
         if (this.lastSample === null){
           this.lastSample = fst;
         }else{
+
           this.samples.push(  parseFloat( (fst - this.lastSample).toFixed(2) ,10) );
           this.lastSample = fst;
+
         }
 
         this.checkFinish();

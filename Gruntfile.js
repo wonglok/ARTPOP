@@ -36,22 +36,30 @@ module.exports = function (grunt) {
             var moduleName = require('./bower.json').name || 'lok';
             var str = '';
             str += 'angular.module(\''+ moduleName +'App\').run([\'$templateCache\', function($templateCache) {';
-            str += '  \'use strict\';';
+            //str += '  \'use strict\';';
+
             str += script;
             str += '}]);';
             return str;
           },
           prefix: '',
-          htmlmin:{
-            collapseBooleanAttributes:      false,
-            collapseWhitespace:             false,
-            removeAttributeQuotes:          false,
-            removeComments:                 false,
-            removeEmptyAttributes:          false,
-            removeRedundantAttributes:      false,
-            removeScriptTypeAttributes:     false,
-            removeStyleLinkTypeAttributes:  false
-          }
+        }
+      },
+      workers: {
+        cwd:        'app/',
+        src:        'workers/**.*',
+        dest:       'app/scripts/ngTemplates/workers.js',
+        options: {
+          bootstrap: function bootstrap(module, script) {
+            var moduleName = require('./bower.json').name || 'lok';
+            var str = '';
+            str += 'angular.module(\''+ moduleName +'App\').run([\'$templateCache\', function($templateCache) {';
+            //str += '  \'use strict\';';
+            str += script;
+            str += '}]);';
+            return str;
+          },
+          prefix: '',
         }
       },
       templates: {
@@ -64,6 +72,7 @@ module.exports = function (grunt) {
         //get templates from last build
         //prodction mode
         //might get old version.
+        //grunt deploy build twice
         cwd:        'dist/',
         src:        'views/**.html',
         dest:       'app/scripts/ngTemplates/templates.js',
@@ -72,7 +81,7 @@ module.exports = function (grunt) {
             var moduleName = require('./bower.json').name || 'lok';
             var str = '';
             str += 'angular.module(\''+ moduleName +'App\').run([\'$templateCache\', function($templateCache) {';
-            str += '  \'use strict\';';
+            //str += '  \'use strict\';';
             str += script;
             str += '}]);';
             return str;
@@ -124,16 +133,23 @@ module.exports = function (grunt) {
           livereload: false
         }
       },
-
-      //usemin a8asd9asd8.haha.png makes template in app/ folder breaks
-      //use dist items.
-      templates: {
-        files: ['<%= yeoman.dist%>/views/*.*'],
-        tasks: ['ngtemplates:templates'],
+      workers: {
+        files: ['<%= yeoman.app%>/workers/*.*'],
+        tasks: ['ngtemplates:workers'],
         options: {
           livereload: false
         }
       },
+
+      //usemin a8asd9asd8.haha.png makes template in app/ folder breaks
+      //use dist items.
+      // templates: {
+      //   files: ['<%= yeoman.dist%>/views/*.*'],
+      //   tasks: ['ngtemplates:templates'],
+      //   options: {
+      //     livereload: false
+      //   }
+      // },
 
       // vanillaCss:{
       //   files: ['<%= yeoman.app%>/styles/*.css'],
@@ -446,6 +462,7 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
+            'workers/{,*/}*.*',
             'images/{,*/}*.{webp}',
             'fonts/*'
           ]
@@ -571,9 +588,10 @@ module.exports = function (grunt) {
 
 
   grunt.registerTask('build', [
+    'buildTemplates', //build twice makes sure it has the right template.
     'clean:dist',
     //'bowerInstall',
-    'ngtemplates:shaders',
+    //'ngtemplates',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
@@ -603,6 +621,7 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin',
+    'ngtemplates'
   ]);
 
   grunt.registerTask('gruntdefault', [
@@ -611,10 +630,16 @@ module.exports = function (grunt) {
     'build'
   ]);
 
+  grunt.registerTask('preview', [
+    'gruntdefault',
+    'exec:openDistTest',
+  ]);
+
+
+
   grunt.registerTask('deploy', [
     'newer:jshint',
     'test',
-    'buildTemplates', //build twice makes sure it has the right template.
     'build',
     'gh-pages'
   ]);

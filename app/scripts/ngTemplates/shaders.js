@@ -1,4 +1,4 @@
-angular.module('artpopApp').run(['$templateCache', function($templateCache) {  'use strict';  'use strict';
+angular.module('artpopApp').run(['$templateCache', function($templateCache) {  'use strict';
 
   $templateCache.put('shaders/spiky.fs',
     "/*http://threejs.org/examples/webgl_custom_attributes.html*/\n" +

@@ -13,6 +13,10 @@ angular
       .when('/Electric-Chapel', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
+
+        // templateUrl: 'views/artpop.html',
+        // controller: 'ArtpopCtrl'
+
       })
       .when('/ARTPOP', {
         templateUrl: 'views/artpop.html',
