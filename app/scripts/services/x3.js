@@ -73,7 +73,7 @@ angular.module('artpopApp')
 			this.scene = param.scene || new THREE.Scene();
 			this.camera = param.camera || new THREE.PerspectiveCamera( 75,  window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-			this.screenshot = param.screenshot || false;
+			this.screenshot = param.screenshot || true;
 
 			this.renderer = param.renderer || new THREE.WebGLRenderer({
 				preserveDrawingBuffer : this.screenshot
@@ -234,6 +234,7 @@ angular.module('artpopApp')
 			this.camera.updateProjectionMatrix();
 		};
 
+		//dirty.
 		var count = 0;
 		var frame = [];
 		var rotations = [];
@@ -248,9 +249,8 @@ angular.module('artpopApp')
 					that.stopLoop();
 
 					count++;
-					window.requestAnimationFrame(loop);
+					setTimeout(loop,1000/30);
 				} else if (currentTime < startTime+1000*4){
-
 					setTimeout(loop,1000/30);
 					that.render();
 
@@ -285,7 +285,6 @@ angular.module('artpopApp')
 				progress: function(info){
 					var progressDom;
 					if (!this.setup){
-
 						that.renderer.domElement.classList.remove('gl-loading');
 						that.reszieForWindow();
 						that.render();
@@ -307,6 +306,8 @@ angular.module('artpopApp')
 					console.log('done');
 					console.dir(arguments);
 					window.gifResult = arguments;
+
+					frame = [];
 
 					// window.open(
 					// 	info.binaryURL
@@ -358,16 +359,7 @@ angular.module('artpopApp')
 		/* ===========================================
 			RenderLoop
 		   ===========================================  */
-		X3.prototype.loopBegin = function(frameStartTime){//
-			stats.begin();
-			frbE.requestTakeSample(frameStartTime);
-			this.requestResizeWindow();
-		};
-		X3.prototype.loopEnd = function(frameStartTime){
-			this.requestMoreFrame();
-			frbT.stepTask(frameStartTime);
-			stats.end();
-		};
+
 
 		X3.prototype.enableSkipFrame = function(){
 			this.state.render.skipFrame = true;
@@ -393,9 +385,9 @@ angular.module('artpopApp')
 
 		X3.prototype.requestRender = function(){//
 			if (this.state.loop.valid && !this.state.render.throttle){
-				if (this.state.render.skipFrame && this.requestSkipFrame()){
-					return;
-				}
+				// if (this.state.render.skipFrame && this.requestSkipFrame()){
+				// 	return;
+				// }
 				this.render();
 			}
 		};
@@ -410,12 +402,16 @@ angular.module('artpopApp')
 			}
 		};
 		X3.prototype.loop = function() {
+			this.requestMoreFrame();
 			var frameStartTime = window.performance.now();
-			this.loopBegin(frameStartTime);
+			stats.begin();
+			frbE.requestTakeSample(frameStartTime);
+			this.requestResizeWindow();
 			this.requestRender(frameStartTime);
-			this.loopEnd(frameStartTime);
-		};
+			frbT.stepTask(frameStartTime);
 
+			stats.end();
+		};
 
 		X3.prototype.startLoop = function() {
 			this.renderer.domElement.classList.remove('gl-loading');

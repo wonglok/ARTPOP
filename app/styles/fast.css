@@ -146,11 +146,11 @@ div.apwgl-footer{
 /*begin-enter*/
 /*entering should be faster*/
 .view-animate.ng-enter {
-  -webkit-transition: all 0.667s cubic-bezier(0.09, 0.68, 0, 0.99);
-     -moz-transition: all 0.667s cubic-bezier(0.09, 0.68, 0, 0.99);
-      -ms-transition: all 0.667s cubic-bezier(0.09, 0.68, 0, 0.99);
-       -o-transition: all 0.667s cubic-bezier(0.09, 0.68, 0, 0.99);
-          transition: all 0.667s cubic-bezier(0.09, 0.68, 0, 0.99);
+  -webkit-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
+     -moz-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
+      -ms-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
+       -o-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
+          transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
 
   opacity: 0;
   -webkit-transform: translate3d(0,-100%,0);
@@ -172,11 +172,11 @@ div.apwgl-footer{
 /*being-leave*/
 /*leaving should be slower*/
 .view-animate.ng-leave {
-  -webkit-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-     -moz-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-      -ms-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-       -o-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-          transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
+  -webkit-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
+     -moz-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
+      -ms-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
+       -o-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
+          transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
   overflow: hidden;
   opacity: 1;
   -webkit-transform: translate3d(0,0,0);
@@ -188,30 +188,14 @@ div.apwgl-footer{
 /*finish-leave*/
 .view-animate.ng-leave.ng-leave-active {
   opacity: 0;
-  -webkit-transform: translate3d(0,80%,0) scale(0.25);
-     -moz-transform: translate3d(0,80%,0) scale(0.25);
-      -ms-transform: translate3d(0,80%,0) scale(0.25);
-       -o-transform: translate3d(0,80%,0) scale(0.25);
-          transform: translate3d(0,80%,0) scale(0.25);
-
-  -webkit-animation: move_eye 4s linear 0s infinite alternate;
+  -webkit-transform: translate3d(0,100%,0) scale(0.25);
+     -moz-transform: translate3d(0,100%,0) scale(0.25);
+      -ms-transform: translate3d(0,100%,0) scale(0.25);
+       -o-transform: translate3d(0,100%,0) scale(0.25);
+          transform: translate3d(0,100%,0) scale(0.25);
 }
 
 
-@-webkit-keyframes view-animate-ng-leave {
-  0% {
-    transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
-    overflow: hidden;
-    opacity: 1;
-    transform: translate3d(0,0,0);
-  }
-  99% {
-    transform: translate3d(0,80%,0) scale(0.25);
-  }
-  100% {
-    display: none;
-  }
-}
 
 
 
