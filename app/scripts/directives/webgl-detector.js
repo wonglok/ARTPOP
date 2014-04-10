@@ -46,7 +46,7 @@ angular.module('artpopApp')
 				inner.rotation.y += 0.004;
 				inner.material.color.offsetHSL(0.001,0.0,0);
 			});
-		},
+		}
 	});
 	frbT.addTask({
 		ctx: app,
@@ -61,7 +61,7 @@ angular.module('artpopApp')
 				lightBack.rotation.y += 0.004;
 				lightBack.color.offsetHSL(0.001,0.0,0);
 			});
-		},
+		}
 	});
 	frbT.digest();
 

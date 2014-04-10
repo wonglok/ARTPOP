@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE, TWEEN, Modernizr */
 angular.module('artpopApp')
-	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, MFAnimatedGIF) {
+	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, MFAnimatedGIF, gifMaker) {
 		// Service logic
 		// HamsterFace 3D Code Organiser
 		// Not an engine, just a pretty code organiser for this project.
@@ -10,7 +10,7 @@ angular.module('artpopApp')
 
 
 		function X3(){
-			var that = this;
+			var self = this;
 
 			//isntance props
 			this.scene = null;
@@ -26,14 +26,10 @@ angular.module('artpopApp')
 				},
 				render: {
 					throttle: false,
-
-					skipFrame: true,
-					skipFrameTarget: 30,
-					skipFrameCurrent: 0,
 				},
 				resize: {
-					timerID: null,
-					invalid: false
+					invalid: false,
+					timeID: null
 				},
 				loop: {
 					valid: true
@@ -41,11 +37,12 @@ angular.module('artpopApp')
 			};
 
 			this.prebind = {
-				loop: that.loop.bind(that)
+				loop: self.loop.bind(self)
 			};
 		}
 		X3.prototype.frbT = frbT;
 		X3.prototype.frbE = frbE;
+		X3.prototype.gifMaker = gifMaker;
 		//shortcut to the task service
 
 		//arithmetic
@@ -97,7 +94,6 @@ angular.module('artpopApp')
 				// this.animationEndEventName = X3.animationEndEventNames[Modernizr.prefixed('animation')];
 				// this.transitionEndEventName = X3.transitionEndEventNames[Modernizr.prefixed('transition')];
 			}
-
 		};
 
 
@@ -121,9 +117,15 @@ angular.module('artpopApp')
 		   ===========================================  */
 		X3.prototype.reconfig = function($scope, $element){
 			//cache dom and context.
-			var that = this;
+			var self = this;
 			var cleanUpStack = [];
-			var setUpTask = [];
+			var setUpStack = [];
+
+			//---------------------
+			// GIF Maker
+			//---------------------
+			self.gifMaker.switchTo(self);
+
 
 			var rendererDom = this.renderer.domElement;
 			this.$element = $element;
@@ -131,7 +133,7 @@ angular.module('artpopApp')
 			//---------------------
 			//render dom
 			//---------------------
-			setUpTask.push(function(){
+			setUpStack.push(function(){
 				$element[0].appendChild(rendererDom);
 			});
 			cleanUpStack.push(function(){
@@ -143,19 +145,19 @@ angular.module('artpopApp')
 			//---------------------
 			//render loop
 			//---------------------
-			setUpTask.push(function(){
+			setUpStack.push(function(){
 				this.startLoop();
 			});
 			cleanUpStack.push(function(){
-				that.stopLoop();
+				self.stopLoop();
 			});
 
 			//---------------------
 			//resizer
 			//---------------------
-			setUpTask.push(function(){
+			setUpStack.push(function(){
 				window.addEventListener('resize', function(){
-					that.handleResizeEvent();
+					self.setScreenInvalid();
 				}, false);
 			});
 			cleanUpStack.push(function(){
@@ -165,12 +167,12 @@ angular.module('artpopApp')
 			//---------------------
 			//webgl context lost
 			//---------------------
-			setUpTask.push(function(){
+			setUpStack.push(function(){
 				rendererDom.addEventListener('webglcontextlost', function (event) {
 					//restartOnContextLost
 					event.preventDefault();
-					that.stopLoop();
-					that.startLoop();
+					self.stopLoop();
+					self.startLoop();
 				}, false);
 			});
 			cleanUpStack.push(function(){
@@ -180,7 +182,7 @@ angular.module('artpopApp')
 			//---------------------
 			//slider
 			//---------------------
-			setUpTask.push(function(){
+			setUpStack.push(function(){
 				datGUI.show();
 			});
 			cleanUpStack.push(function(){
@@ -191,8 +193,14 @@ angular.module('artpopApp')
 			//stats
 			//---------------------
 			if (!Modernizr.touch){
-				setUpTask.push(function(){
+				setUpStack.push(function(){
 					stats.show();
+
+
+					setTimeout(function(){
+						self.gifMaker.start();
+					});
+
 				});
 
 				cleanUpStack.push(function(){
@@ -200,7 +208,10 @@ angular.module('artpopApp')
 				});
 			}
 
-			that.shceduleTaskStackOrder(setUpTask);
+
+
+
+			self.shceduleTaskStackOrder(setUpStack);
 
 			//setup cleanup
 			if (typeof $scope.$on === 'function'){
@@ -209,185 +220,20 @@ angular.module('artpopApp')
 			}
 
 			$scope.$on('$destroy', function() {
-				that.shceduleTaskStackReverse(cleanUpStack);
+				self.shceduleTaskStackReverse(cleanUpStack);
 			});
 		};
 
 		/* ===========================================
-			GifSection
+			Gif Delegate Section
 		   ===========================================  */
-		//kudos
-		//http://stackoverflow.com/questions/8191083/can-one-easily-create-an-html-image-element-from-a-webgl-texture-object
-		X3.prototype.takeScreenShot = function(){
-			return this.renderer.domElement.toDataURL('image/png',1);
-		};
-
-		X3.prototype.reszieForGif = function(){
-			this.renderer.setSize( 320, 320 );
-			this.camera.aspect = 320 / 320;
-			this.camera.updateProjectionMatrix();
-		};
-
-		X3.prototype.reszieForWindow = function(){
-			this.renderer.setSize( window.innerWidth, window.innerHeight );
-			this.camera.aspect = window.innerWidth / window.innerHeight;
-			this.camera.updateProjectionMatrix();
-		};
-
-		//dirty.
-		var count = 0;
-		var frame = [];
-		var rotations = [];
-		X3.prototype.autoMakeGif = function(){
-			var that = this;
-			var startTime = (new Date()).getTime();
-			setTimeout(function loop(){
-				var currentTime = (new Date()).getTime();
-				console.log('capturing frame', count);
-				if (count === 0){
-					that.reszieForGif();
-					that.stopLoop();
-
-					count++;
-					setTimeout(loop,1000/30);
-				} else if (currentTime < startTime+1000*4){
-					setTimeout(loop,1000/30);
-					that.render();
-
-
-					var img = new Image();
-					img.src = that.takeScreenShot();
-
-					frame.push(img);
-					rotations.push(0);
-
-					count++;
-				}else{
-					console.log('start making gif :)');
-					that.makeGIF();
-
-				}
-			});
-		};
-
-
-		//console.log(frbT.frameBudget / frbE.config.tightenFactor);
-		X3.prototype.makeGIF = function(){
-			var that = this;
-			new MFAnimatedGIF({
-				images: frame,
-				rotations: rotations,
-				delay : 1000/30,
-				quality : 3,
-				repeat: 0,
-				height: 320,
-				width : 320,
-				progress: function(info){
-					var progressDom;
-					if (!this.setup){
-						that.renderer.domElement.classList.remove('gl-loading');
-						that.reszieForWindow();
-						that.render();
-
-						progressDom = document.createElement('span');
-						progressDom.style.height = '50px';
-						progressDom.style.color = 'blue';
-						document.getElementById('apwgl-slider').appendChild(progressDom);
-						this.setup = true;
-					}else{
-						progressDom = document.getElementById('apwgl-slider').querySelector('span');
-					}
-
-					progressDom.innerHTML = (info* 100).toFixed(0);
-					console.log('progress', info * 100);
-
-				},// console.dir(arguments);
-				done: function(info){
-					console.log('done');
-					console.dir(arguments);
-					window.gifResult = arguments;
-
-					frame = [];
-
-					// window.open(
-					// 	info.binaryURL
-					// );
-
-					// if( ( !Modernizr.bloburls || !Modernizr.blobbuilder || !Modernizr.download ) && $('#saveasbro').length === 0) {
-					// 	var iframe = document.createElement('iframe');
-					// 	iframe.src = 'http://saveasbro.com/gif/';
-					// 	iframe.setAttribute('style', 'position: absolute; visibility: hidden; left: -999em;');
-					// 	iframe.id = 'saveasbro';
-					// 	document.body.appendChild(iframe);
-					// }
-
-					// window.onmessage = function(e) {
-					// 	e = e || window.event;
-					// 	var origin = e.origin || e.domain || e.uri;
-					// 	if(origin !== 'http://saveasbro.com'){
-					// 		return;
-					// 	}
-					// 	window.open(e.data);
-					// 	// downloadLink.attr('href', );
-					// 	// downloadLink.show();
-					// };
-
-					// iframe = document.querySelector('#saveasbro');
-					// iframe.contentWindow.postMessage(
-					// 	JSON.stringify({
-					// 		name:'APWGL',
-					// 		data: info.rawDataURL,
-					// 		formdata: Modernizr.formdata
-					// 	}),
-					// 	'http://saveasbro.com/gif/'
-					// );
-
-					var image;
-					image = new Image();
-					image.src = info.dataURL;
-					document.getElementById('apwgl-slider').appendChild(image);
-
-					setTimeout(function(){
-						that.startLoop();
-					},1000);
-
-				}
-			});
-		};
 
 
 		/* ===========================================
 			RenderLoop
 		   ===========================================  */
-
-
-		X3.prototype.enableSkipFrame = function(){
-			this.state.render.skipFrame = true;
-		};
-		X3.prototype.disableSkipFrame = function(){
-			this.state.render.skipFrame = false;
-		};
-		X3.prototype.requestSkipFrame = function(){
-			if (this.state.render.skipFrameCurrent === 0 ){
-				this.renderer.domElement.classList.add('gl-loading');
-				this.state.render.skipFrameCurrent++;
-			} else if (this.state.render.skipFrameCurrent < 10){
-				this.state.render.skipFrameCurrent++;
-			} else if (this.state.render.skipFrameCurrent < this.state.render.skipFrameTarget){
-				this.state.render.skipFrameCurrent++;
-				return true;
-			} else if (this.state.render.skipFrameCurrent === this.state.render.skipFrameTarget){
-				this.renderer.domElement.classList.remove('gl-loading');
-				this.state.render.skipFrame = !this.state.render.skipFrame;
-			}
-			return false;
-		};
-
 		X3.prototype.requestRender = function(){//
 			if (this.state.loop.valid && !this.state.render.throttle){
-				// if (this.state.render.skipFrame && this.requestSkipFrame()){
-				// 	return;
-				// }
 				this.render();
 			}
 		};
@@ -402,24 +248,25 @@ angular.module('artpopApp')
 			}
 		};
 		X3.prototype.loop = function() {
-			this.requestMoreFrame();
 			var frameStartTime = window.performance.now();
 			stats.begin();
+
+			this.requestMoreFrame();
 			frbE.requestTakeSample(frameStartTime);
-			this.requestResizeWindow();
+			this.requestScheduleResizeWindow();
 			this.requestRender(frameStartTime);
+
+			//try do all task
 			frbT.stepTask(frameStartTime);
 
 			stats.end();
 		};
 
 		X3.prototype.startLoop = function() {
-			this.renderer.domElement.classList.remove('gl-loading');
 			this.state.loop.valid = true;
 			this.requestMoreFrame();
 		};
 		X3.prototype.stopLoop = function() {
-			this.renderer.domElement.classList.add('gl-loading');
 			this.state.loop.valid = false;
 			window.cancelAnimationFrame(this.state.frameID);
 		};
@@ -427,36 +274,47 @@ angular.module('artpopApp')
 		/* ===========================================
 			Window Resize
 		   ===========================================  */
-		X3.prototype.handleResizeEvent = function() {
+		X3.prototype.setScreenInvalid = function() {
 			this.state.resize.invalid = true;
 		};
-
-		X3.prototype.heavyResizeWork = function() {
-			this.renderer.setSize( window.innerWidth, window.innerHeight );
-			this.camera.aspect = window.innerWidth / window.innerHeight;
-			this.camera.updateProjectionMatrix();
-			this.renderer.domElement.classList.remove('gl-loading');
-
-			this.state.resize.timerID = null;
-			this.state.render.throttle = false;
+		X3.prototype.setScreenValid = function() {
 			this.state.resize.invalid = false;
 		};
+		X3.prototype.resizeRenderer = function(width,height) {
+			this.renderer.setSize( width, height );
+			this.camera.aspect = width / height;
+			this.camera.updateProjectionMatrix();
+		};
 
-		X3.prototype.requestResizeWindow = function() {
-			if (this.state.resize.invalid){
-				var that = this;
+		X3.prototype.throttleRender = function(){
+			this.state.render.throttle = true;
+			this.renderer.domElement.classList.add('gl-loading');
+		};
+		X3.prototype.restoreRender = function(){
+			this.state.render.throttle = false;
+			this.renderer.domElement.classList.remove('gl-loading');
+		};
 
-				if (!this.state.render.throttle){
-					this.state.render.throttle = true;
-					this.renderer.domElement.classList.add('gl-loading');
-				}
-
-				// if (this.state.resize.timerID !== null){
-				// 	clearTimeout(this.state.resize.timerID);
-				// }
-				this.state.resize.timerID = setTimeout(function(){
-					that.heavyResizeWork();
-				},450);
+		X3.prototype.addTask = function(task){
+			frbT.addTask({
+				ctx: this,
+				fn: task
+			});
+		};
+		X3.prototype.resizeAfterRequest = function(){
+			this.addTask(function(){
+				this.resizeRenderer(window.innerWidth, window.innerHeight);
+				this.restoreRender();
+				this.setScreenValid();
+			});
+		};
+		X3.prototype.requestScheduleResizeWindow = function() {
+			if (this.state.resize.invalid && !this.state.render.throttle){
+				this.throttleRender();
+				var self = this;
+				setTimeout(function(){
+					self.resizeAfterRequest();
+				},800);
 			}
 		};
 
@@ -492,11 +350,13 @@ angular.module('artpopApp')
 			for (var i = stack.length - 1, fnc; i >= 0; i--) {
 				fnc = stack[i];
 				if (typeof fnc === 'function'){
-					frbT.addTask({
-						fn: fnc,
-						ctx: this,
-						args: []
-					});
+					this.addTask(fnc);
+
+					// frbT.addTask({
+					// 	fn: fnc,
+					// 	ctx: this,
+					// 	args: []
+					// });
 				}else{
 					throw new Error('not a fuction in process stack');
 				}
@@ -507,21 +367,19 @@ angular.module('artpopApp')
 			for (var i = stack.length - 1, fnc; i >= 0; i--) {
 				fnc = stack[i];
 				if (typeof fnc === 'function'){
-					frbT.addTask({
-						fn: fnc,
-						ctx: this,
-						args: []
-					});
+					this.addTask(fnc);
+
+					// frbT.addTask({
+					// 	fn: fnc,
+					// 	ctx: this,
+					// 	args: []
+					// });
 				}else{
 					throw new Error('not a fuction in process stack');
 				}
 			}
 			frbT.digest();
 		};
-
-
-
-
 
 
 

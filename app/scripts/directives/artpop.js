@@ -50,12 +50,9 @@ angular.module('artpopApp')
 				}
 			};
 
-
-			var currentItem = 'ball';
-			var mesh = meshFactory[currentItem]();
+			var mesh = meshFactory.ball();
 
 			//shaderBank.switchTo('spiky');
-
 			var spiky = new ShaderSpiky();
 			spiky.init({
 				mesh: mesh,

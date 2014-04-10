@@ -30,6 +30,12 @@ canvas.gl-canvas-container.gl-loading{
        -o-transform: scale(0.5);
           transform: scale(0.5);
 }
+
+canvas.gl-canvas-container.gl-rendering{
+  opacity: 0.5;
+}
+
+
 /* ============================================
     Ap-Sliders
    ============================================ */
@@ -146,11 +152,11 @@ div.apwgl-footer{
 /*begin-enter*/
 /*entering should be faster*/
 .view-animate.ng-enter {
-  -webkit-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-     -moz-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-      -ms-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-       -o-transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
-          transition: all 1s cubic-bezier(0.09, 0.68, 0, 0.99);
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 1s;
 
   opacity: 0;
   -webkit-transform: translate3d(0,-100%,0);
@@ -172,11 +178,12 @@ div.apwgl-footer{
 /*being-leave*/
 /*leaving should be slower*/
 .view-animate.ng-leave {
-  -webkit-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
-     -moz-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
-      -ms-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
-       -o-transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
-          transition: all 2s cubic-bezier(0.09, 0.68, 0, 0.99);
+  display: none;
+  -webkit-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 2s;
+     -moz-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 2s;
+      -ms-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 2s;
+       -o-transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 2s;
+          transition: all cubic-bezier(0.09, 0.68, 0, 0.99) 2s;
   overflow: hidden;
   opacity: 1;
   -webkit-transform: translate3d(0,0,0);
@@ -188,11 +195,11 @@ div.apwgl-footer{
 /*finish-leave*/
 .view-animate.ng-leave.ng-leave-active {
   opacity: 0;
-  -webkit-transform: translate3d(0,100%,0) scale(0.25);
-     -moz-transform: translate3d(0,100%,0) scale(0.25);
-      -ms-transform: translate3d(0,100%,0) scale(0.25);
-       -o-transform: translate3d(0,100%,0) scale(0.25);
-          transform: translate3d(0,100%,0) scale(0.25);
+  -webkit-transform: translate3d(0,100%,0) scale(0.4);
+     -moz-transform: translate3d(0,100%,0) scale(0.4);
+      -ms-transform: translate3d(0,100%,0) scale(0.4);
+       -o-transform: translate3d(0,100%,0) scale(0.4);
+          transform: translate3d(0,100%,0) scale(0.4);
 }
 
 

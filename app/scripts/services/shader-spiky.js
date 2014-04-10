@@ -58,7 +58,7 @@ angular.module('artpopApp')
 
 			//uniforms
 			uniforms.color.value = param.color || new THREE.Color( 0xff00ff );
-			uniforms.color.value.offsetHSL( 0, 2, 0 );
+			uniforms.color.value.offsetHSL( 0, 2, 0.7 );
 
 			uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/disturb.jpg' );
 			uniforms.texture.value.wrapS = THREE.RepeatWrapping;
