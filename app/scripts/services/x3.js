@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE, TWEEN, Modernizr */
 angular.module('artpopApp')
-	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, MFAnimatedGIF, gifMaker) {
+	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, gifMaker) {
 		// Service logic
 		// HamsterFace 3D Code Organiser
 		// Not an engine, just a pretty code organiser for this project.
@@ -42,25 +42,8 @@ angular.module('artpopApp')
 		}
 		X3.prototype.frbT = frbT;
 		X3.prototype.frbE = frbE;
-		X3.prototype.gifMaker = gifMaker;
-		//shortcut to the task service
+		X3.prototype.gifMaker = gifMaker;//service
 
-		//arithmetic
-		//1+1
-		//0.324832942394324 / 0.324923749823489737722
-
-		//black box.
-		//many many white box.
-
-		/*
-			{
-				stats: stats,
-				//optional
-				renderer: renderer,
-				clearColor: 0xffffff
-				canvasContainer: '.gl-canvas-container'
-			}
-		*/
 		X3.prototype.constructor = X3;
 		X3.prototype.init = function(param){
 			param = param || {};
@@ -124,7 +107,7 @@ angular.module('artpopApp')
 			//---------------------
 			// GIF Maker
 			//---------------------
-			self.gifMaker.switchTo(self);
+			gifMaker.switchTo(self);
 
 
 			var rendererDom = this.renderer.domElement;
@@ -195,21 +178,12 @@ angular.module('artpopApp')
 			if (!Modernizr.touch){
 				setUpStack.push(function(){
 					stats.show();
-
-
-					setTimeout(function(){
-						self.gifMaker.start();
-					});
-
 				});
 
 				cleanUpStack.push(function(){
 					stats.hide();
 				});
 			}
-
-
-
 
 			self.shceduleTaskStackOrder(setUpStack);
 
@@ -274,6 +248,12 @@ angular.module('artpopApp')
 		/* ===========================================
 			Window Resize
 		   ===========================================  */
+		X3.prototype.showBusy = function(){
+			this.renderer.domElement.classList.add('gl-loading');
+		};
+		X3.prototype.hideBusy = function(){
+			this.renderer.domElement.classList.remove('gl-loading');
+		};
 		X3.prototype.setScreenInvalid = function() {
 			this.state.resize.invalid = true;
 		};
@@ -285,14 +265,13 @@ angular.module('artpopApp')
 			this.camera.aspect = width / height;
 			this.camera.updateProjectionMatrix();
 		};
-
 		X3.prototype.throttleRender = function(){
 			this.state.render.throttle = true;
-			this.renderer.domElement.classList.add('gl-loading');
+			this.showBusy();
 		};
 		X3.prototype.restoreRender = function(){
 			this.state.render.throttle = false;
-			this.renderer.domElement.classList.remove('gl-loading');
+			this.hideBusy();
 		};
 
 		X3.prototype.addTask = function(task){
@@ -314,7 +293,7 @@ angular.module('artpopApp')
 				var self = this;
 				setTimeout(function(){
 					self.resizeAfterRequest();
-				},800);
+				},750);
 			}
 		};
 

@@ -10,8 +10,8 @@ angular.module('artpopApp')
 			frameRate: 0.0,
 			time: 0.0,
 			screenShot: {
-				width: 320,
-				height: 320,
+				width: 480,
+				height: 480,
 			},
 			gif: {
 				width: 240,

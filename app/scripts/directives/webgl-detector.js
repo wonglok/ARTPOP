@@ -11,6 +11,7 @@ angular.module('artpopApp')
 	var app = new X3();
 	window.apwgl = app;
 
+
 	frbT.addTask({
 		ctx: app,
 		fn: app.init,

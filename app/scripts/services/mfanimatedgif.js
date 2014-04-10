@@ -126,6 +126,10 @@ angular.module('artpopApp')
 				transferableList.push(eachFrameInfo.data.buffer);
 			}
 
+
+
+
+
 			var gifWorker;
 			//gifWorker = new Worker('workers/omggif-worker.js');
 			gifWorker = workerFactory.spawn({
@@ -171,7 +175,8 @@ angular.module('artpopApp')
 				frames: frameData,
 				delay: opts.delay,
 				matte: [255, 255, 255],
-				transparent: [0, 0, 0]
+			//	transparent: [0, 0, 0]
+				transparent: false
 			};
 
 			gifWorker.postMessage(message, transferableList);

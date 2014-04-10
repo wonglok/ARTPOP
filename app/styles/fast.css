@@ -3,6 +3,7 @@
 /* ============================================
     Ap-Canvas
    ============================================ */
+img.holder.gl-canvas-container,
 canvas.gl-canvas-container
 {
   z-index: 0;
@@ -30,7 +31,6 @@ canvas.gl-canvas-container.gl-loading{
        -o-transform: scale(0.5);
           transform: scale(0.5);
 }
-
 canvas.gl-canvas-container.gl-rendering{
   opacity: 0.5;
 }

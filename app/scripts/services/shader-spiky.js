@@ -2,7 +2,6 @@
 /* global THREE */
 angular.module('artpopApp')
 	.factory('ShaderSpiky', function (ShaderText) {
-
 		function SpikySahder(){
 			this.noise = [];
 			this.attributes = {

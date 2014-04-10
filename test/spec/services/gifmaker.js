@@ -19,5 +19,9 @@ describe('Service: gifMaker', function () {
     expect(!!gifMaker).toBe(true);
   });
 
+  it('should have correcr member', function () {
+    expect(!!gifMaker).toBe(true);
+  });
+
 
 });

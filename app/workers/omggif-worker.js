@@ -78,7 +78,9 @@ self.onmessage = function(event) {
 
   var startTime = Date.now();
 
+  //new ArrayBuffer(data.length)
   var buffer = new Uint8Array( frames[0].width * frames[0].height * framesLength * 5 );
+  //var buffer = new Uint8Array( frames[0].width * frames[0].height * framesLength * 5 );
   var gif = new GifWriter( buffer, frames[0].width, frames[0].height, { loop: 0 } );
   // var pixels = new Uint8Array( frames[0].width * frames[0].height );
 
@@ -122,6 +124,21 @@ self.onmessage = function(event) {
     });
   }
 
+  //
+  var getGif = function() {
+    var l = gif.end();
+    var uInt8View = new Uint8Array(new ArrayBuffer( l+1 ));
+    //var viewLength = uInt8View.length;
+    var i;
+    for (i = 0; i < l; i++) {
+      uInt8View[i] = buffer[i];
+    }
+    return uInt8View;
+  };
+
+  var transferableBuffer = getGif();
+
+
   // Finish
   var gifString = '';
   var l = gif.end();
@@ -131,6 +148,7 @@ self.onmessage = function(event) {
 
   self.postMessage({
     type: "gif",
+    buffer: transferableBuffer,
     data: gifString,
     frameCount: framesLength,
     encodeTime: Date.now()-startTime

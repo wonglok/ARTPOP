@@ -753,7 +753,9 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "\n" +
     "  var startTime = Date.now();\n" +
     "\n" +
+    "  //new ArrayBuffer(data.length)\n" +
     "  var buffer = new Uint8Array( frames[0].width * frames[0].height * framesLength * 5 );\n" +
+    "  //var buffer = new Uint8Array( frames[0].width * frames[0].height * framesLength * 5 );\n" +
     "  var gif = new GifWriter( buffer, frames[0].width, frames[0].height, { loop: 0 } );\n" +
     "  // var pixels = new Uint8Array( frames[0].width * frames[0].height );\n" +
     "\n" +
@@ -797,6 +799,21 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "    });\n" +
     "  }\n" +
     "\n" +
+    "  //\n" +
+    "  var getGif = function() {\n" +
+    "    var l = gif.end();\n" +
+    "    var uInt8View = new Uint8Array(new ArrayBuffer( l+1 ));\n" +
+    "    //var viewLength = uInt8View.length;\n" +
+    "    var i;\n" +
+    "    for (i = 0; i < l; i++) {\n" +
+    "      uInt8View[i] = buffer[i];\n" +
+    "    }\n" +
+    "    return uInt8View;\n" +
+    "  };\n" +
+    "\n" +
+    "  var transferableBuffer = getGif();\n" +
+    "\n" +
+    "\n" +
     "  // Finish\n" +
     "  var gifString = '';\n" +
     "  var l = gif.end();\n" +
@@ -806,6 +823,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "\n" +
     "  self.postMessage({\n" +
     "    type: \"gif\",\n" +
+    "    buffer: transferableBuffer,\n" +
     "    data: gifString,\n" +
     "    frameCount: framesLength,\n" +
     "    encodeTime: Date.now()-startTime\n" +
