@@ -24,9 +24,10 @@
 
 */
 
-if (typeof importScripts === 'function'){
-  self.importScripts('omggif.js', 'NeuQuant.js');
-}
+
+/*global base64,self, importScripts*/
+
+importScripts('base64.js','omggif.js', 'NeuQuant.js');
 
 var thereAreTransparentPixels = false;
 
@@ -78,7 +79,8 @@ self.onmessage = function(event) {
 
   var startTime = Date.now();
 
-  var buffer = new Uint8Array( frames[0].width * frames[0].height * framesLength * 5 );
+  var buffer = new Uint8Array( new ArrayBuffer(frames[0].width * frames[0].height * framesLength * 5) );
+  //var buffer = new Uint8Array( frames[0].width * frames[0].height * framesLength * 5 );
   var gif = new GifWriter( buffer, frames[0].width, frames[0].height, { loop: 0 } );
   // var pixels = new Uint8Array( frames[0].width * frames[0].height );
 
@@ -117,7 +119,7 @@ self.onmessage = function(event) {
   for (i = 0; i<framesLength; i++) {
     addFrame( frames[i] );
     self.postMessage({
-      type: "progress",
+      type: 'progress',
       data: (i+1)/framesLength
     });
   }
@@ -129,9 +131,26 @@ self.onmessage = function(event) {
     gifString += String.fromCharCode( buffer[ i ] );
   }
 
+  //
+  var getGifBuffer = function(gif,buffer) {
+    var l = gif.end();
+    var uInt8View = new Uint8Array(new ArrayBuffer( l ));
+    //var viewLength = uInt8View.length;
+    var i;
+    for (i = 0; i < l; i++) {
+      uInt8View[i] = buffer[i];
+    }
+    return uInt8View;
+  };
+
+  var gifBuffer = getGifBuffer(gif,buffer);
+
+  //window.aasdasdasd();
   self.postMessage({
-    type: "gif",
+    type: 'gif',
+    buffer: gifBuffer,
     data: gifString,
+    dataURL: 'data:image/gif;base64,'+base64.encode(gifString),
     frameCount: framesLength,
     encodeTime: Date.now()-startTime
   });
