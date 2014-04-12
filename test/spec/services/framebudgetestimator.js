@@ -63,18 +63,18 @@ describe('Service: FrameBudgetEstimator', function () {
     expect(newEst.samples.length === 2).toBe(true);
   });
 
+
   it('should guess frame budget', function () {
     var newEst = new FrameBudgetEstimator();
     var doneLoop = false;
     function loop(){
-      newEst.takeSample();
+      newEst.takeSample(window.performance.now());
       if (!newEst.state.finished && !newEst.checkFinish()){
         window.requestAnimationFrame(loop);
       } else {
         doneLoop = true;
       }
     }
-
     loop();
 
     waitsFor(function(){
@@ -85,8 +85,11 @@ describe('Service: FrameBudgetEstimator', function () {
       expect(newEst.samples.length > 0 ).toBe(true);
 
       //clean sample error
-      var cleandSample = newEst.removeMaxMinError(newEst.samples,newEst.config.filterTimes);
+      var cleandSample = newEst.removeMaxMinError(newEst.samples,2);
       expect(cleandSample.length < newEst.samples.length).toBe(true);
+
+      console.log(newEst.samples);
+      console.log(cleandSample.length);
 
       //calc avg
       var avg = newEst.getAverage(cleandSample);

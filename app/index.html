@@ -46,6 +46,7 @@
       <a ng-href="#ARTPOP">ARTPOP v0.1</a>
       <a ng-href="#Todos">Todos</a>
       <a ng-href="#Credit">Credit</a>
+      <gif-maker></gif-maker>
       <div id="apwgl-stats"></div>
     </div>
 
@@ -73,18 +74,8 @@
 
     <!--jQ-Plugin-->
     <!--
-    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/jquery.base64.min.js"></script>
-    -->
-
-    <!-- build:js scripts/apwgl.js -->
-    <!-- bower:js -->
-    <!-- endbower -->
-
-
-    <!--polyfill-->
-    <script src="scripts/polyfill/console.js"></script>
-    <script src="scripts/polyfill/rAF.js"></script>
     <script src="bower_components/base64/index.js"></script>
+    -->
 
     <!--mohter effing animated gif-->
     <!--
@@ -93,16 +84,31 @@
     <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js"></script>
     <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js"></script>
     -->
-    <!--famework-->
 
+
+    <!--  ================= BUILD START HERE ================= -->
+    <!-- build:js scripts/apwgl.js -->
+    <!-- bower:js -->
+    <!-- endbower -->
+
+
+    <!--polyfill-->
+    <script src="scripts/polyfill/perfNow.js"></script>
+    <script src="scripts/polyfill/console.js"></script>
+    <script src="scripts/polyfill/rAF.js"></script>
+
+    <!--famework-->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/angular/angular.js"></script>
 
     <!--jquery&plugins-->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/jquery.base64.min.js"></script>
+
 
     <!--webgl-->
     <script src="bower_components/three.js/three.min.js"></script>
+    <script src="bower_components/TrackballControls/index.js"></script>
     <script src="bower_components/tween.js/src/Tween.js"></script>
     <script src="bower_components/stats.js/src/Stats.js"></script>
     <script src="bower_components/dat.gui/dat.gui.js"></script>
@@ -133,6 +139,7 @@
     <!--templateCache-->
     <script src="scripts/ngTemplates/shaders.js"></script>
     <script src="scripts/ngTemplates/workers.js"></script>
+
 
     <!--shaders-->
     <script src="scripts/services/shader-spiky.js"></script>
@@ -165,6 +172,10 @@
     <script src="scripts/services/mfanimatedgif.js"></script>
     <script src="scripts/services/webglgif.js"></script>
     <script src="scripts/services/gifmaker.js"></script>
+    <script src="scripts/services/sharedrenderer.js"></script>
+    <script src="scripts/directives/gif-maker.js"></script>
+    <script src="scripts/services/modernizr.js"></script>
+    <script src="scripts/services/customcontrol.js"></script>
     <!-- endbuild -->
 
 

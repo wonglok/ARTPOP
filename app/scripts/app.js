@@ -34,7 +34,8 @@ angular
         redirectTo: '/Electric-Chapel'
       });
   })
-  .run(function ($rootScope){
+  .run(function ($rootScope, Modernizr){
+    $rootScope.Modernizr = Modernizr;
     $rootScope.$on('$routeChangeSuccess', function () {
       console.log('$routeChangeSuccess');
     });

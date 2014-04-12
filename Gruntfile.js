@@ -47,7 +47,7 @@ module.exports = function (grunt) {
       },
       workers: {
         cwd:        'app/',
-        src:        'workers/**.*',
+        src:        'workers/min/*.js',
         dest:       'app/scripts/ngTemplates/workers.js',
         options: {
           bootstrap: function bootstrap(module, script) {
@@ -134,8 +134,8 @@ module.exports = function (grunt) {
         }
       },
       workers: {
-        files: ['<%= yeoman.app%>/workers/*.*'],
-        tasks: ['ngtemplates:workers'],
+        files: ['<%= yeoman.app%>/workers/*.js'],
+        tasks: ['uglify:workers','ngtemplates:workers'],
         options: {
           livereload: false
         }
@@ -537,9 +537,25 @@ module.exports = function (grunt) {
     //   },
     // },
 
+    //uglify:workers
+    uglify: {
+      workers: {
+        preserveComments: 'all',
+        files: [{
+          expand: true,
+          cwd:  '<%= yeoman.app %>/workers/',
+          src:  '*.js',
+
+          //
+          dest: '<%= yeoman.app %>/workers/min'
+        }]
+      }
+    },
+
     // Test settings
     karma: {
       unit: {
+
         configFile: 'karma.conf.js',
         singleRun: true
       }

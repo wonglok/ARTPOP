@@ -6,6 +6,23 @@ angular.module('artpopApp')
 	// ...
 
 	var gui = new dat.GUI({ autoPlace: false });
+
+	/*enhanced so that it can remove folder*/
+	dat.GUI.prototype.removeFolder = function(name) {
+		var folder = this.__folders[name];
+		if (!folder) {
+			return;
+		}
+		folder.close();
+		this.__ul.removeChild(folder.domElement.parentNode);
+		delete this.__folders[name];
+
+		//
+
+		var _this = this;
+		_this.onResize();
+	};
+
 	var guiContainer = document.getElementById('apwgl-slider');
 	return {
 		obj: gui,

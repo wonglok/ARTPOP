@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE */
 angular.module('artpopApp')
-	.factory('ShaderSpiky', function (ShaderText) {
+	.factory('ShaderSpiky', function (CustomControl, ShaderText) {
 		function SpikySahder(){
 			this.noise = [];
 			this.attributes = {
@@ -11,116 +11,206 @@ angular.module('artpopApp')
 				}
 			};
 			this.uniforms = {
+				//ctx
+				textureShift: {
+					type: 'f',
+					value: 0.1,
+					animate: true,
+				},
 				amplitude: {
 					type: 'f',
-					value: 2.0
+					value: 0.1,
+					animate: true,
 				},
 				color:     {
 					type: 'c',
-					value: null
+					value: null,
+					animate: true,
 				},
 				texture:   {
 					type: 't',
 					value: null,
 				}
 			};
+
+
+			this.factors = {
+				mode: 'honey',
+				modeOptions: {
+					'HoneyComb': 'honey',
+					'Spiky': 'spiky'
+				},
+			};
+
 			this.clock = null;
 			this.material = null;
+			window.spiky = this;
 		}
-		/*
-			{
-				mesh: meshInstance,
-				clock: clockInstance,
-				url: urlString,
+		SpikySahder.prototype = {
+			consturctor: SpikySahder,
+			ctr: new CustomControl(),
+			init: function(param){
+				param = param || {};
+				var mesh = param.mesh;
+				var noise = this.noise;
+				var uniforms = this.uniforms;
+				var attributes = this.attributes;
+				if (!!!mesh){
+					throw new Error('requires mesh.');
+				}
+
+				//clock
+				this.clock = param.clock || new THREE.Clock();
+
+				//attribute data
+				var vertices = mesh.geometry.vertices;
+				var values = attributes.displacement.value;
+				for (var v = vertices.length - 1; v >= 0; v--) {
+					values[ v ] = 0;
+					noise[ v ] = Math.random() * 5;
+				}
+
+				//uniforms
+				uniforms.color.value = param.color || new THREE.Color( 0xff00ff );
+
+				uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/disturb.jpg' );
+				uniforms.texture.value.wrapS = THREE.RepeatWrapping;
+				uniforms.texture.value.wrapT = THREE.RepeatWrapping;
+
+
+				//shader material
+				this.material = new THREE.ShaderMaterial( {
+					uniforms : uniforms,
+					attributes : attributes,
+					vertexShader : ShaderText.spiky.vs,
+					fragmentShader : ShaderText.spiky.fs
+				});
+
+				//assgin mesh
+				this.mesh = mesh;
+				this.mesh.material = this.material;
+				this.setUpCtr();
+			},
+			reconfig: function(param){
+				this.mesh = param.mesh;
+				this.mesh.material = this.material;
+			},
+			setUpCtr: function(){
+				this.ctr.addFolder('SpikySahder');
+
+				this.ctr.lib.push({
+					type: 'color',
+					name: 'Ball Color',
+					ctx: this.uniforms.color,
+					get: function(){
+						return '#'+this.value.getHexString();
+					},
+					set: function(val){
+						// val = val.replace('#','0x');
+						this.value.setStyle(val);
+					},
+					finish: function(){
+						this.value.offsetHSL(0,1,2);
+					},
+				});
+
+				this.ctr.lib.push({
+					type: 'slider',
+					name: 'Amplitude',
+					ctx: this.uniforms.amplitude,
+					get: function(){
+						return this.value;
+					},
+					set: function( val ){
+						this.value = val;
+					},
+					min: -3.2,
+					max: 3.2,
+					// step: 0.001
+				});
+
+				this.ctr.lib.push({
+					type: 'slider',
+					name: 'Texture Shift',
+					ctx: this.uniforms.textureShift,
+					get: function(){
+						return this.value;
+					},
+					set: function( val ){
+						this.value = val;
+					},
+					min: -1.2,
+					max: 1.2,
+					// step: 0.001
+				});
+				this.ctr.addBatch();
+
+				this.ctr.folder.add(this.factors, 'mode', this.factors.modeOptions).listen();
+
+				this.ctr.folder.add(this, 'resetAnimation');
+				this.ctr.folder.open();
+			},
+			resetAnimation: function(){
+				for(var key in this.uniforms){
+					this.uniforms[key].animate = true;
+				}
+			},
+			cleanUpCtr: function(){
+				this.ctr.ctrRemoveAll();
+			},
+			update: function (){
+				var factors = this.factors;
+				var uniforms = this.uniforms;
+				var attributes = this.attributes;
+				var clock = this.clock;
+				// var mesh = this.mesh;
+				var noise = this.noise;
+
+				var time = clock.getElapsedTime() * 20;
+
+				//0~1 * 2.5 amplitude
+				// this.ctr.ctrConfig['Amplitude']
+
+
+
+				if (uniforms.color.animate){
+					uniforms.color.value.offsetHSL( 0.0010, 0, 0 );
+				}
+				if (uniforms.amplitude.animate){
+					uniforms.amplitude.value = 3 * Math.sin( 0.05 * time);
+				}
+
+				if (uniforms.textureShift.animate){
+					uniforms.textureShift.value = 1 * Math.cos( 0.02 * time);
+				}
+
+				this.ctr.syncController();
+
+				//loop through displacement
+				var displacements = attributes.displacement.value;
+
+				var dv, dLength = displacements.length;
+				for (dv = 0; dv < dLength; dv++) {
+					displacements[ dv ] = Math.sin( 0.1 * dv + time );
+
+
+					if (factors.mode === 'spiky'){
+						noise[ dv ] += 0.5 * ( 0.5 - Math.random() );
+						noise[ dv ] += 0.5 * ( 0.5 - Math.random() );
+						noise[ dv ] = THREE.Math.clamp( noise[ dv ], -5, 5 );
+
+						displacements[ dv ] += noise[ dv ];
+					}
+				}
+
+				//shake the ball
+				// mesh.position.x = Math.sin(noise[ 0 ]) * 2;
+				// mesh.position.y = Math.sin(noise[ 1 ]) * 2;
+				// mesh.position.z = Math.sin(noise[ 2 ]) * 2;
+
+				attributes.displacement.needsUpdate = true;
+
 			}
-		*/
-		SpikySahder.prototype.init = function(param){
-			param = param || {};
-			var mesh = param.mesh;
-			var noise = this.noise;
-			var uniforms = this.uniforms;
-			var attributes = this.attributes;
-			if (!!!mesh){
-				throw new Error('requires mesh.');
-			}
-
-			//clock
-			this.clock = param.clock || new THREE.Clock();
-
-			//attribute data
-			var vertices = mesh.geometry.vertices;
-			var values = attributes.displacement.value;
-			for (var v = vertices.length - 1; v >= 0; v--) {
-				values[ v ] = 0;
-				noise[ v ] = Math.random() * 5;
-			}
-
-			//uniforms
-			uniforms.color.value = param.color || new THREE.Color( 0xff00ff );
-			uniforms.color.value.offsetHSL( 0, 2, 0.7 );
-
-			uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/disturb.jpg' );
-			uniforms.texture.value.wrapS = THREE.RepeatWrapping;
-			uniforms.texture.value.wrapT = THREE.RepeatWrapping;
-
-			//shader material
-			this.material = new THREE.ShaderMaterial( {
-				uniforms : uniforms,
-				attributes : attributes,
-				vertexShader : ShaderText.spiky.vs,
-				fragmentShader : ShaderText.spiky.fs
-			});
-
-			//mesh
-			this.mesh = mesh;
-			//assign material to mesh;
-			this.mesh.material = this.material;
-		};
-		SpikySahder.prototype.reset = function(){
-			this.mesh.material = null;
-			this.mesh = null;
-		};
-		SpikySahder.prototype.updateInput = function(){
-		};
-		SpikySahder.prototype.update = function (){
-			var uniforms = this.uniforms;
-			var attributes = this.attributes;
-			var clock = this.clock;
-			var mesh = this.mesh;
-			var noise = this.noise;
-
-			var time = clock.getElapsedTime() * 50;
-
-			mesh.rotation.x = 0.01 * time;
-			mesh.rotation.y = 0.01 * time;
-			mesh.rotation.z = 0.01 * time;
-
-			//0~1 * 2.5 amplitude
-			uniforms.amplitude.value = 1.5 * Math.sin( 0.003 * time );
-
-			//color of item.
-			uniforms.color.value.offsetHSL( 0.0005, 0, 0 );
-
-			//loop through displacement
-			var displacementArr = attributes.displacement.value;
-			var currNoise = 0;
-			for (var dv = displacementArr.length - 1; dv >= 0; dv--) {
-				//set displancement based on time within circular range
-				displacementArr[ dv ] = Math.sin( 0.1 * dv + time );
-
-				//add noise to displacement (spkie)
-				currNoise = noise[ dv ];
-				currNoise += 1 * ( 0.5 - Math.random() );
-				currNoise = THREE.Math.clamp( currNoise, -5, 5 );
-				displacementArr[ dv ] += currNoise;
-			}
-
-			//shake the ball
-			mesh.position.x = Math.sin(noise[ 0 ]) * 2;
-			mesh.position.y = Math.sin(noise[ 1 ]) * 2;
-			mesh.position.z = Math.sin(noise[ 2 ]) * 2;
-
-			attributes.displacement.needsUpdate = true;
 
 		};
 

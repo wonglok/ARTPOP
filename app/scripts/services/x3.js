@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE, TWEEN, Modernizr */
 angular.module('artpopApp')
-	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, gifMaker) {
+	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, gifMaker, sharedRenderer) {
 		// Service logic
 		// HamsterFace 3D Code Organiser
 		// Not an engine, just a pretty code organiser for this project.
@@ -36,9 +36,12 @@ angular.module('artpopApp')
 				},
 			};
 
+			this.placeHolder = new Image();
+
 			this.prebind = {
 				loop: self.loop.bind(self)
 			};
+
 		}
 		X3.prototype.frbT = frbT;
 		X3.prototype.frbE = frbE;
@@ -55,9 +58,11 @@ angular.module('artpopApp')
 
 			this.screenshot = param.screenshot || true;
 
-			this.renderer = param.renderer || new THREE.WebGLRenderer({
-				preserveDrawingBuffer : this.screenshot
-			});
+			this.renderer = sharedRenderer;
+
+			// this.renderer = param.renderer || new THREE.WebGLRenderer({
+			// 	preserveDrawingBuffer : this.screenshot
+			// });
 			this.renderer.domElement.classList.add('gl-canvas-container');
 
 			this.renderer.setClearColor( param.clearColor || 0xffffff ,  param.clearAlpha  || 0.5);
@@ -77,6 +82,9 @@ angular.module('artpopApp')
 				// this.animationEndEventName = X3.animationEndEventNames[Modernizr.prefixed('animation')];
 				// this.transitionEndEventName = X3.transitionEndEventNames[Modernizr.prefixed('transition')];
 			}
+
+
+
 		};
 
 
@@ -101,8 +109,9 @@ angular.module('artpopApp')
 		X3.prototype.reconfig = function($scope, $element){
 			//cache dom and context.
 			var self = this;
-			var cleanUpStack = [];
 			var setUpStack = [];
+			var cleanUpStack = [];
+
 
 			//---------------------
 			// GIF Maker
@@ -110,6 +119,7 @@ angular.module('artpopApp')
 			gifMaker.switchTo(self);
 
 
+			//
 			var rendererDom = this.renderer.domElement;
 			this.$element = $element;
 
@@ -138,28 +148,31 @@ angular.module('artpopApp')
 			//---------------------
 			//resizer
 			//---------------------
+
+			var windowResizer = function(){
+				self.setScreenInvalid();
+			};
 			setUpStack.push(function(){
-				window.addEventListener('resize', function(){
-					self.setScreenInvalid();
-				}, false);
+				window.addEventListener('resize', windowResizer, false);
 			});
 			cleanUpStack.push(function(){
-				window.removeEventListener('resize');
+				window.removeEventListener('resize', windowResizer, false);
 			});
 
 			//---------------------
 			//webgl context lost
 			//---------------------
+			var glContextLost = function (event) {
+				//restartOnContextLost
+				event.preventDefault();
+				self.stopLoop();
+				self.startLoop();
+			};
 			setUpStack.push(function(){
-				rendererDom.addEventListener('webglcontextlost', function (event) {
-					//restartOnContextLost
-					event.preventDefault();
-					self.stopLoop();
-					self.startLoop();
-				}, false);
+				rendererDom.addEventListener('webglcontextlost', glContextLost, false);
 			});
 			cleanUpStack.push(function(){
-				rendererDom.removeEventListener('webglcontextlost');
+				rendererDom.removeEventListener('webglcontextlost', glContextLost, false);
 			});
 
 			//---------------------
@@ -235,7 +248,6 @@ angular.module('artpopApp')
 
 			stats.end();
 		};
-
 		X3.prototype.startLoop = function() {
 			this.state.loop.valid = true;
 			this.requestMoreFrame();
@@ -274,11 +286,22 @@ angular.module('artpopApp')
 			this.hideBusy();
 		};
 
-		X3.prototype.addTask = function(task){
-			frbT.addTask({
+
+		X3.prototype.digest = function(){
+			this.frbT.digest();
+		};
+		X3.prototype.addTask = function(task,option){
+			var config = {
 				ctx: this,
 				fn: task
-			});
+			};
+			if (!!option && option instanceof Array){
+				config.args = option;
+			}
+			if (!!option && option instanceof Object){
+				config.data = option;
+			}
+			frbT.addTask(config);
 		};
 		X3.prototype.resizeAfterRequest = function(){
 			this.addTask(function(){

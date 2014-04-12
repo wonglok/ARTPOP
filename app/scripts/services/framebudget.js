@@ -26,8 +26,12 @@ angular.module('artpopApp')
 							if (finalAnswer > 1000/fps){
 								finalAnswer = 1000/fps*frbE.config.tightenFactor;
 							}
+							if (!isNaN(finalAnswer)){
+								frbT.updateFrameBudget(finalAnswer);
+							}else{
+								console.log('ErrorCalc');
+							}
 
-							frbT.updateFrameBudget(finalAnswer);
 							console.log(
 								'Finish FrameBudget Estimation',
 								frbT.frameBudget.toFixed(2)

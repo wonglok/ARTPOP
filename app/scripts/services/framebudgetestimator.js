@@ -24,6 +24,15 @@ angular.module('artpopApp')
       };
       this.config.sample = this.config.validAmount + this.config.filterTimes * 2;
       //console.log('new FrameBudgetEstimator');
+
+      //if using polyfill... checking...
+      //ie.....
+      //if not supported natively
+      //fixes safari.
+      if (window.performance.now.toString().indexOf('[native code]') === -1){
+        this.config.filterTimes = 1;
+      }
+
     }
     FrameBudgetEstimator.prototype = {
       constructor : FrameBudgetEstimator,
@@ -48,7 +57,7 @@ angular.module('artpopApp')
           this.lastSample = fst;
         }else{
 
-          this.samples.push(  parseFloat( (fst - this.lastSample).toFixed(2) ,10) );
+          this.samples.push(  parseFloat( (fst - this.lastSample).toFixed(2), 10) );
           this.lastSample = fst;
 
         }
@@ -80,8 +89,8 @@ angular.module('artpopApp')
       },
       decideMaxMin: function(item,index,array){
         return (
-          item < Math.max.apply( null, array ) &&
-          item > Math.min.apply( null, array )
+          item > Math.min.apply( Math, array ) &&
+          item < Math.max.apply( Math, array )
         );
       },
       removeMaxMinError: function(samples,times){
@@ -103,7 +112,25 @@ angular.module('artpopApp')
         avg *= this.config.tightenFactor;
         this.estimation = avg;
         return this.estimation;
-      }
+      },
+      selfTest:function(){
+        var loop = function (){
+          this.takeSample(window.performance.now());
+          if (!this.state.finished && !this.checkFinish()){
+            window.requestAnimationFrame(loopBind);
+          } else {
+          }
+        };
+        var loopBind = loop.bind(this);
+
+
+        loopBind();
+      },
+
     };
+    window.frbE = new FrameBudgetEstimator();
+
+
+
     return FrameBudgetEstimator;
   });

@@ -61,6 +61,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
   $templateCache.put('shaders/spiky.vs',
     "/*http://threejs.org/examples/webgl_custom_attributes.html*/\n" +
     "uniform float amplitude;\n" +
+    "uniform float textureShift;\n" +
     "\n" +
     "attribute float displacement;\n" +
     "\n" +
@@ -70,7 +71,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "void main() {\n" +
     "\n" +
     "\tvNormal = normal;\n" +
-    "\tvUv = ( 0.5 + amplitude ) * uv + vec2( amplitude );\n" +
+    "\tvUv = ( 0.5 + textureShift ) * uv + vec2( textureShift );\n" +
     "\n" +
     "\tvec3 newPosition = position + amplitude * normal * vec3( displacement );\n" +
     "\tgl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );\n" +

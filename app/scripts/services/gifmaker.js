@@ -6,13 +6,15 @@ angular.module('artpopApp')
 	// ...
 	function GifMaker(){
 		this.state = {
-			busy: false
+			busy: false,
+
+			count: 0
 		};
 		this.config = {
-			timeLength: 1000*5,
+			timeLength: 1000*3,
 			frameDelay: 1000/24,
 			size: {
-				sourceImage: {
+				source: {
 					width: 320,
 					height: 320
 				},
@@ -48,7 +50,6 @@ angular.module('artpopApp')
 		switchTo: function(app){
 			this.app = app;
 		},
-
 		fitToScreen: function(){
 			var renEl = this.app.renderer.domElement;
 			var rWidth = renEl.width;
@@ -70,7 +71,7 @@ angular.module('artpopApp')
 		},
 
 		updateRendererForGif: function(){
-			var source = this.config.size.sourceImage;
+			var source = this.config.size.source;
 			var width = source.width;
 			var height = source.height;
 
@@ -81,7 +82,6 @@ angular.module('artpopApp')
 			this.restoreFit();
 			this.app.resizeRenderer(window.innerWidth, window.innerHeight);
 		},
-
 
 		//gif factory status
 		setBusy: function(){
@@ -105,6 +105,9 @@ angular.module('artpopApp')
 			this.frameData = [];
 			this.rotations = [];
 
+			//reset State
+			this.state.count = 0;
+
 			//
 			this.setBusy();
 			this.stopLoop();
@@ -117,26 +120,56 @@ angular.module('artpopApp')
 		},
 		//
 		checkFinish: function(beginTime){
-			return (	(new Date()).getTime() < beginTime + this.config.timeLength		);
+			return (	(new Date()).getTime()  >= (beginTime + this.config.timeLength)		);
 		},
 		takeScreenShot: function(){
-			return this.app.renderer.domElement.toDataURL('image/png');
+			return this.app.renderer.domElement.toDataURL();
+		},
+		//firefox doesn't seemed to be able to reuse image...
+		//without this... kinda flaky...
+		makeImgObj: function(dataURL, fnc){
+			var img = new Image();
+			if (!!!dataURL){
+				throw new Error('requires dataURL');
+			}
+			img.onload = fnc;
+			img.src = dataURL;
+			return img;
 		},
 		collectScreenShot:function(){
 			var dataURL = this.takeScreenShot();
-			this.frameData.push(dataURL);
-			this.rotations.push(0);
+			var self = this;
+
+			this.state.count++;
+
+			this.makeImgObj(dataURL, function(){
+				self.frameData.push(this);
+				self.rotations.push(0);
+			});
+
+			//document.getElementById('apwgl-slider').appendChild(imgObj);
 		},
-		start: function(){
-			if (this.state.busy){
+		requestMakeGif: function(){
+			var self = this;
+
+
+			var timerID = setInterval(function requestGif(){
+				console.log('requestGif');
+				if (self.frameData.length === self.state.count){
+					clearTimeout(timerID);
+					self.makeGIF();
+				}
+			},100);
+
+		},
+		start: function(force){
+			if (this.state.busy && !!!force){
 				console.warn('already started.');
 				return;
 			}
-			this.state.busy = true;
+			this.setUp();
 
 			var self = this;
-
-			this.setUp();
 			var startTime = (new Date()).getTime();
 			var timerID = setInterval(function(){
 				console.log('capturing frame');
@@ -144,23 +177,28 @@ angular.module('artpopApp')
 				self.app.render();
 				self.collectScreenShot();
 
-				if (!self.checkFinish(startTime)){
+				if (self.checkFinish(startTime)){
 					clearTimeout(timerID);
-					console.log('start making gif :)');
-					self.makeGIF();
+					self.requestMakeGif();
 				}
 			},this.config.frameDelay);
+
+			return 'started';
 		},
 		makeGIF: function(){
+			console.log('start making gif :)');
 
 			new MFAnimatedGIF({
-				dataURLs: this.frameData,
+				frameData: this.frameData,
 				rotations: this.rotations,
 				delay : this.config.frameDelay,
 				repeat: 0,
 
-				height: this.config.size.gif.height,
-				width: this.config.size.gif.width,
+				sHeight: this.config.size.source.height,
+				sWidth: this.config.size.source.width,
+
+				gHeight: this.config.size.gif.height,
+				gWidth: this.config.size.gif.width,
 
 				//event handlr for worker msg, executed in window scope.
 				done: this.prebind.done,
@@ -188,7 +226,7 @@ angular.module('artpopApp')
 				};
 			}());
 
-			var fileName = 'my-download.gif';
+			var fileName = 'gif.gif';
 
 			saveData(info.buffer, fileName);
 		},
@@ -210,6 +248,11 @@ angular.module('artpopApp')
 			this.cleanUp();
 			this.downloadFile(info);
 			this.displayResult(info);
+
+
+			if (!!this.indicator){
+				this.indicator.html('');
+			}
 		},
 		lastFrame: null,
 		progress: function(info){
@@ -219,6 +262,11 @@ angular.module('artpopApp')
 			}else{
 				tick = window.performance.now() - this.lastFrame;
 			}
+
+			if (!!this.indicator){
+				this.indicator.html((info * 100).toFixed(0));
+			}
+
 			this.lastFrame = window.performance.now();
 			console.log('progress', (info * 100).toFixed(2), tick.toFixed(2));
 		},

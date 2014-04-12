@@ -1,5 +1,6 @@
 'use strict';
-/* global base64 */
+///* global base64 */
+/* global $ */
 angular.module('artpopApp')
 .factory('MFAnimatedGIF', function (InlineWorkerFactory, $templateCache) {
 	// Service logic
@@ -8,10 +9,7 @@ angular.module('artpopApp')
 	//Kudos:
 	//h5bp/h5MFAnimatedGif github
 
-
-
 	/*
-
 	// new MFAnimatedGIF({
 	// 	images: [ new Image(), new Image() ],
 	// 	rotations: [ 0, 0],
@@ -24,45 +22,19 @@ angular.module('artpopApp')
 	// 	done: function(){ console.dir(arguments); }
 	// });
 
-
-	new MFAnimatedGIF({
-		images: frame,
-		rotations: rotations,
-		delay : 1000/20,
-		quality : 3,
-		repeat: 0,
-		height: 320,
-		width : 320,
-		progress: function(info){
-			console.log('progress', info * 100);
-		},// console.dir(arguments);
-		done: function(info){
-			//info.rawDataURL
-			//info.binaryURL //blob, use href
-			//info.dataURL //base64, src string.
-
-			var image;
-			image = new Image();
-			image.src = info.dataURL;
-			document.getElementById('apwgl-slider').appendChild(image);
-
-			that.enableSkipFrame();
-			that.startLoop();
-
-		}
-	});
-
-	var img = new Image();
-		img.src = that.takeScreenShot();
-		frame.push(img);
-		rotations.push(0);
-
 	*/
 
 	var workerFactory = new InlineWorkerFactory();
 
 	// handles interfacing with omggif-worker.js
 	function MFAnimatedGIF(opts) {
+
+		// var addTask = function(tsk){
+		// 	frbT.addTask({
+		// 		ctx: this,
+		// 		fn: tsk
+		// 	});
+		// };
 
 		var _rotate = function(image, rotation) {
 			var canvas = document.createElement('canvas');
@@ -79,97 +51,124 @@ angular.module('artpopApp')
 		};
 
 
-		var _getImgObj = function(img, src){
-			img.src = src;
-			return img;
-		};
 
 		var _initialize = function(opts) {
 
-			var img = new Image();
 			var canvas = document.createElement('canvas');
 			var context = canvas.getContext('2d');
-			canvas.width  = opts.width;
-			canvas.height = opts.height;
 
+			canvas.width  = opts.gWidth;
+			canvas.height = opts.gHeight;
 
-
+			//bucket
 			var frameData = [],
 				transferableList = [];
 
-			var i, frameLength = opts.dataURLs.length,
+			//canvas loop
+			var i, frameLength = opts.frameData.length,
 				eachRotation,
-				eachImgURL,
-				eachImg,
-				eachCanvasData,
-				eachFrameInfo;
+				eachFrame,
+				eachSrcImg,
+				eachGifData,
+				eachGifFrame;
 
 			for(i = 0; i< frameLength; i++) {
 				eachRotation = opts.rotations[i];
-				eachImgURL = opts.dataURLs[i];
-				eachImg = _getImgObj(img,eachImgURL);
+				eachFrame = opts.frameData[i];
+
+				//sometimes it could be...
+				//eachDataURL = eachFrame;
+
+				eachSrcImg = eachFrame;
+
+				eachSrcImg.width  = opts.sWidth;
+				eachSrcImg.height = opts.sHeight;
 
 				if (eachRotation !== 0){
-					eachImg = _rotate(eachImg, opts.rotations[i]);
+					eachSrcImg = _rotate(eachSrcImg, opts.rotations[i]);
 				}
 
 				context.clearRect(0, 0, canvas.width, canvas.height);
-				context.drawImage(eachImg, 0, 0, eachImg.width, eachImg.height, 0, 0, canvas.width, canvas.height);
-				eachCanvasData = context.getImageData(0, 0, canvas.width, canvas.height);
+				context.drawImage(eachSrcImg,
+					0, 0,
+					eachSrcImg.width, eachSrcImg.height,
+					0, 0,
+					canvas.width, canvas.height
+				);
+				eachGifData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-				eachFrameInfo = {
-					data: _transferableArray(eachCanvasData.data),
+				// var newImg = new Image();
+				// newImg.src = canvas.toDataURL();
+				// document.getElementById('apwgl-slider').appendChild(newImg);
+
+//				frameData.push(eachGifData);
+
+				eachGifFrame = {
+					data: _transferableArray(eachGifData.data),
 					height: canvas.height,
 					width: canvas.width
 				};
-				frameData.push(eachFrameInfo);
-				transferableList.push(eachFrameInfo.data.buffer);
+				frameData.push(eachGifFrame);
+				transferableList.push(eachGifFrame.data.buffer);
+			}
+
+			var gifWorker;
+			window.useNetwork = false;
+			if(!!window.useNetwork){
+				gifWorker = new Worker('workers/omggif-worker.js');
+			}else{
+				gifWorker = workerFactory.spawn({
+					deps: [
+						// ['_transferableArray',_transferableArray],
+						// ['mimivela', function mimivela(){ return 'ok'; }],
+						// ['mimivela2', function mimivela2(){ return 'ok2'; }],
+						// ['mimivela3', function mimivela3(){ return 'ok3'; }]
+					],
+					noopImportScript: true,
+					imports: [
+						$templateCache.get('workers/min/base64.js'),
+						$templateCache.get('workers/min/NeuQuant.js'),
+						$templateCache.get('workers/min/omggif.js'),
+						$templateCache.get('workers/min/omggif-worker.js')
+					]
+					// fn: function(self){
+					// 	var result = self.mimivela();
+					// 	result += self.mimivela2();
+					// 	result += self.mimivela3();
+					// 	self.postMessage(result);
+					// },
+				});
 			}
 
 
 
-
-
-			var gifWorker;
-			//gifWorker = new Worker('workers/omggif-worker.js');
-			gifWorker = workerFactory.spawn({
-				deps: [
-					['_transferableArray',_transferableArray],
-					// ['mimivela', function mimivela(){ return 'ok'; }],
-					// ['mimivela2', function mimivela2(){ return 'ok2'; }],
-					// ['mimivela3', function mimivela3(){ return 'ok3'; }]
-				],
-				noopImportScript: true,
-				imports: [
-					$templateCache.get('workers/NeuQuant.js'),
-					$templateCache.get('workers/omggif.js'),
-					$templateCache.get('workers/omggif-worker.js')
-				]
-				// fn: function(self){
-				// 	var result = self.mimivela();
-				// 	result += self.mimivela2();
-				// 	result += self.mimivela3();
-				// 	self.postMessage(result);
-				// },
-			});
-
-			gifWorker.addEventListener('message', function (e) {
+			function onMessageHandler(e) {
 				if (e.data.type === 'progress') {
 					//Percent done, 0.0-0.1
 					opts.progress(e.data.data);
 				} else if (e.data.type === 'gif') {
 					var info = e.data;
-					info.binaryURL = _blobURL( e.data.data );
-					info.rawDataURL = _rawDataURL( e.data.data );
-					info.dataURL = _dataURL( info.rawDataURL );
-					opts.done(info);
-				}
-			}, false);
 
-			gifWorker.addEventListener('error', function (e) {
+					info.blobURL = _blobURL( e.data.data );
+					info.rawBase64URL = _rawBase64URL( e.data.data );
+					// info.dataURL = _dataURL( info.rawBase64URL );
+
+					//they can use
+					//info.buffer and then blob it. and download it.
+					//into.dataURL directly it is base64 encoded @ worker.
+
+					opts.done(info);
+					gifWorker.removeEventListener('message', onMessageHandler, false);
+				}
+			}
+			function onErrorHandler(e) {
 				opts.error(e);
+				gifWorker.removeEventListener('error', onErrorHandler, false);
 				gifWorker.terminate();
-			}, false);
+			}
+
+			gifWorker.addEventListener('message', onMessageHandler, false);
+			gifWorker.addEventListener('error', onErrorHandler, false);
 
 			var message = {
 				frames: frameData,
@@ -180,16 +179,17 @@ angular.module('artpopApp')
 			};
 
 			gifWorker.postMessage(message, transferableList);
+			// gifWorker.postMessage(message);
 
 		};
 
-		var _rawDataURL = function(data) {
-			return base64.encode(data);
+		var _rawBase64URL = function(data) {
+			return $.base64.encode(data);
 		};
 
-		var _dataURL = function(rawData) {
-			return 'data:image/gif;base64,' + rawData;
-		};
+		// var _dataURL = function(rawData) {
+		// 	return 'data:image/gif;base64,' + rawData;
+		// };
 
 		var _blobURL = function(data) {
 			window.URL = window.URL || window.webkitURL;

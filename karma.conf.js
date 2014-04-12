@@ -17,6 +17,7 @@ module.exports = function(config) {
       'app/bower_components/tween.js/src/Tween.js',
       'app/bower_components/modernizr/modernizr.js',
       'app/bower_components/three.js/three.min.js',
+      'app/bower_components/TrackballControls/index.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',
@@ -54,7 +55,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+    browsers: ['Chrome','Firefox','Safari'],
 
 
     // Continuous Integration mode
