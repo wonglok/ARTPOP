@@ -17,7 +17,7 @@ angular.module('artpopApp')
 		param = param || {};
 		this.config = angular.extend(this.config, param);
 	};
-	ObjPool.prototype.makeNewItemContainer = function(){
+	ObjPool.prototype.makeNewPoolItem = function(){
 		this.currentID++;
 		var item = new ObjPoolItem(
 			this.currentID,
@@ -27,7 +27,7 @@ angular.module('artpopApp')
 		this.pool.push(item);
 		return item;
 	};
-	ObjPool.prototype.getFreeItemContainer = function(){
+	ObjPool.prototype.getFreePoolItem = function(){
 		for (var j = this.pool.length - 1; j >= 0; j--) {
 			if (!this.pool[j].inUse){
 				return this.pool[j];
@@ -36,9 +36,9 @@ angular.module('artpopApp')
 		return -1;
 	};
 	ObjPool.prototype.alloc = function(){
-		var itemSet = this.getFreeItemContainer();
+		var itemSet = this.getFreePoolItem();
 		if (itemSet === -1){
-			itemSet = this.makeNewItemContainer();
+			itemSet = this.makeNewPoolItem();
 		}
 		itemSet.inUse = true;
 		//console.log(this.name,this.pool.length, this.currentID);

@@ -61,7 +61,6 @@ angular.module('artpopApp')
 	}
 	addLight();
 
-
 	return {
 		//template: '',
 		restrict: 'E',

@@ -59,7 +59,6 @@
 
     <!--
     <script src="bower_components/bootstrap-sass-official/vendor/assets/javascripts/bootstrap.js"></script>
-    <script src="scripts/ngTemplates/templates.js"></script>
     -->
 
     <!-- _disable_endbuild -->
@@ -140,10 +139,14 @@
     <script src="scripts/ngTemplates/shaders.js"></script>
     <script src="scripts/ngTemplates/workers.js"></script>
 
-
     <!--shaders-->
     <script src="scripts/services/shader-spiky.js"></script>
+
+    <!--banks-->
+    <script src="scripts/services/banker.js"></script>
+    <script src="scripts/services/texturebank.js"></script>
     <script src="scripts/services/shaderbank.js"></script>
+    <script src="scripts/services/meshbank.js"></script>
 
     <!--webgl-->
     <script src="scripts/services/shadertext.js"></script>
@@ -169,14 +172,25 @@
     <!--worker factory-->
     <script src="scripts/services/workerfactory.js"></script>
     <script src="scripts/services/inlineworkerfactory.js"></script>
-    <script src="scripts/services/mfanimatedgif.js"></script>
-    <script src="scripts/services/webglgif.js"></script>
+
+    <!--gif-->
     <script src="scripts/services/gifmaker.js"></script>
-    <script src="scripts/services/sharedrenderer.js"></script>
     <script src="scripts/directives/gif-maker.js"></script>
+    <script src="scripts/services/mfanimatedgif.js"></script>
+
+    <!--services-->
+    <script src="scripts/services/sharedrenderer.js"></script>
     <script src="scripts/services/modernizr.js"></script>
+
+    <!--controls-->
     <script src="scripts/services/customcontrol.js"></script>
+    <script src="scripts/services/apwglapp.js"></script>
     <!-- endbuild -->
+
+    <!-- build:js scripts/templates.js -->
+    <script src="scripts/ngTemplates/templates.js"></script>
+    <!-- endbuild -->
+
 
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

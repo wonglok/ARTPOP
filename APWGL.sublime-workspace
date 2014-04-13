@@ -1,0 +1,2589 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"shader",
+				"shaderBank"
+			],
+			[
+				"shade",
+				"shaderBank"
+			],
+			[
+				"setUp",
+				"setUpShaderCtr"
+			],
+			[
+				"APWGL",
+				"APWGLAPP"
+			],
+			[
+				"Mesh",
+				"MeshBank"
+			],
+			[
+				"$cah",
+				"angular: $cacheFactory"
+			],
+			[
+				"attrDs",
+				"attrDisplacement"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
+				"ctrAd",
+				"ctrAddColor"
+			],
+			[
+				"param",
+				"$routeParams	AngularJS"
+			],
+			[
+				"eachIm",
+				"eachImg"
+			],
+			[
+				"process",
+				"processInternal"
+			],
+			[
+				"_",
+				"_transferableArray"
+			],
+			[
+				"frame",
+				"frameID"
+			],
+			[
+				"blob",
+				"blobURL"
+			],
+			[
+				"request",
+				"requestMoreFrameRender"
+			],
+			[
+				"frameSta",
+				"frameStartTime"
+			],
+			[
+				"FrameB",
+				"FrameBudget"
+			],
+			[
+				"Fram",
+				"FrameBudget"
+			],
+			[
+				"frb",
+				"frbE"
+			],
+			[
+				"clean",
+				"cleandSample"
+			],
+			[
+				"trans",
+				"transitionend"
+			],
+			[
+				"finish",
+				"finishCallback"
+			],
+			[
+				"transit",
+				"transitionEndEventName"
+			],
+			[
+				"start",
+				"started"
+			],
+			[
+				"update",
+				"updateStack"
+			],
+			[
+				"displace",
+				"displacementArr"
+			],
+			[
+				"disp",
+				"displacementArr"
+			],
+			[
+				"webgl",
+				"webglcontextlost"
+			],
+			[
+				"wire",
+				"wireFrameMaterial"
+			],
+			[
+				"effekc",
+				"effecktStackIndex"
+			],
+			[
+				"curren",
+				"currentMaterial"
+			],
+			[
+				"genTween",
+				"genTweenPos"
+			],
+			[
+				"curr",
+				"currentMaterial"
+			],
+			[
+				"current",
+				"currentGeometry"
+			],
+			[
+				"updateS",
+				"updateScreenSize"
+			],
+			[
+				"0x",
+				"0xff0000"
+			],
+			[
+				"list-s",
+				"list-style"
+			],
+			[
+				"font-",
+				"font-family"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"abs",
+				"absolute"
+			],
+			[
+				"0xff",
+				"0xffffff"
+			],
+			[
+				"LOK",
+				"LOK_PORT"
+			],
+			[
+				"LOK_",
+				"LOK_CWURL"
+			],
+			[
+				"Solar",
+				"SolarSystemApp"
+			],
+			[
+				"KEY_",
+				"KEY_RIGHT"
+			],
+			[
+				"comm",
+				"comm-section	Comment - Full section comment"
+			],
+			[
+				"com",
+				"comm-block	Comment - Block style comment"
+			],
+			[
+				"comm-",
+				"comm-html	Comment - HTML comment"
+			],
+			[
+				"cos",
+				"comm-subsection	Comment - Subsection comment"
+			],
+			[
+				"libBuild",
+				"libBuildDocs"
+			],
+			[
+				"frameEnd",
+				"frameEndTime"
+			],
+			[
+				"ope",
+				"openBrowser"
+			],
+			[
+				"shared",
+				"sharedAnonymousFunction"
+			],
+			[
+				"opt",
+				"angular: $log.assertEmpty"
+			],
+			[
+				"resize",
+				"resizeCameraScene"
+			],
+			[
+				"webkit-tra",
+				"webkit-transform"
+			],
+			[
+				"catalok",
+				"catalokRoot"
+			],
+			[
+				"effec",
+				"effectState"
+			],
+			[
+				"eSate",
+				"eStateFactory"
+			],
+			[
+				"matri",
+				"matrixFactory"
+			],
+			[
+				"effect",
+				"effectState"
+			],
+			[
+				"mo",
+				"angular.module"
+			],
+			[
+				"bowe",
+				"bower_components"
+			],
+			[
+				"border-bottom",
+				"border-bottom-color"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"depa",
+				"departmentID"
+			],
+			[
+				"departme",
+				"department"
+			],
+			[
+				"module",
+				"angular.module"
+			],
+			[
+				"yeo",
+				"yeomanConfig"
+			],
+			[
+				"mar",
+				"margin"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"z-i",
+				"z-index"
+			],
+			[
+				"angul",
+				"angular.copy	AngularJS"
+			],
+			[
+				"an",
+				"angular	Angular.js"
+			],
+			[
+				"ang",
+				"angular.copy	AngularJS"
+			],
+			[
+				"hei",
+				"height"
+			],
+			[
+				"z-",
+				"z-index"
+			],
+			[
+				"backg",
+				"background-color"
+			],
+			[
+				"bor",
+				"border-top"
+			],
+			[
+				"tr",
+				"trainings"
+			],
+			[
+				"training",
+				"training_id"
+			],
+			[
+				"fun",
+				"function"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "app/scripts/services/apwglapp.js",
+			"settings":
+			{
+				"buffer_size": 1823,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/meshbank.js",
+			"settings":
+			{
+				"buffer_size": 1738,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/shader-spiky.js",
+			"settings":
+			{
+				"buffer_size": 5290,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/index.html",
+			"settings":
+			{
+				"buffer_size": 7584,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/shaders/spiky.vs",
+			"settings":
+			{
+				"buffer_size": 447,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/shaders/spiky.fs",
+			"settings":
+			{
+				"buffer_size": 587,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/scripts/services/customcontrol.js",
+			"settings":
+			{
+				"buffer_size": 2824,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/views/credit.html",
+			"settings":
+			{
+				"buffer_size": 5056,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"ww",
+				"Word Wrap: Toggle"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"tab ",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"sha",
+				"Set Syntax: CG Shader"
+			],
+			[
+				"shader",
+				"Set Syntax: CG Shader"
+			],
+			[
+				"contab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"ctab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"retin",
+				"Preferences: Terminal Settings – Default"
+			],
+			[
+				"conv t",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"spaces",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"s js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"con space",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"con",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"conts",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"s bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"ss gl",
+				"Set Syntax: OpenGL SL"
+			],
+			[
+				"ss shader",
+				"Set Syntax: CG Shader"
+			],
+			[
+				"conv",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"cont",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"bash",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"conv ta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"add",
+				"Project: Add Folder"
+			],
+			[
+				"convt",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"convta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"ss sha",
+				"Set Syntax: CG Shader"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"isntall",
+				"LiveStyle: Install WebKit extension"
+			],
+			[
+				"ss shad",
+				"CSV: Use First Row As Header"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"rtein",
+				"Preferences: Terminal Settings – Default"
+			],
+			[
+				"markdown",
+				"Set Syntax: Markdown"
+			],
+			[
+				"preview",
+				"Markdown Preview: Github Flavored Markdown: Export HTML in Sublime Text"
+			],
+			[
+				"preview github",
+				"Markdown Preview: Github Flavored Markdown: Preview in Browser"
+			],
+			[
+				"ss md",
+				"Set Syntax: Markdown"
+			],
+			[
+				"html",
+				"Snippet: html"
+			],
+			[
+				"live",
+				"LiveStyle: Apply Patch"
+			],
+			[
+				"hex",
+				"Hex Viewer: Generate Hash from Selection"
+			],
+			[
+				"www",
+				"Line Ending to all views on window: Windows"
+			],
+			[
+				"livest",
+				"LiveStyle: Apply Patch"
+			],
+			[
+				"conta",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"ren",
+				"ANF: Rename File"
+			],
+			[
+				"rein tab",
+				"Laravel Artisan: Session: Table"
+			],
+			[
+				"jshi",
+				"AngularJS: Rebuild Search Index"
+			],
+			[
+				"taonv ",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"con ta",
+				"Package Control: Remove Package"
+			],
+			[
+				"contab ",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"inden",
+				"Trailing Spaces: Delete Trailing Spaces"
+			],
+			[
+				"con tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"conv tab",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"ss js",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"ss json",
+				"Set Syntax: JSON"
+			],
+			[
+				"cont sp",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"npm insta",
+				"Nodejs::NPM::Install"
+			],
+			[
+				"nodejs",
+				"Nodejs::NPM::Install"
+			],
+			[
+				"ss jade",
+				"Set Syntax: Jade"
+			],
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
+			[
+				"ss bas",
+				"Set Syntax: Shell Script (Bash)"
+			],
+			[
+				"browse",
+				"SFTP: Browse Remote…"
+			],
+			[
+				"w",
+				"Word Wrap: Toggle"
+			],
+			[
+				"convert",
+				"Indentation: Convert to Spaces"
+			],
+			[
+				"ss css",
+				"Set Syntax: CSS"
+			],
+			[
+				"cov ta",
+				"Indentation: Convert to all views on window to Tabs"
+			],
+			[
+				"contav",
+				"Indentation: Convert to all views on window to Spaces"
+			],
+			[
+				"istnal",
+				"LiveStyle: Install WebKit extension"
+			],
+			[
+				"ss html",
+				"Set Syntax: HTML"
+			],
+			[
+				"convr",
+				"Indentation: Convert to Tabs"
+			],
+			[
+				"ss coff",
+				"Set Syntax: CoffeeScript"
+			]
+		],
+		"width": 647.0
+	},
+	"console":
+	{
+		"height": 146.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/node_modules/karma/node_modules/useragent/CREDITS",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/x3.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/directives/webgl-detector.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/directives/artpop.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/shader-spiky.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/banker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/banker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/shaderbank.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/shaderbank.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/meshbank.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/meshbank.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/framebudgetestimator.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/apwglapp.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/webglgif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/bank.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/meshfactory.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/objpool.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/.tmp/concat/scripts/apwgl.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/shadertext.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/objpoolitem.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/webglgif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/sharedrenderer.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/corscanvas.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/mfanimatedgif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/customcontrol.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/dat.gui/dat.gui.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/karma.conf.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/customcontrol.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/corscanvas.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/shaders/spiky.fs",
+		"/Users/LOK/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/framebudgettaskmanager.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/datgui.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/.jshintrc",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/gifmaker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/mfanimated.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/omggif-worker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/gifmaker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/base64.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/framebudgetestimator.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/framebudget.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/index.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/Gruntfile.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/views/credit.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/styles/fast.css",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/directives/gif-maker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/directives/gif-maker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/polyfill/rAF.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/customshader.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/dist/views/todos.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/app.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/modernizr.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/ngTemplates/workers.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/sharedrenderer.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/polyfill/perfNow.js",
+		"/Users/LOK/Library/Application Support/Sublime Text 2/Packages/Terminal/Terminal.sublime-settings",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/minWorkers/app/workers/NeuQuant.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/NeuQuant.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/omggif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/minWorkers/app/workers/omggif-worker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/minWorkers/*.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/workers/minWorkers",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/cache.manifest",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/workerfactory.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/inlineworkerfactory.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/directives/artpop.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/favicon.ico",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/robots.txt",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/.buildignore",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/base64.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/base64.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/inlineworkerfactory.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/libraries/omggif-worker.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/dist/scripts/d41aed53.apwgl.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/views/bummer.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/workerfactory.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/startup.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/models.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/ui.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/libraries/omggif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/index.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/mfanimatedgif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/libraries/jquery.base64.min.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/mfanimated.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/models.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/node_modules/grunt-angular-templates/tasks/lib/compiler.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/mfgif.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/neuquant.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/libraries/NeuQuant.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/workers/omggif.wjs",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/node_modules/grunt-angular-templates/node_modules/html-minifier/package.json",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/gifwriter.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/neuquant.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/stats.js",
+		"/Users/LOK/.zshrc",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/run.sh",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/test/AppSpec.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/network.status.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/libraries/jQueryRotateCompressed.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js/cache.update.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/index",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/controllers/artpop.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/objectpool.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/viewanimate.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/directives/doob-stat.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/shaders/spiky.vs",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/controllers/artpop.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/controllers/todos.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/controllers/main.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/directives/active-link.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/views/artpop.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/views/main.html",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/x3service.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/x3service.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/controllers/credit.js",
+		"/Users/LOK/Downloads/Chrome/ThreeNodes.js-master/server.js",
+		"/Users/LOK/Downloads/Chrome/ThreeNodes.js-master/README.md",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/framebudgettaskmanager.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/framebudget.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec/services/stats.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/Github-wonglok/FrameBudget.js/docs/frameBudget.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/polyfill/console.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/Github-wonglok/FrameBudget.js/src/frameBudget.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/scripts/services/framebudgetmanager.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/package.json",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/karma-e2e.conf.js",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/.travis.yml",
+		"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/.jshintrc"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/app/bower_components/mothereffinganimatedgif/assets/js",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP/test/spec",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/ThreeJs.js/webglforbeginners/up-n-running",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/ThreeJs.js/webglforbeginners/webgl-beginnerz/app/webgl-beginners-guide-code/1727_09/js/webgl",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/ThreeJs.js/webglforbeginners/webgl-beginnerz/app/webgl-beginners-guide-code/1727_03",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/!Clients/GovDataOne/osf-catalok",
+			"/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/!Clients/GovDataOne/osf-catalok/app"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"ditch",
+			"ditchShader",
+			"mesh",
+			"processTaskStackOrder",
+			"updateStack",
+			"animateWave",
+			"frbT",
+			"updateStack",
+			"processTaskStackOrder",
+			"update",
+			"updateStack",
+			"gifMaker",
+			"updateStack",
+			"spiky",
+			"changeWave",
+			"wave",
+			"fn",
+			"APWGLAPP.prototype",
+			"APWGLAPP.fn.",
+			"APWGLAPP",
+			"circleGeometry",
+			"Banker",
+			"CustomControl",
+			"circle",
+			"twentyFace",
+			"shaderBank",
+			"meshBank",
+			"CustomControl",
+			"APWGLAPP",
+			"shaderBank",
+			"Banker",
+			"meshBank",
+			"$cacheFactory",
+			"color",
+			"1",
+			"newInstnace",
+			"shaderBank",
+			"aBanker",
+			"shaderBank",
+			"$cacheFactory",
+			"appOpts",
+			"this.appOpts.mesh",
+			"appOtps",
+			"Banker",
+			"$cacheFactory",
+			"MeshBank",
+			"getNewShader",
+			"getShader",
+			"getLazy",
+			"40",
+			"shaderBank",
+			"appOpts",
+			"meshBank",
+			"BankMesh",
+			"MeshBank",
+			"ShaderBank",
+			"shader",
+			"datGUI",
+			"param.clock || ",
+			"APWGL",
+			"APWGLAPP",
+			"APWGL",
+			"makeItem",
+			"newItem",
+			"item",
+			"poolCache",
+			"makeNewPoolItem",
+			"getFreePoolItem",
+			"getFreeItemContainer",
+			"makeNewItemContainer",
+			"ObjPoolItem",
+			"\"",
+			"shaderBank",
+			"_shaderBank_",
+			"cache",
+			"ARTPOP",
+			"useShader",
+			"switch",
+			"attributes",
+			"this.mesh",
+			"values",
+			";\n				var ",
+			"mesh",
+			"// frbT.addTask({\n					// 	fn: fnc,\n					// 	ctx: this,\n					// 	args: []\n					// });",
+			"this.renderer",
+			"this.camera",
+			"this.scene",
+			"-3",
+			"2",
+			"factors",
+			"1",
+			"factor",
+			"2",
+			"dv",
+			"route",
+			"shaderBank",
+			"frbT",
+			"128",
+			"64",
+			"i",
+			"attrDisplacement",
+			"1.5",
+			"2",
+			"animate",
+			"datGUI",
+			"Controller",
+			"animateAll",
+			"|| (function(){throw new Error('requires",
+			"setAllAnimate",
+			"restoreAnimation",
+			"animate",
+			"addLib",
+			"addConfig",
+			"				_animate = param.animate,\n",
+			"'animate'",
+			"controller",
+			"__controller",
+			"__controllers",
+			"interceptor",
+			"	interceptor: 'animate',\n				",
+			"_interceptor = param.interceptor || function(){}",
+			"curLib",
+			"this.ctr.",
+			"min: 0.1,",
+			"i",
+			"currentLib",
+			"configLib",
+			"animate"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "app/scripts/services/apwglapp.js",
+					"settings":
+					{
+						"buffer_size": 1823,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1275,
+								1275
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 509.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/scripts/services/meshbank.js",
+					"settings":
+					{
+						"buffer_size": 1738,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1411,
+								1411
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 177.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/scripts/services/shader-spiky.js",
+					"settings":
+					{
+						"buffer_size": 5290,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1845,
+								1912
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 229.0,
+						"translation.y": 883.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 4,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "app/index.html",
+					"settings":
+					{
+						"buffer_size": 7584,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/AngularJS/AngularJS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 34.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/shaders/spiky.vs",
+					"settings":
+					{
+						"buffer_size": 447,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								320,
+								320
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/ShaderLanguages/CG Shader.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/shaders/spiky.fs",
+					"settings":
+					{
+						"buffer_size": 587,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								482,
+								482
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/ShaderLanguages/CG Shader.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/scripts/services/customcontrol.js",
+					"settings":
+					{
+						"buffer_size": 2824,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1371,
+								1371
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 499.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/views/credit.html",
+					"settings":
+					{
+						"buffer_size": 5056,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110.0
+							],
+							"gjslint_options":
+							[
+							],
+							"glsv_configured": true,
+							"glsv_enabled": 1.0,
+							"glsv_spec": 0.0,
+							"incomplete_sync": null,
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"remote_loading": false,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2.0,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": true,
+							"sublimelinter_gutter_marks_theme": "simple",
+							"sublimelinter_mark_style": "none",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"synced": false,
+							"syntax": "Packages/AngularJS/AngularJS.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true,
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.477196925755,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 112.0
+	},
+	"output.sftp":
+	{
+		"height": 112.0
+	},
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"credit",
+				"app/views/credit.html"
+			],
+			[
+				"credits",
+				"node_modules/karma/node_modules/useragent/CREDITS"
+			],
+			[
+				"shaderspiky",
+				"app/scripts/services/shader-spiky.js"
+			],
+			[
+				"customc",
+				"app/scripts/services/customcontrol.js"
+			],
+			[
+				"x3",
+				"app/scripts/services/x3.js"
+			],
+			[
+				"shader",
+				"app/scripts/services/shader-spiky.js"
+			],
+			[
+				"shaderbank",
+				"app/scripts/services/shaderbank.js"
+			],
+			[
+				"banker",
+				"test/spec/services/banker.js"
+			],
+			[
+				"test/meshbank",
+				"test/spec/services/meshbank.js"
+			],
+			[
+				"meshba",
+				"app/scripts/services/meshbank.js"
+			],
+			[
+				"spiky",
+				"app/scripts/services/shader-spiky.js"
+			],
+			[
+				"bank",
+				"test/spec/services/banker.js"
+			],
+			[
+				"apwgl",
+				".tmp/concat/scripts/apwgl.js"
+			],
+			[
+				"shaderi",
+				"app/scripts/services/shader-spiky.js"
+			],
+			[
+				"obj",
+				"app/scripts/services/objpool.js"
+			],
+			[
+				"testshader",
+				"test/spec/services/shaderbank.js"
+			],
+			[
+				"shaderp",
+				"app/scripts/services/shader-spiky.js"
+			],
+			[
+				"dat.gui",
+				"app/bower_components/dat.gui/dat.gui.js"
+			],
+			[
+				"karm",
+				"karma.conf.js"
+			],
+			[
+				"test/customcont",
+				"test/spec/services/customcontrol.js"
+			],
+			[
+				"shaders/",
+				"app/shaders/spiky.fs"
+			],
+			[
+				"service/dat",
+				"app/scripts/services/datgui.js"
+			],
+			[
+				"index",
+				"app/index.html"
+			],
+			[
+				"service/mfa",
+				"app/scripts/services/mfanimatedgif.js"
+			],
+			[
+				"diregif",
+				"test/spec/directives/gif-maker.js"
+			],
+			[
+				"test/gifma",
+				"test/spec/services/gifmaker.js"
+			],
+			[
+				"karma",
+				"karma.conf.js"
+			],
+			[
+				"shaderspi",
+				"app/scripts/services/shader-spiky.js"
+			],
+			[
+				"ebgl-detec",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"framebu",
+				"app/scripts/services/framebudget.js"
+			],
+			[
+				"framebudget",
+				"app/scripts/services/framebudgetestimator.js"
+			],
+			[
+				"indexht",
+				"app/index.html"
+			],
+			[
+				"shared",
+				"test/spec/services/sharedrenderer.js"
+			],
+			[
+				"x3.",
+				"app/scripts/services/x3.js"
+			],
+			[
+				"webgl-de",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"testdirecart",
+				"test/spec/directives/artpop.js"
+			],
+			[
+				"gifmaker",
+				"test/spec/services/gifmaker.js"
+			],
+			[
+				"webgl",
+				"app/scripts/services/webglgif.js"
+			],
+			[
+				"webglgif",
+				"app/scripts/services/webglgif.js"
+			],
+			[
+				"webglgf",
+				"test/spec/services/webglgif.js"
+			],
+			[
+				"webglg",
+				"app/scripts/services/webglgif.js"
+			],
+			[
+				"base64",
+				"app/scripts/services/base64.js"
+			],
+			[
+				"mfanim",
+				"app/bower_components/mothereffinganimatedgif/assets/js/mfanimated.js"
+			],
+			[
+				"x3.js",
+				"app/scripts/services/x3.js"
+			],
+			[
+				"fast.css",
+				"app/styles/fast.css"
+			],
+			[
+				"webgl-",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"bummer",
+				"app/views/bummer.html"
+			],
+			[
+				"app.js",
+				"app/scripts/app.js"
+			],
+			[
+				"ser/mfa",
+				"app/scripts/services/mfanimatedgif.js"
+			],
+			[
+				"estimator",
+				"app/scripts/services/framebudgetestimator.js"
+			],
+			[
+				"gruntfi",
+				"Gruntfile.js"
+			],
+			[
+				"test/workerfa",
+				"test/spec/services/workerfactory.js"
+			],
+			[
+				"workerf",
+				"app/scripts/services/workerfactory.js"
+			],
+			[
+				"test/inline",
+				"test/spec/services/inlineworkerfactory.js"
+			],
+			[
+				"mf",
+				"app/scripts/services/mfgif.js"
+			],
+			[
+				"framebud",
+				"app/scripts/services/framebudget.js"
+			],
+			[
+				"framebudge",
+				"app/scripts/services/framebudgetestimator.js"
+			],
+			[
+				"index.html",
+				"app/index.html"
+			],
+			[
+				"framebudgetes",
+				"app/scripts/services/framebudgetestimator.js"
+			],
+			[
+				"stats",
+				"app/scripts/services/stats.js"
+			],
+			[
+				"services/dat",
+				"app/scripts/services/datgui.js"
+			],
+			[
+				"test/artpop",
+				"test/spec/directives/artpop.js"
+			],
+			[
+				"test/estimator",
+				"test/spec/services/framebudgetestimator.js"
+			],
+			[
+				"framebudget.js",
+				"app/scripts/services/framebudget.js"
+			],
+			[
+				"directive/arto",
+				"app/scripts/directives/artpop.js"
+			],
+			[
+				"directive",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"x3s",
+				"app/scripts/services/x3service.js"
+			],
+			[
+				"gruntfile",
+				"Gruntfile.js"
+			],
+			[
+				"controller",
+				"app/scripts/controllers/artpop.js"
+			],
+			[
+				"directivearto",
+				"app/scripts/directives/artpop.js"
+			],
+			[
+				"artpop.",
+				"app/scripts/controllers/artpop.js"
+			],
+			[
+				"estima",
+				"app/scripts/services/framebudgetestimator.js"
+			],
+			[
+				"test/",
+				"test/spec/services/framebudgetestimator.js"
+			],
+			[
+				"app.",
+				"app/scripts/app.js"
+			],
+			[
+				"direcartop",
+				"app/scripts/directives/artpop.js"
+			],
+			[
+				"direcwebgl",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"artpop.js",
+				"app/scripts/directives/artpop.js"
+			],
+			[
+				"test/frame",
+				"test/spec/services/framebudgetestimator.js"
+			],
+			[
+				"budgetestim",
+				"app/scripts/services/framebudgetestimator.js"
+			],
+			[
+				"frambud",
+				"test/spec/services/framebudgetestimator.js"
+			],
+			[
+				"test/framebudget",
+				"test/spec/services/framebudgetmanager.js"
+			],
+			[
+				"gruntfile.js",
+				"ARTPOP/Gruntfile.js"
+			],
+			[
+				"webgl-deteco",
+				"ARTPOP/app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"webgl-detector.js",
+				"ARTPOP/test/spec/directives/webgl-detector.js"
+			],
+			[
+				"doobstats",
+				"ARTPOP/app/scripts/directives/doob-stat.js"
+			],
+			[
+				"artpop/app/detector",
+				"WebGL/ap-3js/ARTPOP/app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"web-gld",
+				"WebGL/Book/up-n-running/sim/webGLDetector.js"
+			],
+			[
+				"test",
+				"ARTPOP/app/views/testv.html"
+			],
+			[
+				"webgl-debug",
+				"ARTPOP/app/bower_components/webgl-debug/index.js"
+			],
+			[
+				"test/spec/shaderan",
+				"ARTPOP/test/spec/services/shaderbank.js"
+			],
+			[
+				"test/shaderb",
+				"ARTPOP/test/spec/services/shaderbank.js"
+			],
+			[
+				"test/shaderpi",
+				"ARTPOP/test/spec/services/shader-spiky.js"
+			],
+			[
+				"test/shaders",
+				"ARTPOP/test/spec/services/shaders.js"
+			],
+			[
+				"cutomatt",
+				"3js-source/examples/webgl_custom_attributes.html"
+			],
+			[
+				"controllers",
+				"app/scripts/controllers/artpop.js"
+			],
+			[
+				"artpophtml",
+				"app/views/artpop.html"
+			],
+			[
+				"mainhtml",
+				"app/views/main.html"
+			],
+			[
+				"main.js",
+				"app/scripts/controllers/main.js"
+			],
+			[
+				"main.html",
+				"app/views/main.html"
+			],
+			[
+				"webgl-d",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"app/ser/obj",
+				"app/scripts/services/objpool.js"
+			],
+			[
+				"test/spec/services/objectp",
+				"test/spec/services/objectpool.js"
+			],
+			[
+				"objectpool.js",
+				"app/scripts/services/objectpool.js"
+			],
+			[
+				"object",
+				"app/scripts/services/objectpool.js"
+			],
+			[
+				"cors",
+				"app/scripts/services/corscanvas.js"
+			],
+			[
+				"dompool",
+				"app/scripts/services/dompool.js"
+			],
+			[
+				"dirartpop",
+				"app/scripts/directives/artpop.js"
+			],
+			[
+				"webglde",
+				"app/scripts/directives/webgl-detector.js"
+			],
+			[
+				"testdirec/artpop",
+				"test/spec/directives/artpop.js"
+			],
+			[
+				"testwebgl",
+				"test/spec/directives/webgl-detector.js"
+			],
+			[
+				"directivearpop",
+				"app/scripts/directives/artpop.js"
+			],
+			[
+				"index.h",
+				"app/index.html"
+			],
+			[
+				"todos",
+				"app/views/todos.html"
+			],
+			[
+				"service/shaders",
+				"app/scripts/services/shaders.js"
+			],
+			[
+				"read",
+				"README.md"
+			],
+			[
+				"artpop",
+				"app/views/artpop.html"
+			],
+			[
+				"angular",
+				"app/bower_components/angular/angular.js"
+			],
+			[
+				"ssha",
+				"app/scripts/services/shaders.js"
+			],
+			[
+				"ngtemplatessha",
+				"app/scripts/ngTemplates/shaders.js"
+			],
+			[
+				"service/shader",
+				"app/scripts/services/shaders.js"
+			],
+			[
+				"doob-stat",
+				"app/scripts/directives/doob-stat.js"
+			],
+			[
+				"service/",
+				"app/scripts/services/tween.js"
+			],
+			[
+				"webglrenderer",
+				"app/scripts/services/webglrenderer.js"
+			],
+			[
+				"testdoob",
+				"test/spec/services/doob-stat.js"
+			],
+			[
+				"doobstat",
+				"app/scripts/directives/doob-stat.js"
+			],
+			[
+				"test/dir/doob",
+				"test/spec/directives/doob-stat.js"
+			],
+			[
+				"directivestat",
+				"app/scripts/directives/doob-stat.js"
+			],
+			[
+				"stat",
+				"app/bower_components/stats.js/src/Stats.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 196.0,
+	"status_bar_visible": true
+}

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('artpopApp')
-.factory('gifMaker', function (MFAnimatedGIF, frbT) {
+.factory('gifMaker', function (MFAnimatedGIF, frbT, $http, $templateCache, datGUI) {
 	// Service logic
 	// ...
 	function GifMaker(){
@@ -15,16 +15,15 @@ angular.module('artpopApp')
 			frameDelay: 1000/24,
 			size: {
 				source: {
-					width: 320,
-					height: 320
+					width: 256,
+					height: 256
 				},
 				gif: {
-					width: 240,
-					height: 240
+					width: 256,
+					height: 256
 				}
 			}
 		};
-
 		this.prebind = {
 			done: this.done.bind(this),
 			error: this.error.bind(this),
@@ -35,6 +34,24 @@ angular.module('artpopApp')
 
 		this.frameData = [];
 		this.rotations = [];
+
+
+		this.ratio = (function(){
+
+			// //http://www.html5rocks.com/en/tutorials/canvas/hidpi/
+			var canvas = document.createElement('canvas');
+			var context = canvas.getContext('2d');
+
+			var devicePixelRatio = window.devicePixelRatio || 1,
+			backingStoreRatio = context.webkitBackingStorePixelRatio ||
+			context.mozBackingStorePixelRatio ||
+			context.msBackingStorePixelRatio ||
+			context.oBackingStorePixelRatio ||
+			context.backingStorePixelRatio || 1,
+			ratio = devicePixelRatio / backingStoreRatio;
+
+			return ratio;
+		}());
 
 	}
 	GifMaker.prototype = {
@@ -56,12 +73,12 @@ angular.module('artpopApp')
 			var rHeight = renEl.height;
 			var rAspect = rWidth/rHeight;
 
-			if (rAspect >= 1){
-				renEl.style.width = '';
-				renEl.style.height = '100%';
-			}else{
+			if (rAspect <= 1){
 				renEl.style.width = '100%';
 				renEl.style.height = '';
+			}else{
+				renEl.style.width = '';
+				renEl.style.height = '100%';
 			}
 		},
 		restoreFit: function(){
@@ -142,12 +159,15 @@ angular.module('artpopApp')
 
 			this.state.count++;
 
-			this.makeImgObj(dataURL, function(){
+			var imgObj = null;
+			imgObj = this.makeImgObj(dataURL, function(){
 				self.frameData.push(this);
 				self.rotations.push(0);
 			});
 
-			//document.getElementById('apwgl-slider').appendChild(imgObj);
+			// document.getElementById('apwgl-slider').appendChild(imgObj);
+
+			// debugger;
 		},
 		requestMakeGif: function(){
 			var self = this;
@@ -162,14 +182,22 @@ angular.module('artpopApp')
 			},100);
 
 		},
+
+		//PUBLIC API
 		start: function(force){
+			var self = this;
 			if (this.state.busy && !!!force){
 				console.warn('already started.');
 				return;
 			}
 			this.setUp();
+			datGUI.obj.close();
 
-			var self = this;
+
+			if (!!this.indicator){
+				self.indicator.html($templateCache.get('views/loading.html'));
+			}
+
 			var startTime = (new Date()).getTime();
 			var timerID = setInterval(function(){
 				console.log('capturing frame');
@@ -236,6 +264,8 @@ angular.module('artpopApp')
 
 			this.addTask(function(){
 				var image = new Image();
+				image.width = this.config.size.gif.width;
+				image.height = this.config.size.gif.height;
 				image.src = info.dataURL;
 				document.getElementById('apwgl-slider').appendChild(image);
 			});
@@ -246,9 +276,10 @@ angular.module('artpopApp')
 		//event handlr for worker msg
 		done: function(info){
 			this.cleanUp();
-			this.downloadFile(info);
+			// this.downloadFile(info);
 			this.displayResult(info);
 
+			datGUI.obj.open();
 
 			if (!!this.indicator){
 				this.indicator.html('');

@@ -14,12 +14,13 @@ angular.module('artpopApp')
 			this.folderName = '';
 			this.folder = null;
 			this.lib = [];
-			this.config = {};
+			this.factors = {};
 			this.ctrList = [];
 			this.gui = datGUI.obj;
 
 			return this;
 		},
+
 		find: function(name){
 			var i, arl = this.lib.length;
 			for (i = 0; i < arl; i++) {
@@ -41,6 +42,9 @@ angular.module('artpopApp')
 				this.addConfig(this.lib[i]);
 			}
 		},
+		addCtr: function(param){
+			this.lib.push(param);
+		},
 		addConfig: function(param){
 			param = param || {};
 			var ctx = param.ctx || (function(){throw new Error('requires ctx');}()),
@@ -50,16 +54,16 @@ angular.module('artpopApp')
 				_finish = param.finish || function(){},
 
 				folder = this.folder,
-				config = this.config,
+				factors = this.factors,
 
 				controller;
 
-			config[name] = _getter.call(ctx);
+			factors[name] = _getter.call(ctx);
 
 			if (param.type === 'color'){
-				controller = folder.addColor(config, name);
+				controller = folder.addColor(factors, name);
 			} else if (param.type === 'slider'){
-				var args = [config,name];
+				var args = [factors,name];
 				if (param.min && param.max){
 					args.push(param.min);
 					args.push(param.max);
@@ -69,6 +73,10 @@ angular.module('artpopApp')
 					controller.step(param.step);
 				}
 				args = null;
+			} else if (param.type === 'checkbox'){
+				controller = folder.add(factors, name);
+			} else if (param.type === 'select'){
+				controller = folder.add(factors, name);
 			}
 			controller.onChange( function(val){
 				ctx.animate = false;
@@ -95,13 +103,17 @@ angular.module('artpopApp')
 		syncController: function(){
 			var j,
 				lib = this.lib,
-				config = this.config,
+				factors = this.factors,
 				param;
+
+			if (this.lib.length === 0){
+				return;
+			}
 
 			for (j = lib.length - 1; j >= 0; j--) {
 				param = lib[j];
 				if (param.ctx.animate){
-					config[param.name] = param.get.call(param.ctx);
+					factors[param.name] = param.get.call(param.ctx);
 				}
 			}
 

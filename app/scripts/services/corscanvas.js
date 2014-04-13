@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('artpopApp')
-	.factory('CORSCanvas', function (
-		ObjPool, $q
-	) {
+	.factory('CORSCanvas', function (ObjPool, $q) {
 		var canvasPool = new ObjPool('canvas');
 		canvasPool.init({
 			factory: function(){

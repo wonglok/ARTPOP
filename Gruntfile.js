@@ -62,6 +62,43 @@ module.exports = function (grunt) {
           prefix: '',
         }
       },
+      devTemplates: {
+        //because of usemin.
+        //uses the dist's view to build app's tempalteCache.
+
+        //dev mode
+        //does not include.
+
+        //get templates from last build
+        //prodction mode
+        //might get old version.
+        //grunt deploy build twice
+        cwd:        'app/',
+        src:        'views/**.html',
+        dest:       'app/scripts/ngTemplates/templates.js',
+        options: {
+          bootstrap: function bootstrap(module, script) {
+            var moduleName = require('./bower.json').name || 'lok';
+            var str = '';
+            str += 'angular.module(\''+ moduleName +'App\').run([\'$templateCache\', function($templateCache) {';
+            //str += '  \'use strict\';';
+            str += script;
+            str += '}]);';
+            return str;
+          },
+          prefix: '',
+          htmlmin:{
+            collapseBooleanAttributes:      false,
+            collapseWhitespace:             true,
+            removeAttributeQuotes:          false,
+            removeComments:                 false,
+            removeEmptyAttributes:          false,
+            removeRedundantAttributes:      false,
+            removeScriptTypeAttributes:     false,
+            removeStyleLinkTypeAttributes:  false
+          }
+        }
+      },
       templates: {
         //because of usemin.
         //uses the dist's view to build app's tempalteCache.
@@ -143,13 +180,13 @@ module.exports = function (grunt) {
 
       //usemin a8asd9asd8.haha.png makes template in app/ folder breaks
       //use dist items.
-      // templates: {
-      //   files: ['<%= yeoman.dist%>/views/*.*'],
-      //   tasks: ['ngtemplates:templates'],
-      //   options: {
-      //     livereload: false
-      //   }
-      // },
+      templates: {
+        files: ['<%= yeoman.dist%>/views/*.*'],
+        tasks: ['ngtemplates:devTemplates'],
+        options: {
+          livereload: false
+        }
+      },
 
       // vanillaCss:{
       //   files: ['<%= yeoman.app%>/styles/*.css'],
@@ -637,13 +674,15 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     'htmlmin',
-    'ngtemplates'
+    'ngtemplates:workers',
+    'ngtemplates:shaders',
+    'ngtemplates:templates'
   ]);
 
   grunt.registerTask('gruntdefault', [
     'newer:jshint',
     'test',
-    'build'
+    'build',
   ]);
 
   grunt.registerTask('preview', [

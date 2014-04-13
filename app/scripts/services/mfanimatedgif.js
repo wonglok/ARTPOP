@@ -50,18 +50,53 @@ angular.module('artpopApp')
 			return canvas;
 		};
 
+		// //http://www.html5rocks.com/en/tutorials/canvas/hidpi/
+		var _getRatio = function(context){
+			var devicePixelRatio = window.devicePixelRatio || 1,
+			backingStoreRatio = context.webkitBackingStorePixelRatio ||
+			context.mozBackingStorePixelRatio ||
+			context.msBackingStorePixelRatio ||
+			context.oBackingStorePixelRatio ||
+			context.backingStorePixelRatio || 1,
+			ratio = devicePixelRatio / backingStoreRatio;
 
+			return ratio;
+		};
+
+		// //http://www.html5rocks.com/en/tutorials/canvas/hidpi/
+		// var _highdpi = function(canvas, context){
+		// 	// finally query the various pixel ratios
+		// 	var ratio = _getRatio(context);
+		// 	if (ratio !== 1){
+		// 		//
+		// 		var oldWidth = canvas.width;
+		// 		var oldHeight = canvas.height;
+		// 		//rezie the canvas
+		// 		canvas.width = oldWidth * ratio;
+		// 		canvas.height = oldHeight * ratio;
+		// 		//fix the geometry
+		// 		canvas.style.width = oldWidth + 'px';
+		// 		canvas.style.height = oldHeight + 'px';
+		// 		context.scale(1/ratio, 1/ratio);
+		// 	}else{
+		// 	}
+		// };
 
 		var _initialize = function(opts) {
 
 			var canvas = document.createElement('canvas');
 			var context = canvas.getContext('2d');
 
-			canvas.width  = opts.gWidth;
-			canvas.height = opts.gHeight;
+			var ratio = opts.ratio || _getRatio(context);
+
+			//
+			canvas.width  = opts.gWidth * ((ratio >= 2) ? 2 : ratio );
+			canvas.height = opts.gHeight * ((ratio >= 2) ? 2 : ratio );
+
+			// context.scale(ratio, ratio);
 
 			//bucket
-			var frameData = [],
+			var frameBucket = [],
 				transferableList = [];
 
 			//canvas loop
@@ -72,15 +107,16 @@ angular.module('artpopApp')
 				eachGifData,
 				eachGifFrame;
 
+
+
 			for(i = 0; i< frameLength; i++) {
-				eachRotation = opts.rotations[i];
 				eachFrame = opts.frameData[i];
+				eachRotation = opts.rotations[i];
 
 				//sometimes it could be...
 				//eachDataURL = eachFrame;
 
 				eachSrcImg = eachFrame;
-
 				eachSrcImg.width  = opts.sWidth;
 				eachSrcImg.height = opts.sHeight;
 
@@ -91,55 +127,48 @@ angular.module('artpopApp')
 				context.clearRect(0, 0, canvas.width, canvas.height);
 				context.drawImage(eachSrcImg,
 					0, 0,
-					eachSrcImg.width, eachSrcImg.height,
+					eachSrcImg.width * ratio, eachSrcImg.height * ratio,
 					0, 0,
 					canvas.width, canvas.height
 				);
 				eachGifData = context.getImageData(0, 0, canvas.width, canvas.height);
 
-				// var newImg = new Image();
-				// newImg.src = canvas.toDataURL();
-				// document.getElementById('apwgl-slider').appendChild(newImg);
 
-//				frameData.push(eachGifData);
+				// frameData.push(eachGifData);
 
 				eachGifFrame = {
 					data: _transferableArray(eachGifData.data),
 					height: canvas.height,
 					width: canvas.width
 				};
-				frameData.push(eachGifFrame);
+				frameBucket.push(eachGifFrame);
 				transferableList.push(eachGifFrame.data.buffer);
 			}
 
 			var gifWorker;
-			window.useNetwork = false;
-			if(!!window.useNetwork){
-				gifWorker = new Worker('workers/omggif-worker.js');
-			}else{
-				gifWorker = workerFactory.spawn({
-					deps: [
-						// ['_transferableArray',_transferableArray],
-						// ['mimivela', function mimivela(){ return 'ok'; }],
-						// ['mimivela2', function mimivela2(){ return 'ok2'; }],
-						// ['mimivela3', function mimivela3(){ return 'ok3'; }]
-					],
-					noopImportScript: true,
-					imports: [
-						$templateCache.get('workers/min/base64.js'),
-						$templateCache.get('workers/min/NeuQuant.js'),
-						$templateCache.get('workers/min/omggif.js'),
-						$templateCache.get('workers/min/omggif-worker.js')
-					]
-					// fn: function(self){
-					// 	var result = self.mimivela();
-					// 	result += self.mimivela2();
-					// 	result += self.mimivela3();
-					// 	self.postMessage(result);
-					// },
-				});
-			}
+			//gifWorker = new Worker('workers/omggif-worker.js');
 
+			gifWorker = workerFactory.spawn({
+				deps: [
+					// ['_transferableArray',_transferableArray],
+					// ['mimivela', function mimivela(){ return 'ok'; }],
+					// ['mimivela2', function mimivela2(){ return 'ok2'; }],
+					// ['mimivela3', function mimivela3(){ return 'ok3'; }]
+				],
+				noopImportScript: true,
+				imports: [
+					$templateCache.get('workers/min/base64.js'),
+					$templateCache.get('workers/min/NeuQuant.js'),
+					$templateCache.get('workers/min/omggif.js'),
+					$templateCache.get('workers/min/omggif-worker.js')
+				]
+				// fn: function(self){
+				// 	var result = self.mimivela();
+				// 	result += self.mimivela2();
+				// 	result += self.mimivela3();
+				// 	self.postMessage(result);
+				// },
+			});
 
 
 			function onMessageHandler(e) {
@@ -171,7 +200,7 @@ angular.module('artpopApp')
 			gifWorker.addEventListener('error', onErrorHandler, false);
 
 			var message = {
-				frames: frameData,
+				frames: frameBucket,
 				delay: opts.delay,
 				matte: [255, 255, 255],
 			//	transparent: [0, 0, 0]

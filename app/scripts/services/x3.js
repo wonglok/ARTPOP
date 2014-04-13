@@ -7,8 +7,6 @@ angular.module('artpopApp')
 		// Not an engine, just a pretty code organiser for this project.
 		// Looking good and feeling fine.
 
-
-
 		function X3(){
 			var self = this;
 
@@ -36,16 +34,20 @@ angular.module('artpopApp')
 				},
 			};
 
-			this.placeHolder = new Image();
 
 			this.prebind = {
-				loop: self.loop.bind(self)
+				loop: self.loop.bind(self),
+				setScreenInvalid: self.setScreenInvalid.bind(self),
+				glContextLost: self.glContextLost.bind(self),
+				glContextRestore: self.glContextRestore.bind(self)
 			};
 
 		}
 		X3.prototype.frbT = frbT;
 		X3.prototype.frbE = frbE;
 		X3.prototype.gifMaker = gifMaker;//service
+
+
 
 		X3.prototype.constructor = X3;
 		X3.prototype.init = function(param){
@@ -56,14 +58,9 @@ angular.module('artpopApp')
 			this.scene = param.scene || new THREE.Scene();
 			this.camera = param.camera || new THREE.PerspectiveCamera( 75,  window.innerWidth/window.innerHeight, 0.1, 1000 );
 
-			this.screenshot = param.screenshot || true;
-
 			this.renderer = sharedRenderer;
 
-			// this.renderer = param.renderer || new THREE.WebGLRenderer({
-			// 	preserveDrawingBuffer : this.screenshot
-			// });
-			this.renderer.domElement.classList.add('gl-canvas-container');
+			this.renderer.domElement.classList.add('wgl-canvas');
 
 			this.renderer.setClearColor( param.clearColor || 0xffffff ,  param.clearAlpha  || 0.5);
 
@@ -82,9 +79,6 @@ angular.module('artpopApp')
 				// this.animationEndEventName = X3.animationEndEventNames[Modernizr.prefixed('animation')];
 				// this.transitionEndEventName = X3.transitionEndEventNames[Modernizr.prefixed('transition')];
 			}
-
-
-
 		};
 
 
@@ -149,31 +143,30 @@ angular.module('artpopApp')
 			//resizer
 			//---------------------
 
-			var windowResizer = function(){
-				self.setScreenInvalid();
-			};
 			setUpStack.push(function(){
-				window.addEventListener('resize', windowResizer, false);
+				window.addEventListener('resize', self.prebind.setScreenInvalid, false);
 			});
 			cleanUpStack.push(function(){
-				window.removeEventListener('resize', windowResizer, false);
+				window.removeEventListener('resize', self.prebind.setScreenInvalid, false);
 			});
 
 			//---------------------
 			//webgl context lost
 			//---------------------
-			var glContextLost = function (event) {
-				//restartOnContextLost
-				event.preventDefault();
-				self.stopLoop();
-				self.startLoop();
-			};
 			setUpStack.push(function(){
-				rendererDom.addEventListener('webglcontextlost', glContextLost, false);
+				rendererDom.addEventListener('webglcontextlost', self.prebind.glContextLost, false);
 			});
 			cleanUpStack.push(function(){
-				rendererDom.removeEventListener('webglcontextlost', glContextLost, false);
+				rendererDom.removeEventListener('webglcontextlost', self.prebind.glContextLost, false);
 			});
+
+			setUpStack.push(function(){
+				rendererDom.addEventListener('webglcontextrestore', self.prebind.glContextRestore, false);
+			});
+			cleanUpStack.push(function(){
+				rendererDom.removeEventListener('webglcontextrestore', self.prebind.glContextRestore, false);
+			});
+
 
 			//---------------------
 			//slider
@@ -212,8 +205,16 @@ angular.module('artpopApp')
 		};
 
 		/* ===========================================
-			Gif Delegate Section
+			WebGL Context Lost Handler
 		   ===========================================  */
+		X3.prototype.glContextLost = function(e){//
+			e.preventDefault();
+			this.stopLoop();
+		};
+		X3.prototype.glContextRestore = function(e){//
+			e.preventDefault();
+			this.startLoop();
+		};
 
 
 		/* ===========================================
@@ -224,8 +225,12 @@ angular.module('artpopApp')
 				this.render();
 			}
 		};
+		X3.prototype.update = function(){
+
+		};
 		X3.prototype.render = function(){
 			this.renderer.render(this.scene, this.camera);
+			this.update();
 			this.processTaskStackOrder(this.updateStack);
 			TWEEN.update();
 		};
@@ -324,7 +329,9 @@ angular.module('artpopApp')
 			Process Task Stack Sync
 		   ===========================================  */
 		X3.prototype.processTaskStackReverse = function(stack) {
-			for (var i = stack.length - 1, fnc; i >= 0; i--) {
+			var i, l = stack.length, fnc;
+			if (l === 0){ return; }
+			for (i = l - 1; i >= 0; i--) {
 				fnc = stack[i];
 				if (typeof fnc === 'function'){
 					fnc();
@@ -335,6 +342,7 @@ angular.module('artpopApp')
 		};
 		X3.prototype.processTaskStackOrder = function(stack) {
 			var i, l = stack.length, fnc;
+			if (l === 0){ return; }
 			for (i = 0; i < l; i++) {
 				fnc = stack[i];
 				if (typeof fnc === 'function'){
