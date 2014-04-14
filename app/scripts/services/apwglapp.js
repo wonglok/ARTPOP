@@ -130,6 +130,8 @@ angular.module('artpopApp')
 		this.ctr.folder.add(gifMaker.config, 'autoDownload').listen();
 		if (!Modernizr.touch){
 			this.ctr.folder.open();
+			gifMaker.config.displayGif = true;
+			gifMaker.config.autoDownload = false;
 		}else{
 			gifMaker.config.autoDownload = true;
 			gifMaker.config.displayGif = false;

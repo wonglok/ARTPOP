@@ -35,14 +35,14 @@ canvas.wgl-canvas
   margin: 0px;
 }
 canvas.wgl-canvas,
-canvas.wgl-canvas.gl-invalid{
-  -webkit-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-     -moz-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-      -ms-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-       -o-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-          transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+canvas.wgl-canvas.gl-loading{
+  -webkit-transition: -webkit-transform 0.7s cubic-bezier(0.09, 0.68, 0, 0.99);
+     -moz-transition: -moz-transform 0.7s cubic-bezier(0.09, 0.68, 0, 0.99);
+      -ms-transition: -ms-transform 0.7s cubic-bezier(0.09, 0.68, 0, 0.99);
+       -o-transition: -o-transform 0.7s cubic-bezier(0.09, 0.68, 0, 0.99);
+          transition: transform 0.7s cubic-bezier(0.09, 0.68, 0, 0.99);
 }
-canvas.wgl-canvas.gl-invalid{
+canvas.wgl-canvas.gl-loading{
   opacity: 0.5;
   -webkit-transform: scale(0.5);
      -moz-transform: scale(0.5);

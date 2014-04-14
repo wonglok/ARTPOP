@@ -49,21 +49,21 @@ angular.module('artpopApp')
 			consturctor: SpikySahder,
 			ctr: new CustomControl(),
 			setFactors: function(){
-				this.select = {
-					morphMode: {
-						'Honey Ball': 'honey',
-						'Spiky Ball': 'spiky'
-					}
-				};
+				this.select = this.select || {};
+				this.select.morphMode = this.select.morphMode || {};
+				this.select.morphMode['Honey Ball'] = 'honey';
+				this.select.morphMode['Spiky Ball'] = 'spiky';
+
 				//Control Factors
-				this.factors = {
-					speed: 1,
-					mode: 'honey',
-					moveWave: true,
-					rotateX: true,
-					rotateY: true,
-					rotateZ: true
-				};
+				this.factors = this.factors || {};
+
+				this.factors.speed = 1;
+				this.factors.mode = 'honey';
+				this.factors.moveWave = true;
+				this.factors.rotateX = true;
+				this.factors.rotateY = true;
+				this.factors.rotateZ = true;
+
 			},
 			resetAnimation: function(){
 				for(var key in this.uniforms){
@@ -119,6 +119,7 @@ angular.module('artpopApp')
 			},
 			setUpCtr: function(){
 				this.ctr.addFolder('SpikySahder');
+				this.ctr.folder.add(this.factors, 'mode', this.select.morphMode);
 
 				this.ctr.addCtr({
 					type: 'color',
@@ -137,7 +138,7 @@ angular.module('artpopApp')
 					},
 				});
 
-				this.ctr.folder.add(this.factors, 'speed', 0.5,3).listen();
+				this.ctr.folder.add(this.factors, 'speed', -3,3).listen();
 				this.ctr.addCtr({
 					type: 'slider',
 					name: 'Amplitude',
@@ -181,7 +182,6 @@ angular.module('artpopApp')
 				});
 
 				this.ctr.folder.add(this.factors, 'moveWave').listen();
-				this.ctr.folder.add(this.factors, 'mode', this.select.morphMode);
 
 				this.ctr.folder.add(this.factors, 'rotateX').listen();
 				this.ctr.folder.add(this.factors, 'rotateY').listen();

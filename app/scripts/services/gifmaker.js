@@ -28,19 +28,22 @@ angular.module('artpopApp')
 			return ratio;
 		}());
 
-		// this.ratio = ((this.ratio >= 2) ? 2 : this.ratio );
+		//limit?
+		this.ratio = ((this.ratio >= 2) ? 2 : this.ratio );
 
 		this.config = {
 			timeLength: 1000*3,
 			frameDelay: 1000/24,
 			size: {
 				source: {
-					width: (this.ratio > 1) ? 160 : 360,
-					height: (this.ratio > 1) ? 160 : 360
+					//for high dpi devices. use lower logical pixel.
+					//use same pixel amount as the souce.
+					width: (this.ratio > 1) ? 160 : 340,
+					height: (this.ratio > 1) ? 160 : 340
 				},
 				gif: {
-					width: (this.ratio > 1) ? 160: 240,
-					height: (this.ratio > 1) ? 160: 240
+					width: (this.ratio > 1) ? 160: 256,
+					height: (this.ratio > 1) ? 160: 256
 				}
 			},
 			autoDownload: false,

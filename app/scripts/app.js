@@ -45,7 +45,7 @@ angular
       console.log('$routeChangeSuccess');
       setTimeout(function(){
         NProgress.done();
-      },3000);
+      },300);
     });
     $rootScope.$on('$routeChangeError', function () {
       console.log('$routeChangeError');
