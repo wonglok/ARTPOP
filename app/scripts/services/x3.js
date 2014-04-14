@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE, TWEEN, Modernizr */
 angular.module('artpopApp')
-	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, gifMaker, sharedRenderer) {
+	.factory('X3', function (frameBudget, stats, datGUI, frbE, frbT, sharedRenderer) {
 		// Service logic
 		// HamsterFace 3D Code Organiser
 		// Not an engine, just a pretty code organiser for this project.
@@ -17,6 +17,8 @@ angular.module('artpopApp')
 
 			//one kind of task stack.
 			this.updateStack = [];
+
+
 			this.state = {
 				frameID: 0,
 				system: {
@@ -34,6 +36,10 @@ angular.module('artpopApp')
 				},
 			};
 
+			this.directiveDomElement = null;
+
+			this.domClassName = 'wgl-canvas';
+			this.domClassName = 'wgl-canvas';
 
 			this.prebind = {
 				loop: self.loop.bind(self),
@@ -45,7 +51,6 @@ angular.module('artpopApp')
 		}
 		X3.prototype.frbT = frbT;
 		X3.prototype.frbE = frbE;
-		X3.prototype.gifMaker = gifMaker;//service
 
 
 
@@ -60,7 +65,7 @@ angular.module('artpopApp')
 
 			this.renderer = sharedRenderer;
 
-			this.renderer.domElement.classList.add('wgl-canvas');
+			this.renderer.domElement.classList.add(this.domClassName);
 
 			this.renderer.setClearColor( param.clearColor || 0xffffff ,  param.clearAlpha  || 0.5);
 
@@ -100,32 +105,32 @@ angular.module('artpopApp')
 		/* ===========================================
 			Reconfig in Directives link/controler fnc.
 		   ===========================================  */
-		X3.prototype.reconfig = function($scope, $element){
+		X3.prototype.reconfig = function($scope, $element, container){
 			//cache dom and context.
 			var self = this;
+
 			var setUpStack = [];
 			var cleanUpStack = [];
 
-
 			//---------------------
-			// GIF Maker
+			// Directive
 			//---------------------
-			gifMaker.switchTo(self);
+			this.directiveDomElement = $element;
 
 
 			//
 			var rendererDom = this.renderer.domElement;
-			this.$element = $element;
+
 
 			//---------------------
 			//render dom
 			//---------------------
 			setUpStack.push(function(){
-				$element[0].appendChild(rendererDom);
+				container.appendChild(rendererDom);
 			});
 			cleanUpStack.push(function(){
 				setTimeout(function(){
-					$element.empty();
+					container.parentNode.removeChild(container);
 				},500);
 			});
 
@@ -168,15 +173,21 @@ angular.module('artpopApp')
 			});
 
 
+
 			//---------------------
 			//slider
 			//---------------------
 			setUpStack.push(function(){
-				datGUI.show();
+				if (typeof self.setUpCtr === 'function'){
+					datGUI.show();
+				}
 			});
 			cleanUpStack.push(function(){
-				datGUI.hide();
+				if (typeof self.cleanUpCtr === 'function'){
+					datGUI.hide();
+				}
 			});
+
 
 			//---------------------
 			//stats
@@ -191,6 +202,7 @@ angular.module('artpopApp')
 				});
 			}
 
+
 			self.shceduleTaskStackOrder(setUpStack);
 
 			//setup cleanup
@@ -203,6 +215,8 @@ angular.module('artpopApp')
 				self.shceduleTaskStackReverse(cleanUpStack);
 			});
 		};
+
+
 
 		/* ===========================================
 			WebGL Context Lost Handler
@@ -230,9 +244,15 @@ angular.module('artpopApp')
 		};
 		X3.prototype.render = function(){
 			this.renderer.render(this.scene, this.camera);
+			this.requestUpdateControl();
 			this.update();
 			this.processTaskStackOrder(this.updateStack);
 			TWEEN.update();
+		};
+		X3.prototype.requestUpdateControl = function(){
+			if (this.controls){
+				this.controls.update();
+			}
 		};
 		X3.prototype.requestMoreFrame = function(){
 			if (this.state.loop.valid){
@@ -262,68 +282,62 @@ angular.module('artpopApp')
 			window.cancelAnimationFrame(this.state.frameID);
 		};
 
+
+
 		/* ===========================================
 			Window Resize
 		   ===========================================  */
-		X3.prototype.showBusy = function(){
-			this.renderer.domElement.classList.add('gl-loading');
-		};
-		X3.prototype.hideBusy = function(){
-			this.renderer.domElement.classList.remove('gl-loading');
-		};
 		X3.prototype.setScreenInvalid = function() {
 			this.state.resize.invalid = true;
 		};
 		X3.prototype.setScreenValid = function() {
 			this.state.resize.invalid = false;
 		};
+		X3.prototype.showDomBusy = function(){
+			this.renderer.domElement.classList.add('gl-invalid');
+		};
+		X3.prototype.hideDomBusy = function(){
+			this.renderer.domElement.classList.remove('gl-invalid');
+		};
 		X3.prototype.resizeRenderer = function(width,height) {
 			this.renderer.setSize( width, height );
 			this.camera.aspect = width / height;
 			this.camera.updateProjectionMatrix();
+
+			// if(this.controls){
+			// 	this.controls.handleResize();
+			// }
 		};
 		X3.prototype.throttleRender = function(){
 			this.state.render.throttle = true;
-			this.showBusy();
+			this.showDomBusy();
 		};
 		X3.prototype.restoreRender = function(){
 			this.state.render.throttle = false;
-			this.hideBusy();
+			this.hideDomBusy();
 		};
+		X3.prototype.processResizeRequest = function(){
+			this.renderer.domElement.style.visibility = 'hidden';
+			this.resizeRenderer(window.innerWidth, window.innerHeight);
 
-
-		X3.prototype.digest = function(){
-			this.frbT.digest();
-		};
-		X3.prototype.addTask = function(task,option){
-			var config = {
-				ctx: this,
-				fn: task
-			};
-			if (!!option && option instanceof Array){
-				config.args = option;
-			}
-			if (!!option && option instanceof Object){
-				config.data = option;
-			}
-			frbT.addTask(config);
-		};
-		X3.prototype.resizeAfterRequest = function(){
-			this.addTask(function(){
-				this.resizeRenderer(window.innerWidth, window.innerHeight);
-				this.restoreRender();
-				this.setScreenValid();
-			});
+			var self = this;
+			setTimeout(function(){
+				self.renderer.domElement.style.visibility = 'visible';
+				self.setScreenValid();
+				self.restoreRender();
+			},10000);
 		};
 		X3.prototype.requestScheduleResizeWindow = function() {
 			if (this.state.resize.invalid && !this.state.render.throttle){
 				this.throttleRender();
 				var self = this;
 				setTimeout(function(){
-					self.resizeAfterRequest();
+					self.processResizeRequest();
 				},750);
 			}
 		};
+
+
 
 		/* ===========================================
 			Process Task Stack Sync
@@ -357,16 +371,12 @@ angular.module('artpopApp')
 			Scheudle Tasks in Task Stack
 		   ===========================================  */
 		X3.prototype.shceduleTaskStackOrder = function(stack){
-			for (var i = stack.length - 1, fnc; i >= 0; i--) {
+			var i, l = stack.length, fnc;
+			if (l === 0){ return; }
+			for (i = 0; i < l; i++) {
 				fnc = stack[i];
 				if (typeof fnc === 'function'){
 					this.addTask(fnc);
-
-					// frbT.addTask({
-					// 	fn: fnc,
-					// 	ctx: this,
-					// 	args: []
-					// });
 				}else{
 					throw new Error('not a fuction in process stack');
 				}
@@ -374,16 +384,11 @@ angular.module('artpopApp')
 			frbT.digest();
 		};
 		X3.prototype.shceduleTaskStackReverse = function(stack){
+			if (stack.length === 0){ return; }
 			for (var i = stack.length - 1, fnc; i >= 0; i--) {
 				fnc = stack[i];
 				if (typeof fnc === 'function'){
 					this.addTask(fnc);
-
-					// frbT.addTask({
-					// 	fn: fnc,
-					// 	ctx: this,
-					// 	args: []
-					// });
 				}else{
 					throw new Error('not a fuction in process stack');
 				}
@@ -391,6 +396,25 @@ angular.module('artpopApp')
 			frbT.digest();
 		};
 
+		/* ===========================================
+			FrameBudget Task Manager Shortcut
+		   ===========================================  */
+		X3.prototype.digest = function(){
+			this.frbT.digest();
+		};
+		X3.prototype.addTask = function(task,option){
+			var config = {
+				ctx: this,
+				fn: task
+			};
+			if (!!option && option instanceof Array){
+				config.args = option;
+			}
+			if (!!option && option instanceof Object){
+				config.data = option;
+			}
+			frbT.addTask(config);
+		};
 
 
 		return X3;

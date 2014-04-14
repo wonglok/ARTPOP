@@ -5,7 +5,12 @@ angular.module('artpopApp')
 
 
 	function MeshBank(){
+		var self = this;
 		this.cache = $cacheFactory('meshBank');
+		this.makeMeshWithGeometry = function(geometry) {
+			geometry.dynamic = true;
+			return new THREE.Mesh(geometry);
+		};
 		this.factories = {
 			/*
 			{
@@ -13,79 +18,114 @@ angular.module('artpopApp')
 				detail: 0
 			}
 			*/
-			twentyFace: function (param){
+			sphereHD: function (param){
+				param = param || {};
+
+				param.radius = param.radius || 40;
+				param.segments = param.segments || 50;
+				param.rings = param.rings || 50;
+
+				return self.factories.sphere(param);
+			},
+			sphere: function (param){
+				param = param || {};
+				var radius = param.radius || 40,
+				segments = param.segments || 40,
+				rings = param.rings || 40;
+
+				var geometry = new THREE.SphereGeometry( radius, segments, rings );
+				return self.makeMeshWithGeometry(geometry);
+			},
+			icosahedronHD: function (param){
+				param = param || {};
+				var radius = param.radius || 50,
+				detail = param.detail || 3;
+
+				var geometry = new THREE.IcosahedronGeometry(radius,detail);
+
+				return self.makeMeshWithGeometry(geometry);
+			},
+			icosahedron: function (param){
 				param = param || {};
 				var radius = param.radius || 50,
 				detail = param.detail || 0;
 
 				var geometry = new THREE.IcosahedronGeometry(radius,detail);
-				geometry.dynamic = true;
-				var mesh = new THREE.Mesh( geometry );
-				return mesh;
-			},
-			/*
-				radius: 40,
-				segments: 75,
-				rings: 75,
-			*/
-			sphereHD: function (param){
-				param = param || {};
-				var radius = param.radius || 40,
-				segments = param.segments || 75,
-				rings = param.rings || 75;
 
-				var geometry = new THREE.SphereGeometry( radius, segments, rings );
-				geometry.dynamic = true;
-				var mesh = new THREE.Mesh( geometry );
-				return mesh;
-			},
-			sphere: function (param){
-				param = param || {};
-				var radius = param.radius || 40,
-				segments = param.segments || 50,
-				rings = param.rings || 50;
-
-				var geometry = new THREE.SphereGeometry( radius, segments, rings );
-				geometry.dynamic = true;
-				var mesh = new THREE.Mesh( geometry );
-				return mesh;
+				return self.makeMeshWithGeometry(geometry);
 			},
 
-			newObj: function (param){
+
+
+			ring: function(param){
+
+				// RingGeometry(innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength)
+				// innerRadius — Default is 0, but it doesn't work right when innerRadius is set to 0.
+				// outerRadius — Default is 50.
+				// thetaSegments — Number of segments. A higher number means the ring will be more round. Minimum is 3. Default is 8.
+				// phiSegments — Minimum is 3. Default is 8.
+				// thetaStart — Starting angle. Default is 0.
+				// thetaLength — Central angle. Default is Math.PI * 2.
+
 				param = param || {};
 
+				param.innerRadius = param.innerRadius || 20;
+				param.outerRadius = param.outerRadius || 50;
+				param.thetaSegments = param.thetaSegments || 20;
+				param.phiSegments = param.phiSegments || 20;
+				param.thetaStart = param.thetaStart || 0;
+				param.thetaLength = param.thetaLength || Math.PI * 2;
+
+				var geometry = new THREE.RingGeometry(
+					param.innerRadius,
+					param.outerRadius,
+					param.thetaSegments,
+					param.phiSegments,
+					param.thetaStart,
+					param.thetaLength
+				);
+
+				return self.makeMeshWithGeometry(geometry);
 			},
 
-			circle: function(param){
+			cube: function (param){
 				param = param || {};
-				var radius = param.radius || 10;
-				var segments = param.segments || 32;
 
-				var geometry = new THREE.CircleGeometry( radius, segments );
-				geometry.dynamic = true;
-				var mesh = new THREE.Mesh( geometry );
+				param.width = param.width || 45;
+				param.height = param.height || 45;
+				param.depth = param.depth || 45;
+				param.widthSegments = param.widthSegments || 1;
+				param.heightSegments = param.heightSegments || 1;
+				param.depthSegments = param.depthSegments || 1;
 
-				return mesh;
-			},
-			lathe: function (){
+				var geometry = new THREE.CubeGeometry(
+					param.width,
+					param.height,
+					param.depth,
+					param.widthSegments,
+					param.heightSegments,
+					param.depthSegments
+				);
 
-				var points = [];
-				for ( var i = 0; i < 10; i ++ ) {
-					points.push( new THREE.Vector3( Math.sin( i * 0.2 ) * 15 + 50, 0, ( i - 5 ) * 2 ) );
-				}
-				var geometry = new THREE.LatheGeometry( points );
-				geometry.dynamic = true;
-
-				var lathe = new THREE.Mesh( geometry );
-
-				return lathe;
+				return self.makeMeshWithGeometry(geometry);
 			},
 
+			cubeHD: function (param){
+				param = param || {};
 
+				param.width = param.width || 45;
+				param.height = param.height || 45;
+				param.depth = param.depth || 45;
+				param.widthSegments = param.widthSegments || 5;
+				param.heightSegments = param.heightSegments || 5;
+				param.depthSegments = param.depthSegments || 5;
 
+				return self.factories.cube(param);
+			}
 		};
 	}
 	MeshBank.prototype = Object.create(Banker.prototype);
+
 
 	return new MeshBank();
 });

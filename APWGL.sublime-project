@@ -3,9 +3,8 @@
 	[
 		{
 			"path": "/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP",
-		    "binary_file_patterns": ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"],
-			"folder_exclude_patterns": [".grunt",".sass-cache",".tmp"]
-        }
+		    "binary_file_patterns": ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"]
+		}
 	]
 
 }

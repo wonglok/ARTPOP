@@ -20,7 +20,6 @@ angular.module('artpopApp')
 
 			return this;
 		},
-
 		find: function(name){
 			var i, arl = this.lib.length;
 			for (i = 0; i < arl; i++) {
@@ -37,15 +36,11 @@ angular.module('artpopApp')
 			this.folderName = name;
 			this.folder = this.gui.addFolder(name);
 		},
-		addBatch: function(){
-			for (var i = 0; i < this.lib.length; i++) {
-				this.addConfig(this.lib[i]);
-			}
-		},
 		addCtr: function(param){
 			this.lib.push(param);
+			this.configCtr(param);
 		},
-		addConfig: function(param){
+		configCtr: function(param){
 			param = param || {};
 			var ctx = param.ctx || (function(){throw new Error('requires ctx');}()),
 				name = param.name || (function(){throw new Error('requires name');}()),
@@ -78,6 +73,8 @@ angular.module('artpopApp')
 			} else if (param.type === 'select'){
 				controller = folder.add(factors, name);
 			}
+
+			controller.__manualUpdate = true;
 			controller.onChange( function(val){
 				ctx.animate = false;
 				_setter.call(ctx,val);
@@ -85,15 +82,16 @@ angular.module('artpopApp')
 			controller.onFinishChange(function(val){
 				_finish.call(ctx,val);
 			});
+
 			this.ctrList.push(controller);
 		},
-		clearInnerItems: function(){
-			var i, listLength = this.ctrList, currentCtr;
-			for (i = 0; i <= listLength; i++) {
-				currentCtr = this.ctrList[i];
-				this.folder.remove(currentCtr);
-			}
-		},
+		// clearInnerItems: function(){
+		// 	var i, listLength = this.ctrList, currentCtr;
+		// 	for (i = 0; i <= listLength; i++) {
+		// 		currentCtr = this.ctrList[i];
+		// 		this.folder.remove(currentCtr);
+		// 	}
+		// },
 		removeAll: function(){
 			//remove all items from the
 			//this.folder.close();
@@ -116,6 +114,12 @@ angular.module('artpopApp')
 					factors[param.name] = param.get.call(param.ctx);
 				}
 			}
+
+			// var i, listLength = this.ctrList, currentCtr;
+			// for (i = 0; i <= listLength; i++) {
+			// 	currentCtr = this.ctrList[i];
+			// 	currentCtr[i].updateDisplay();
+			// }
 
 			for (var i in this.folder.__controllers) {
 				this.folder.__controllers[i].updateDisplay();

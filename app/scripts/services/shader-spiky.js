@@ -35,16 +35,7 @@ angular.module('artpopApp')
 			};
 			this.noise = [];
 
-
-			//Control Factors
-			this.factors = {
-				mode: 'honey',
-				modeOptions: {
-					'HoneyComb': 'honey',
-					'Spiky': 'spiky'
-				},
-				moveWave: true
-			};
+			this.setFactors();
 
 			this.prebind = {
 				update: this.update.bind(this)
@@ -57,12 +48,28 @@ angular.module('artpopApp')
 		SpikySahder.prototype = {
 			consturctor: SpikySahder,
 			ctr: new CustomControl(),
+			setFactors: function(){
+				this.select = {
+					morphMode: {
+						'Honey Ball': 'honey',
+						'Spiky Ball': 'spiky'
+					}
+				};
+				//Control Factors
+				this.factors = {
+					speed: 1,
+					mode: 'honey',
+					moveWave: true,
+					rotateX: true,
+					rotateY: true,
+					rotateZ: true
+				};
+			},
 			resetAnimation: function(){
 				for(var key in this.uniforms){
 					this.uniforms[key].animate = true;
 				}
-				this.factors.moveWave = true;
-				this.material.wireframe = false;
+				this.setFactors();
 			},
 			init: function(param){
 				param = param || {};
@@ -75,7 +82,7 @@ angular.module('artpopApp')
 					attributes : this.attributes,
 					vertexShader : ShaderText.spiky.vs,
 					fragmentShader : ShaderText.spiky.fs,
-					wireframe: false
+					wireframe: true
 				});
 
 			},
@@ -94,7 +101,6 @@ angular.module('artpopApp')
 				uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 
 				this.loopThroughVerticies();
-
 			},
 			loopThroughVerticies: function(){
 				//assgin mesh
@@ -126,10 +132,12 @@ angular.module('artpopApp')
 						this.value.setStyle(val);
 					},
 					finish: function(){
-						this.value.offsetHSL(0,1,2);
+						console.log('ballcolr');
+						// this.value.offsetHSL(0,2,2);
 					},
 				});
 
+				this.ctr.folder.add(this.factors, 'speed', 0.5,3).listen();
 				this.ctr.addCtr({
 					type: 'slider',
 					name: 'Amplitude',
@@ -172,13 +180,22 @@ angular.module('artpopApp')
 					},
 				});
 
-				this.ctr.addBatch();
-
-				this.ctr.folder.add(this.factors, 'mode', this.factors.modeOptions).listen();
 				this.ctr.folder.add(this.factors, 'moveWave').listen();
+				this.ctr.folder.add(this.factors, 'mode', this.select.morphMode);
+
+				this.ctr.folder.add(this.factors, 'rotateX').listen();
+				this.ctr.folder.add(this.factors, 'rotateY').listen();
+				this.ctr.folder.add(this.factors, 'rotateZ').listen();
+
 
 				this.ctr.folder.add(this, 'resetAnimation');
-				this.ctr.folder.open();
+
+				if (typeof window.orientation !== 'undefined'){
+
+				}else{
+					this.ctr.folder.open();
+				}
+
 			},
 
 			cleanUpCtr: function(){
@@ -204,11 +221,11 @@ angular.module('artpopApp')
 					uniforms.color.value.offsetHSL( 0.0010, 0, 0 );
 				}
 				if (uniforms.amplitude.animate){
-					uniforms.amplitude.value = 3 * Math.sin( 0.05 * time);
+					uniforms.amplitude.value = 3 * Math.sin( factors.speed * 0.05 * time);
 				}
 
 				if (uniforms.textureShift.animate){
-					uniforms.textureShift.value = 1 * Math.cos( 0.02 * time);
+					uniforms.textureShift.value = 1 * Math.cos( factors.speed * 0.02 * time);
 				}
 
 				if (this.factors.moveWave){
@@ -220,9 +237,9 @@ angular.module('artpopApp')
 
 
 						if (factors.mode === 'spiky'){
-							// noise[ dv ] += 0.5 * ( 0.5 - Math.random() );
-							// noise[ dv ] += 0.5 * ( 0.5 - Math.random() );
-							// noise[ dv ] = THREE.Math.clamp( noise[ dv ], -5, 5 );
+							noise[ dv ] += 0.5 * ( 0.5 - Math.random() );
+							noise[ dv ] += 0.5 * ( 0.5 - Math.random() );
+							noise[ dv ] = THREE.Math.clamp( noise[ dv ], -5, 5 );
 
 							displacements[ dv ] += noise[ dv ];
 						}
@@ -230,12 +247,17 @@ angular.module('artpopApp')
 					attributes.displacement.needsUpdate = true;
 				}
 
-				//shake the ball
-				// mesh.position.x = Math.sin(noise[ 0 ]) * 2;
-				// mesh.position.y = Math.sin(noise[ 1 ]) * 2;
-				// mesh.position.z = Math.sin(noise[ 2 ]) * 2;
 
-
+				//rotate the ball.
+				if (this.factors.rotateX){
+					this.mesh.rotation.x += factors.speed / 50;
+				}
+				if (this.factors.rotateY){
+					this.mesh.rotation.y += factors.speed / 50;
+				}
+				if (this.factors.rotateZ){
+					this.mesh.rotation.z += factors.speed / 50;
+				}
 
 				this.ctr.syncController();
 

@@ -1,4 +1,5 @@
 'use strict';
+/* global NProgress */
 angular
   .module('artpopApp', [
     'ngCookies',
@@ -10,7 +11,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/Electric-Chapel', {
+      .when('/Detecotr', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
 
@@ -18,7 +19,7 @@ angular
         // controller: 'ArtpopCtrl'
 
       })
-      .when('/ARTPOP', {
+      .when('/3DMix', {
         templateUrl: 'views/artpop.html',
         controller: 'ArtpopCtrl'
       })
@@ -31,21 +32,24 @@ angular
         controller: 'CreditCtrl'
       })
       .otherwise({
-        redirectTo: '/Electric-Chapel'
+        redirectTo: '/Detecotr'
       });
   })
   .run(function ($rootScope, Modernizr){
     $rootScope.Modernizr = Modernizr;
-    $rootScope.$on('$routeChangeSuccess', function () {
-      console.log('$routeChangeSuccess');
-    });
     $rootScope.$on('$routeChangeStart', function () {
       console.log('$routeChangeStart');
-
+      NProgress.start();
+    });
+    $rootScope.$on('$routeChangeSuccess', function () {
+      console.log('$routeChangeSuccess');
+      setTimeout(function(){
+        NProgress.done();
+      },3000);
     });
     $rootScope.$on('$routeChangeError', function () {
       console.log('$routeChangeError');
-
+      NProgress.done();
     });
   });
 

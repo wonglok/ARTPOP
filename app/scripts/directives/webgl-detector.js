@@ -3,12 +3,13 @@
 angular.module('artpopApp')
 .directive('webglDetector', function (X3) {
 
-	// function ARTPOP(){
-	// 	X3.apply(this,arguments);
-	// }
-	// ARTPOP.prototype = Object.create(X3.prototype);
+	function Detector(){
+		X3.apply(this,arguments);
+	}
+	Detector.prototype = Object.create(X3.prototype);
 
-	var app = new X3();
+	var app = new Detector();
+
 	window.apwgl = app;
 
 	app.init();
@@ -62,15 +63,17 @@ angular.module('artpopApp')
 	addLight();
 
 	return {
-		//template: '',
+		template: '<div class="gl-canvas-container"></div>',
 		restrict: 'E',
 		transclude: true,
 		//link function is not di.
 		link: function($scope, $element, $transclude){
+			var container = $element[0].querySelector('.gl-canvas-container');
+
 			if (Modernizr.webgl){
-				app.reconfig($scope, $element);
+				app.reconfig($scope, $element, container);
 			}else{
-				$element.find('.gl-canvas-container').html($transclude());
+				container.appendChild($transclude());
 			}
 		}
 	};

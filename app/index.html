@@ -16,6 +16,7 @@
 
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
+    <link rel="stylesheet" href="bower_components/nprogress/nprogress.css"/>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/fast.css">
     <!-- endbuild -->
@@ -29,11 +30,7 @@
     <!--content-->
     <div class="apwgl-container">
         <div class="view-animate" ng-view="">
-            Downloading System... :) <br>
-            You are suppose to see this image: <br>
-            <img src="images/supposeToSee.gif" alt=""> <br>
-            P.S. Requires WebGL & JavaScript Enabled.<br>
-            Simply use desktop Google Chrome/ Latest 4.4 Andoird Google Chrome.
+            Downloading System... :)
         </div>
     </div>
 
@@ -42,12 +39,12 @@
 
     <!--topright-->
     <div class="apwgl-menu">
-      <a ng-href="#Electric-Chapel">Electric Chapel</a>
-      <a ng-href="#ARTPOP">ARTPOP v0.1</a>
-      <a ng-href="#Todos">Todos</a>
-      <a ng-href="#Credit">Credit</a>
       <gif-maker></gif-maker>
       <div id="apwgl-stats"></div>
+      <a ng-href="#Detector">Detector</a>
+      <a ng-href="#3DMix">3DMix v0.1</a>
+      <a ng-href="#Todos">Todos</a>
+      <a ng-href="#Credit">Credit</a>
     </div>
 
 
@@ -73,7 +70,6 @@
 
     <!--jQ-Plugin-->
     <!--
-    <script src="bower_components/base64/index.js"></script>
     -->
 
     <!--mohter effing animated gif-->
@@ -96,6 +92,10 @@
     <script src="scripts/polyfill/console.js"></script>
     <script src="scripts/polyfill/rAF.js"></script>
 
+    <!--js tools-->
+    <script src="bower_components/base64/index.js"></script>
+
+
     <!--famework-->
     <script src="bower_components/modernizr/modernizr.js"></script>
     <script src="bower_components/angular/angular.js"></script>
@@ -103,7 +103,7 @@
     <!--jquery&plugins-->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/mothereffinganimatedgif/assets/js/libraries/jquery.base64.min.js"></script>
-
+    <script src="bower_components/nprogress/nprogress.js"></script>
 
     <!--webgl-->
     <script src="bower_components/three.js/three.min.js"></script>
@@ -185,6 +185,7 @@
     <!--controls-->
     <script src="scripts/services/customcontrol.js"></script>
     <script src="scripts/services/apwglapp.js"></script>
+    <script src="scripts/services/framebudgetpromisemanager.js"></script>
     <!-- endbuild -->
 
     <!-- build:js scripts/templates.js -->

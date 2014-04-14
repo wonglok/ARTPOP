@@ -180,9 +180,17 @@ module.exports = function (grunt) {
 
       //usemin a8asd9asd8.haha.png makes template in app/ folder breaks
       //use dist items.
+      devTemplates: {
+        files: ['<%= yeoman.app%>/views/*.*'],
+        tasks: ['ngtemplates:devTemplates'],
+        options: {
+          livereload: false
+        }
+      },
+
       templates: {
         files: ['<%= yeoman.dist%>/views/*.*'],
-        tasks: ['ngtemplates:devTemplates'],
+        tasks: ['ngtemplates:templates'],
         options: {
           livereload: false
         }

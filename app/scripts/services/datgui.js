@@ -5,8 +5,8 @@ angular.module('artpopApp')
 	// Service logic
 	// ...
 
-	var gui = new dat.GUI({ autoPlace: false });
-
+	//http://stackoverflow.com/questions/14710559/dat-gui-how-hide-menu-from-code
+	//https://code.google.com/p/dat-gui/issues/detail?id=21
 	/*enhanced so that it can remove folder*/
 	dat.GUI.prototype.removeFolder = function(name) {
 		var folder = this.__folders[name];
@@ -20,21 +20,30 @@ angular.module('artpopApp')
 		//
 
 		var _this = this;
-		_this.onResize();
+		dat.utils.common.defer(function(){
+			_this.onResize();
+		});
 	};
 
-	var guiContainer = document.getElementById('apwgl-slider');
+	var gui = new dat.GUI({autoPlace: true});
+	gui.domElement.style.display = 'none';
+
+
+	// var guiContainer = document.getElementById('apwgl-slider');
 	return {
 		obj: gui,
 		show: function(){
-			if (guiContainer && typeof guiContainer.appendChild === 'function'){
-				guiContainer.appendChild(gui.domElement);
-			}
+			gui.domElement.style.display = 'block';
+			// if (guiContainer && typeof guiContainer.appendChild === 'function'){
+				// gui.domElement.parentNode.appendChild(gui.domElement);
+			// }
 		},
 		hide: function(){
-			if (guiContainer && typeof guiContainer.removeChild === 'function'){
-				guiContainer.removeChild(gui.domElement);
-			}
+			gui.domElement.style.display = 'none';
+
+			// if (guiContainer && typeof guiContainer.removeChild === 'function'){
+			//gui.domElement.parentNode.removeChild(gui.domElement);
+			// }
 		}
 	};
 });

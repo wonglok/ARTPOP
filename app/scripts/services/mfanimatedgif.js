@@ -89,9 +89,12 @@ angular.module('artpopApp')
 
 			var ratio = opts.ratio || _getRatio(context);
 
-			//
-			canvas.width  = opts.gWidth * ((ratio >= 2) ? 2 : ratio );
-			canvas.height = opts.gHeight * ((ratio >= 2) ? 2 : ratio );
+
+			canvas.width  = opts.gWidth;
+			canvas.height = opts.gHeight;
+
+			canvas.width  *= ratio;
+			canvas.height *= ratio;
 
 			// context.scale(ratio, ratio);
 
@@ -108,6 +111,8 @@ angular.module('artpopApp')
 				eachGifFrame;
 
 
+			// document.getElementById('apwgl-slider').appendChild(canvas);
+
 
 			for(i = 0; i< frameLength; i++) {
 				eachFrame = opts.frameData[i];
@@ -117,8 +122,9 @@ angular.module('artpopApp')
 				//eachDataURL = eachFrame;
 
 				eachSrcImg = eachFrame;
-				eachSrcImg.width  = opts.sWidth;
-				eachSrcImg.height = opts.sHeight;
+				// eachSrcImg.width  = opts.sWidth;
+				// eachSrcImg.height = opts.sHeight;
+
 
 				if (eachRotation !== 0){
 					eachSrcImg = _rotate(eachSrcImg, opts.rotations[i]);

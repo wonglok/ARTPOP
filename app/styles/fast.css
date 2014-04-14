@@ -1,9 +1,28 @@
 /*
 */
+
+
+
 /* ============================================
-    Ap-Canvas
+    Canvas container
    ============================================ */
-img.holder.wgl-canvas,
+/* ============================================
+    Required by Trackball
+   ============================================ */
+.gl-canvas-container {
+  z-index: 0;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* ============================================
+    wgl-Canvas
+   ============================================ */
 canvas.wgl-canvas
 {
   z-index: 0;
@@ -15,14 +34,15 @@ canvas.wgl-canvas
   padding: 0px;
   margin: 0px;
 }
-canvas.wgl-canvas.gl-loading{
-  -webkit-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-     -moz-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-      -ms-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-       -o-transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
-          transition: all 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+canvas.wgl-canvas,
+canvas.wgl-canvas.gl-invalid{
+  -webkit-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+     -moz-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+      -ms-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+       -o-transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
+          transition: transform 0.5s cubic-bezier(0.09, 0.68, 0, 0.99);
 }
-canvas.wgl-canvas.gl-loading{
+canvas.wgl-canvas.gl-invalid{
   opacity: 0.5;
   -webkit-transform: scale(0.5);
      -moz-transform: scale(0.5);
@@ -30,6 +50,7 @@ canvas.wgl-canvas.gl-loading{
        -o-transform: scale(0.5);
           transform: scale(0.5);
 }
+
 canvas.wgl-canvas.gl-rendering{
   opacity: 0.5;
 }
@@ -53,7 +74,7 @@ canvas.wgl-canvas.gl-rendering{
 .apwgl-menu {
     /* font-family: Helvetiker; */
     position: absolute;
-    top: 0px;
+    bottom: 0px;
     right:0;
     border: papayawhip dotted 1px;
     list-style: none;
@@ -63,26 +84,23 @@ canvas.wgl-canvas.gl-rendering{
     z-index: 1000;
 }
     #apwgl-stats{
-    }
+    text-align: center;
+  }
     #apwgl-stats #stats{
-        margin-right: 25px;
-        margin-bottom: 11px;
-        margin-left: 24px;
-        box-shadow: 0px 0px 8px 0px rgba(11, 206, 255, 0.5);
-
-        display: block;
-        float: right;
-    }
+    display:inline-block;
+    padding: 0px;
+    margin: 0px;
+  }
 
     .apwgl-menu a:active,
     .apwgl-menu a:visited,
     .apwgl-menu a{
-    	display: block;
-    	margin: 10px;
-    	border-bottom: #eee solid 1px;
-    	text-decoration: none;
-    	color: blue;
-    	border: rgba(255,255,255,0.2);
+      display: block;
+      margin: 10px;
+      border-bottom: #eee solid 1px;
+      text-decoration: none;
+      color: blue;
+      border: rgba(255,255,255,0.2);
     }
 
 
@@ -117,6 +135,8 @@ div.apwgl-footer{
 }
 
 
+
+
 /* ============================================
     Angular Animations
    ============================================ */
@@ -134,12 +154,12 @@ div.apwgl-footer{
 
 
 .view-animate {
-	z-index: 0;
-	position:absolute;
-	top: 0px;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
+  z-index: 0;
+  position:absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
 }
 
 .view-animate.ng-enter,
@@ -196,6 +216,14 @@ div.apwgl-footer{
        -o-transform: translate3d(0,100%,0) scale(0.4);
           transform: translate3d(0,100%,0) scale(0.4);
 }
+
+.gif-indicator{
+  text-align: center;
+  color:red;
+}
+
+
+
 
 
 

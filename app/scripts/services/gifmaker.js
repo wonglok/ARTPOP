@@ -10,31 +10,6 @@ angular.module('artpopApp')
 
 			count: 0
 		};
-		this.config = {
-			timeLength: 1000*3,
-			frameDelay: 1000/24,
-			size: {
-				source: {
-					width: 256,
-					height: 256
-				},
-				gif: {
-					width: 256,
-					height: 256
-				}
-			}
-		};
-		this.prebind = {
-			done: this.done.bind(this),
-			error: this.error.bind(this),
-			progress: this.progress.bind(this),
-		};
-
-		this.app = null;
-
-		this.frameData = [];
-		this.rotations = [];
-
 
 		this.ratio = (function(){
 
@@ -53,6 +28,35 @@ angular.module('artpopApp')
 			return ratio;
 		}());
 
+		// this.ratio = ((this.ratio >= 2) ? 2 : this.ratio );
+
+		this.config = {
+			timeLength: 1000*3,
+			frameDelay: 1000/24,
+			size: {
+				source: {
+					width: (this.ratio > 1) ? 160 : 360,
+					height: (this.ratio > 1) ? 160 : 360
+				},
+				gif: {
+					width: (this.ratio > 1) ? 160: 240,
+					height: (this.ratio > 1) ? 160: 240
+				}
+			},
+			autoDownload: false,
+			displayGif: true
+		};
+		this.prebind = {
+			done: this.done.bind(this),
+			error: this.error.bind(this),
+			progress: this.progress.bind(this),
+		};
+
+
+		this.app = null;
+
+		this.frameData = [];
+		this.rotations = [];
 	}
 	GifMaker.prototype = {
 		constructor: GifMaker,
@@ -149,6 +153,13 @@ angular.module('artpopApp')
 			if (!!!dataURL){
 				throw new Error('requires dataURL');
 			}
+
+			//mfanimatedgif would multiple ratio :)
+			//css width
+			img.width = this.config.size.source.width;
+			img.height = this.config.size.source.height;
+
+			//css width
 			img.onload = fnc;
 			img.src = dataURL;
 			return img;
@@ -194,13 +205,15 @@ angular.module('artpopApp')
 			datGUI.obj.close();
 
 
-			if (!!this.indicator){
-				self.indicator.html($templateCache.get('views/loading.html'));
-			}
-
+			var frameID = 0;
 			var startTime = (new Date()).getTime();
 			var timerID = setInterval(function(){
 				console.log('capturing frame');
+
+				frameID++;
+				if (!!self.indicator){
+					self.indicator.html('Snapshot '+frameID);
+				}
 
 				self.app.render();
 				self.collectScreenShot();
@@ -264,8 +277,9 @@ angular.module('artpopApp')
 
 			this.addTask(function(){
 				var image = new Image();
-				image.width = this.config.size.gif.width;
-				image.height = this.config.size.gif.height;
+
+				// image.width = this.config.size.gif.width;
+				// image.height = this.config.size.gif.height;
 				image.src = info.dataURL;
 				document.getElementById('apwgl-slider').appendChild(image);
 			});
@@ -276,8 +290,12 @@ angular.module('artpopApp')
 		//event handlr for worker msg
 		done: function(info){
 			this.cleanUp();
-			// this.downloadFile(info);
-			this.displayResult(info);
+			if (this.config.autoDownload){
+				this.downloadFile(info);
+			}
+			if (this.config.displayGif){
+				this.displayResult(info);
+			}
 
 			datGUI.obj.open();
 
@@ -295,7 +313,7 @@ angular.module('artpopApp')
 			}
 
 			if (!!this.indicator){
-				this.indicator.html((info * 100).toFixed(0));
+				this.indicator.html('Export '+(info * 100).toFixed(0)+'%');
 			}
 
 			this.lastFrame = window.performance.now();

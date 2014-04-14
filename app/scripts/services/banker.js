@@ -21,7 +21,7 @@ angular.module('artpopApp')
 			if (typeof factory !== 'function'){
 				throw new Error('Factory Not Found');
 			}
-			var newItem = factory(param);
+			var newItem = factory.call(this,param);
 			this.cache.put(key, newItem);
 			return newItem;
 		},
