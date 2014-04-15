@@ -1,4 +1,6 @@
-/*http://threejs.org/examples/webgl_custom_attributes.html*/
+//http://threejs.org/examples/webgl_custom_attributes.html
+
+
 uniform float amplitude;
 uniform float textureShift;
 
@@ -28,6 +30,28 @@ void main() {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

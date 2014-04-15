@@ -3,7 +3,7 @@
 angular.module('artpopApp')
 	.factory('ShaderSpiky', function (CustomControl, ShaderText) {
 		function SpikySahder(){
-			//Shader Data
+			//Shader
 			this.attributes = {
 				displacement: {
 					type: 'f',
@@ -12,7 +12,6 @@ angular.module('artpopApp')
 				}
 			};
 			this.uniforms = {
-				//ctx
 				textureShift: {
 					type: 'f',
 					value: 0.1,
