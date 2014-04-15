@@ -8,7 +8,7 @@ angular.module('artpopApp')
 		var self = this;
 		this.cache = $cacheFactory('meshBank');
 		this.makeMeshWithGeometry = function(geometry) {
-			// geometry.dynamic = true;
+		//	geometry.dynamic = true;
 			return new THREE.Mesh(geometry);
 		};
 		this.factories = {
@@ -25,15 +25,11 @@ angular.module('artpopApp')
 				param.segments = param.segments || 50;
 				param.rings = param.rings || 50;
 
-				return self.factories.sphere(param);
-			},
-			sphere: function (param){
-				param = param || {};
-				var radius = param.radius || 40,
-				segments = param.segments || 40,
-				rings = param.rings || 40;
-
-				var geometry = new THREE.SphereGeometry( radius, segments, rings );
+				var geometry = new THREE.SphereGeometry(
+					param.radius,
+					param.segments,
+					param.rings
+				);
 				return self.makeMeshWithGeometry(geometry);
 			},
 			icosahedronHD: function (param){
@@ -54,9 +50,6 @@ angular.module('artpopApp')
 
 				return self.makeMeshWithGeometry(geometry);
 			},
-
-
-
 			ring: function(param){
 
 				// RingGeometry(innerRadius, outerRadius, thetaSegments, phiSegments, thetaStart, thetaLength)

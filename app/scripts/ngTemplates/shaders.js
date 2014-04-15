@@ -157,7 +157,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "\t\t\t\t\t\t\t\t\t\tuvTimeShift\n" +
     "\t\t\t\t\t\t\t\t\t);\n" +
     "\n" +
-    "\tvec2 uvNoiseTimeShift = \t\tvUv\n" +
+    "\tvec2 uvNoiseTimeShift = \tvUv\n" +
     "\t\t\t\t\t\t\t\t+\n" +
     "\n" +
     "\t\t\t\t\t\t\t\t\tnoiseScale\n" +
@@ -177,7 +177,36 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "\tgl_FragColor = baseColor;\n" +
     "}\n" +
     "\n" +
-    "\n"
+    "\n" +
+    "\n" +
+    "\n" +
+    "//https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html\n" +
+    "// uniform float time;\n" +
+    "\n" +
+    "// uniform sampler2D texture1;\n" +
+    "// uniform sampler2D texture2;\n" +
+    "\n" +
+    "// varying vec2 texCoord;\n" +
+    "\n" +
+    "// void main( void ) {\n" +
+    "\n" +
+    "// \tvec4 noise = texture2D( texture1, texCoord );\n" +
+    "\n" +
+    "// \tvec2 T1 = texCoord + vec2( 1.5, -1.5 ) * time  * 0.01;\n" +
+    "// \tvec2 T2 = texCoord + vec2( -0.5, 2.0 ) * time *  0.01;\n" +
+    "\n" +
+    "// \tT1.x -= noise.r * 2.0;\n" +
+    "// \tT1.y += noise.g * 4.0;\n" +
+    "\n" +
+    "// \tT2.x += noise.g * 0.2;\n" +
+    "// \tT2.y += noise.b * 0.2;\n" +
+    "\n" +
+    "// \tfloat p = texture2D( texture1, T1 * 2.0 ).a + 0.25;\n" +
+    "\n" +
+    "// \tvec4 color = texture2D( texture2, T2 );\n" +
+    "// \tvec4 temp = color * 2.0 * ( vec4( p, p, p, p ) ) + ( color * color );\n" +
+    "// \tgl_FragColor = temp;\n" +
+    "// }"
   );
 
 

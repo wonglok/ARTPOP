@@ -125,8 +125,8 @@ angular.module('artpopApp')
 	   ============================================ */
 	APWGLAPP.fn.setUpCtr = function(){
 		this.ctr.addFolder('APWGL');
-		this.ctr.folder.add(this.select.current, 'mesh', this.select.options.mesh).onChange(this.onChangeMesh.bind(this));
 		this.ctr.folder.add(this.select.current, 'shader', this.select.options.shader).onChange(this.onChangeShader.bind(this));
+		this.ctr.folder.add(this.select.current, 'mesh', this.select.options.mesh).onChange(this.onChangeMesh.bind(this));
 		this.ctr.folder.add(this, 'MakeGif');
 
 		this.ctr.folder.add(gifMaker.config, 'autoDownload').listen();
@@ -155,6 +155,8 @@ angular.module('artpopApp')
 		var mesh = meshBank.getLazy(this.select.current.mesh);
 		var shader = this.last.shader;
 
+
+		meshControl.reconfig(mesh);
 
 		//config shader with mesh
 		shader.reconfig({

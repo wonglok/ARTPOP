@@ -55,6 +55,8 @@ angular.module('artpopApp')
 
 			factors[name] = _getter.call(ctx);
 
+			ctx.___animateControl = true;
+
 			if (param.type === 'color'){
 				controller = folder.addColor(factors, name);
 			} else if (param.type === 'slider'){
@@ -74,9 +76,8 @@ angular.module('artpopApp')
 				controller = folder.add(factors, name);
 			}
 
-			controller.__manualUpdate = true;
 			controller.onChange( function(val){
-				ctx.animate = false;
+				ctx.___animateControl = false;
 				_setter.call(ctx,val);
 			});
 			controller.onFinishChange(function(val){
@@ -110,7 +111,7 @@ angular.module('artpopApp')
 
 			for (j = lib.length - 1; j >= 0; j--) {
 				param = lib[j];
-				if (param.ctx.animate){
+				if (param.ctx.___animateControl){
 					factors[param.name] = param.get.call(param.ctx);
 				}
 			}

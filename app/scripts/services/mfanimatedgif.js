@@ -111,9 +111,7 @@ angular.module('artpopApp')
 				eachGifData,
 				eachGifFrame;
 
-
 			// document.getElementById('apwgl-slider').appendChild(canvas);
-
 
 			for(i = 0; i< frameLength; i++) {
 				eachFrame = opts.frameData[i];

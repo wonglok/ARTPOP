@@ -29,7 +29,8 @@ angular.module('artpopApp')
 		}());
 
 		//limit?
-		this.ratio = ((this.ratio >= 2) ? 2 : this.ratio );
+		this._ratio = ((this.ratio >= 2) ? 2 : this.ratio );
+
 
 		this.config = {
 			timeLength: 1000*3,
@@ -157,11 +158,6 @@ angular.module('artpopApp')
 				throw new Error('requires dataURL');
 			}
 
-			//mfanimatedgif would multiple ratio :)
-			//css width
-			img.width = this.config.size.source.width;
-			img.height = this.config.size.source.height;
-
 			//css width
 			img.onload = fnc;
 			img.src = dataURL;
@@ -171,13 +167,13 @@ angular.module('artpopApp')
 			var dataURL = this.takeScreenShot();
 			var self = this;
 
-			this.state.count++;
-
 			var imgObj = null;
 			imgObj = this.makeImgObj(dataURL, function(){
-				self.frameData.push(this);
+				self.frameData[this.state.count](this);
 				self.rotations.push(0);
 			});
+
+			this.state.count++;
 
 			// document.getElementById('apwgl-slider').appendChild(imgObj);
 			// debugger;
@@ -280,12 +276,24 @@ angular.module('artpopApp')
 			window.gifResult = arguments;
 
 			this.addTask(function(){
-				var image = new Image();
 
+				var blob = new Blob([info.buffer], {type: 'octet/stream'}),
+				url = window.URL.createObjectURL(blob);
+
+
+
+				var anchor = document.createElement('a');
+				anchor.href = url;
+				anchor.download = 'gif.gif';
+
+				var image = new Image();
+				image.src = url;//info.dataURL;
 				// image.width = this.config.size.gif.width;
 				// image.height = this.config.size.gif.height;
-				image.src = info.dataURL;
-				document.getElementById('apwgl-slider').appendChild(image);
+
+				anchor.appendChild(image);
+
+				document.getElementById('apwgl-slider').appendChild(anchor);
 			});
 			frbT.digest();
 

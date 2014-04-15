@@ -15,12 +15,12 @@ angular.module('artpopApp')
 			// use "this." to create global object
 			this.uniforms = {
 				baseTexture:	{ type: 't', value: lavaTexture },
-				baseSpeed:		{ type: 'f', value: 0.05 },
+				baseSpeed:		{ type: 'f', value: 0.1 },
 
 				noiseTexture:	{ type: 't', value: noiseTexture },
-				noiseScale:		{ type: 'f', value: 1 },
+				noiseScale:		{ type: 'f', value: 1.0 },
 
-				alpha:			{ type: 'f', value: 1.0 },
+				alpha:			{ type: 'f', value: 0.5 },
 				time:			{ type: 'f', value: 1.0 }
 			};
 
@@ -65,7 +65,7 @@ angular.module('artpopApp')
 			//Control Factors
 			this.factors = this.factors || {};
 
-			this.factors.speed = 1;
+			this.factors.timerSpeed = 1;
 			// this.factors.mode = 'spiky';
 			// this.factors.moveWave = true;
 
@@ -120,22 +120,22 @@ angular.module('artpopApp')
 			// 	},
 			// });
 
-			this.ctr.folder.add(this.factors, 'speed', -3,3).listen();
+			this.ctr.folder.add(this.factors, 'timerSpeed', -3,3).listen();
 
-			// this.ctr.addCtr({
-			// 	type: 'slider',
-			// 	name: 'Amplitude',
-			// 	ctx: this.uniforms.amplitude,
-			// 	get: function(){
-			// 		return this.value;
-			// 	},
-			// 	set: function( val ){
-			// 		this.value = val;
-			// 	},
-			// 	min: -3.2,
-			// 	max: 3.2,
-			// 	// step: 0.001
-			// });
+			this.ctr.addCtr({
+				type: 'slider',
+				name: 'Noise Scale',
+				ctx: this.uniforms.noiseScale,
+				get: function(){
+					return this.value;
+				},
+				set: function( val ){
+					this.value = val;
+				},
+				min: 0.1,
+				max: 3,
+				// step: 0.001
+			});
 
 			// this.ctr.addCtr({
 			// 	type: 'slider',
@@ -152,17 +152,17 @@ angular.module('artpopApp')
 			// 	// step: 0.001
 			// });
 
-			// this.ctr.addCtr({
-			// 	type: 'checkbox',
-			// 	name: 'wireframe',
-			// 	ctx: this.material,
-			// 	get: function(){
-			// 		return this.wireframe;
-			// 	},
-			// 	set: function( val ){
-			// 		this.wireframe = val;
-			// 	},
-			// });
+			this.ctr.addCtr({
+				type: 'checkbox',
+				name: 'wireframe',
+				ctx: this.material,
+				get: function(){
+					return this.wireframe;
+				},
+				set: function( val ){
+					this.wireframe = val;
+				},
+			});
 
 			// this.ctr.folder.add(this.factors, 'moveWave').listen();
 
@@ -193,7 +193,7 @@ angular.module('artpopApp')
 
 			var delta = this.clock.getDelta();
 
-			this.uniforms.time.value += delta * factors.speed;
+			this.uniforms.time.value += delta * factors.timerSpeed;
 
 			this.ctr.syncController();
 
