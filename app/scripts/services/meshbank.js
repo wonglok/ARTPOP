@@ -8,7 +8,7 @@ angular.module('artpopApp')
 		var self = this;
 		this.cache = $cacheFactory('meshBank');
 		this.makeMeshWithGeometry = function(geometry) {
-			geometry.dynamic = true;
+			// geometry.dynamic = true;
 			return new THREE.Mesh(geometry);
 		};
 		this.factories = {

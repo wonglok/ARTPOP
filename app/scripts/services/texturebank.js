@@ -1,16 +1,39 @@
 'use strict';
-
+/* global THREE */
 angular.module('artpopApp')
-  .factory('textureBank', function () {
-    // Service logic
-    // ...
+.factory('TextureBank', function ($cacheFactory, Banker) {
+	function TextureBank(){
+		this.cache = $cacheFactory('textureBank');
+		this.factories = {
+			oilPaint: function(){
+				return THREE.ImageUtils.loadTexture('textures/disturb.jpg' );
+			},
+		};
+	}
+	TextureBank.prototype = Object.create(Banker.prototype);
 
-    var meaningOfLife = 42;
+	return TextureBank;
+})
+.factory('textureBank', function (TextureBank) {
+	return new TextureBank();
+});
 
-    // Public API here
-    return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
-    };
-  });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**/

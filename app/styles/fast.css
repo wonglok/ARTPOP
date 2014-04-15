@@ -1,8 +1,5 @@
 /*
 */
-
-
-
 /* ============================================
     Canvas container
    ============================================ */
@@ -117,7 +114,7 @@ canvas.wgl-canvas.gl-rendering{
     padding: 19px;
     font-weight: bold;
 }
-.apwgl-credit a.credit-item{
+.apwgl-credit .credit-item{
     display: block;
     border-bottom: #f0f0f0 solid 1px;
     border-left: #f0f0f0 solid 1px;

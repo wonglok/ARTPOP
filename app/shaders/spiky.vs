@@ -10,10 +10,22 @@ varying vec2 vUv;
 void main() {
 
 	vNormal = normal;
-	vUv = ( 0.5 + textureShift ) * uv + vec2( textureShift );
 
-	vec3 newPosition = position + amplitude * normal * vec3( displacement );
-	gl_Position = projectionMatrix * modelViewMatrix * vec4( newPosition, 1.0 );
+	vUv =		  ( 0.5 + textureShift )
+				* uv
+			  +
+			    vec2( textureShift );
+
+	vec3 newPosition = 	  position
+						+
+						    amplitude
+						  * normal
+						  * vec3( displacement );
+
+    gl_Position =     projectionMatrix
+    				* modelViewMatrix
+    				* vec4( newPosition, 1.0 );
+
 
 }
 
@@ -23,4 +35,4 @@ void main() {
 
 
 
-/**/
+//

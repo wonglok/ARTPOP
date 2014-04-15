@@ -1,22 +1,24 @@
 'use strict';
 
 angular.module('artpopApp')
-.factory('ShaderBank', function ($cacheFactory, Banker, ShaderSpiky) {
+.factory('ShaderBank', function ($cacheFactory, Banker, ShaderSpiky, ShaderSun) {
 
 	function ShaderBank(){
 		this.cache = $cacheFactory('shaderBank');
 		this.factories = {
-			spiky: function(){
-				var spiky = new ShaderSpiky();
-				// spiky.factors.mode = 'spiky';
-				spiky.init();
-				return spiky;
+			spiky: function(param){
+				var shader = new ShaderSpiky();
+				shader.init(param);
+				return shader;
 			},
-			// honey: function(){
-			// 	var spiky = new ShaderSpiky();
-			// 	spiky.init();
-			// 	return spiky;
-			// }
+
+			sun: function(param){
+				var shader = new ShaderSun();
+				shader.init(param);
+				return shader;
+			},
+
+
 		};
 	}
 	ShaderBank.prototype = Object.create(Banker.prototype);

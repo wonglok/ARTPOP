@@ -2,9 +2,10 @@
 	"folders":
 	[
 		{
-			"path": "/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP",
-		    "binary_file_patterns": ["*.jpg", "*.jpeg", "*.png", "*.gif", "*.ttf", "*.tga", "*.dds", "*.ico", "*.eot", "*.pdf", "*.swf", "*.jar", "*.zip"]
+			"path": "/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/WebGL/ap-3js/ARTPOP"
+		},
+		{
+			"path": "/Users/LOK/Desktop/PersonalData/WORKSPACE/Exp/Github-wonglok/stemkoski.github.com"
 		}
 	]
-
 }

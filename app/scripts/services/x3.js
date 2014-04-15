@@ -17,8 +17,6 @@ angular.module('artpopApp')
 
 			//one kind of task stack.
 			this.updateStack = [];
-
-
 			this.state = {
 				frameID: 0,
 				system: {
@@ -140,13 +138,11 @@ angular.module('artpopApp')
 			//render loop
 			//---------------------
 			setUpStack.push(function(){
-				this.startLoop();
+				self.startLoop();
 			});
 			cleanUpStack.push(function(){
 				self.stopLoop();
 			});
-
-
 
 
 			//---------------------
@@ -177,8 +173,6 @@ angular.module('artpopApp')
 				rendererDom.removeEventListener('webglcontextrestore', self.prebind.glContextRestore, false);
 			});
 
-
-
 			//---------------------
 			//slider
 			//---------------------
@@ -192,7 +186,6 @@ angular.module('artpopApp')
 					datGUI.hide();
 				}
 			});
-
 
 			//---------------------
 			//stats
@@ -221,8 +214,6 @@ angular.module('artpopApp')
 				self.shceduleTaskStackReverse(cleanUpStack);
 			});
 		};
-
-
 
 		/* ===========================================
 			WebGL Context Lost Handler
@@ -315,7 +306,6 @@ angular.module('artpopApp')
 			this.renderer.setSize( width, height );
 			this.camera.aspect = width / height;
 			this.camera.updateProjectionMatrix();
-
 			// if(this.controls){
 			// 	this.controls.handleResize();
 			// }
@@ -330,15 +320,14 @@ angular.module('artpopApp')
 		};
 		X3.prototype.processResizeRequest = function(){
 			this.hideDom();
-			this.setScreenValid();
 			this.resizeRenderer(window.innerWidth, window.innerHeight);
-			this.restoreRender();
+			this.setScreenValid();
 			this.showDom();
+			this.restoreRender();
 		};
 		X3.prototype.requestScheduleResizeWindow = function() {
 			if (this.state.resize.invalid && !this.state.render.throttle){
 				this.throttleRender();
-
 				var self = this;
 				setTimeout(function(){
 					self.processResizeRequest();
@@ -390,7 +379,7 @@ angular.module('artpopApp')
 					throw new Error('not a fuction in process stack');
 				}
 			}
-			frbT.digest();
+			this.digest();
 		};
 		X3.prototype.shceduleTaskStackReverse = function(stack){
 			if (stack.length === 0){ return; }
@@ -402,7 +391,7 @@ angular.module('artpopApp')
 					throw new Error('not a fuction in process stack');
 				}
 			}
-			frbT.digest();
+			this.digest();
 		};
 
 		/* ===========================================

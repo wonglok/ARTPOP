@@ -180,7 +180,6 @@ angular.module('artpopApp')
 			});
 
 			// document.getElementById('apwgl-slider').appendChild(imgObj);
-
 			// debugger;
 		},
 		requestMakeGif: function(){
@@ -254,19 +253,21 @@ angular.module('artpopApp')
 		//http://stackoverflow.com/questions/19327749/javascript-blob-filename-without-link
 		downloadFile: function(info){
 			var saveData = (function () {
-				var a = document.createElement('a');
-				document.body.appendChild(a);
-				a.style = 'display: none';
+				var anchor = document.createElement('a');
+				document.body.appendChild(anchor);
+				anchor.style = 'display: none';
 				return function (data, fileName) {
 					// var json = JSON.stringify(data),
 					// var blob = new Blob([json], {type: 'octet/stream'}),
 					var blob = new Blob([data], {type: 'octet/stream'}),
 					url = window.URL.createObjectURL(blob);
-					a.href = url;
-					a.download = fileName;
-					a.click();
+					anchor.href = url;
+					anchor.download = fileName;
+					anchor.click();
+
 					window.URL.revokeObjectURL(url);
-					a = null;
+					anchor.parentNode.removeChild(anchor);
+					anchor = null;
 				};
 			}());
 

@@ -5,6 +5,7 @@ angular.module('artpopApp')
 	// Service logic
 	// ...
 
+	//Remove Folder
 	//http://stackoverflow.com/questions/14710559/dat-gui-how-hide-menu-from-code
 	//https://code.google.com/p/dat-gui/issues/detail?id=21
 	/*enhanced so that it can remove folder*/
@@ -17,8 +18,6 @@ angular.module('artpopApp')
 		this.__ul.removeChild(folder.domElement.parentNode);
 		delete this.__folders[name];
 
-		//
-
 		var _this = this;
 		dat.utils.common.defer(function(){
 			_this.onResize();
@@ -27,7 +26,8 @@ angular.module('artpopApp')
 
 	var gui = new dat.GUI({autoPlace: true});
 	gui.domElement.style.display = 'none';
-
+	//insert into dom tree but display none,
+	//so that no render.
 
 	// var guiContainer = document.getElementById('apwgl-slider');
 	return {

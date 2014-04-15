@@ -60,9 +60,12 @@ angular.module('artpopApp')
 				this.factors.speed = 1;
 				this.factors.mode = 'honey';
 				this.factors.moveWave = true;
-				this.factors.rotateX = true;
-				this.factors.rotateY = true;
-				this.factors.rotateZ = true;
+
+
+
+				// this.factors.rotateX = true;
+				// this.factors.rotateY = true;
+				// this.factors.rotateZ = true;
 
 			},
 			resetAnimation: function(){
@@ -101,6 +104,9 @@ angular.module('artpopApp')
 				uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 
 				this.loopThroughVerticies();
+			},
+			cleanUp: function(){
+				this.cleanUpCtr();
 			},
 			loopThroughVerticies: function(){
 				//assgin mesh
@@ -183,9 +189,9 @@ angular.module('artpopApp')
 
 				this.ctr.folder.add(this.factors, 'moveWave').listen();
 
-				this.ctr.folder.add(this.factors, 'rotateX').listen();
-				this.ctr.folder.add(this.factors, 'rotateY').listen();
-				this.ctr.folder.add(this.factors, 'rotateZ').listen();
+				// this.ctr.folder.add(this.factors, 'rotateX').listen();
+				// this.ctr.folder.add(this.factors, 'rotateY').listen();
+				// this.ctr.folder.add(this.factors, 'rotateZ').listen();
 
 
 				this.ctr.folder.add(this, 'resetAnimation');
@@ -248,16 +254,16 @@ angular.module('artpopApp')
 				}
 
 
-				//rotate the ball.
-				if (this.factors.rotateX){
-					this.mesh.rotation.x += factors.speed / 50;
-				}
-				if (this.factors.rotateY){
-					this.mesh.rotation.y += factors.speed / 50;
-				}
-				if (this.factors.rotateZ){
-					this.mesh.rotation.z += factors.speed / 50;
-				}
+				// //rotate the ball.
+				// if (this.factors.rotateX){
+				// 	this.mesh.rotation.x += factors.speed / 50;
+				// }
+				// if (this.factors.rotateY){
+				// 	this.mesh.rotation.y += factors.speed / 50;
+				// }
+				// if (this.factors.rotateZ){
+				// 	this.mesh.rotation.z += factors.speed / 50;
+				// }
 
 				this.ctr.syncController();
 

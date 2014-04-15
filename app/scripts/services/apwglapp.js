@@ -1,7 +1,7 @@
 'use strict';
 /* global THREE, Modernizr */
 angular.module('artpopApp')
-.factory('APWGLAPP', function (X3, shaderBank, meshBank, CustomControl, gifMaker) {
+.factory('APWGLAPP', function (X3, shaderBank, meshBank, CustomControl, meshControl, gifMaker) {
 	// Service logic
 	// ...
 
@@ -14,8 +14,7 @@ angular.module('artpopApp')
 
 		this.last = {
 			mesh: null,
-			shader: null,
-			shaderUpdater: null
+			shader: null
 		};
 
 		this.select = {
@@ -29,7 +28,6 @@ angular.module('artpopApp')
 			mesh: this.select.options.mesh[0],
 			shader: this.select.options.shader[0],
 		};
-
 
 		this.prebind = this.prebind || {};
 	}
@@ -46,10 +44,6 @@ angular.module('artpopApp')
 
 		this.addTask(this.setUpCtr);
 		this.addTask(this.setUpScene);
-		// //setup controller
-		// this.setUpCtr();
-		// //3d scene
-		// this.setUpScene();
 	};
 
 	/* ============================================
@@ -92,24 +86,32 @@ angular.module('artpopApp')
 		var mesh = meshBank.getLazy(this.select.current.mesh);
 		var shader = shaderBank.getLazy(this.select.current.shader);
 
-		//export
-		this.last.mesh = mesh;
-		this.last.shader = shader;
-		this.last.shaderUpdater = this.last.shader.prebind.update;
 
-		shader.factors.wireframe = true;
+		meshControl.reconfig(mesh);
+		meshControl.setUpCtr();
 
 		//config shader with mesh
 		shader.reconfig({
-			mesh: this.last.mesh,
+			mesh: mesh,
 			url: 'textures/disturb.jpg'
 		});
 
-		shader.material.wireframe = true;
-
 		shader.setUpCtr();
 
-		this.scene.add( this.last.mesh  );
+
+		// shader.factors.wireframe = true;
+		// shader.material.wireframe = true;
+
+
+		//add to scene
+		this.scene.add( mesh  );
+
+
+		//export
+		this.last.mesh = mesh;
+		this.last.shader = shader;
+
+
 	};
 
 
@@ -151,12 +153,8 @@ angular.module('artpopApp')
 		}
 
 		var mesh = meshBank.getLazy(this.select.current.mesh);
-		var shader = shaderBank.getLazy(this.select.current.shader);
+		var shader = this.last.shader;
 
-		//export
-		this.last.mesh = mesh;
-		this.last.shader = shader;
-		this.last.shaderUpdater = this.last.shader.prebind.update;
 
 		//config shader with mesh
 		shader.reconfig({
@@ -167,29 +165,31 @@ angular.module('artpopApp')
 		this.scene.add( mesh );
 
 
-
+		//export
+		this.last.mesh = mesh;
+		this.last.shader = shader;
 	};
 	APWGLAPP.fn.onChangeShader = function(){
 		if (this.last.shader){
-			this.last.shader.cleanUpCtr();
+			this.last.shader.cleanUp();
 		}
 
 		var mesh = meshBank.getLazy(this.select.current.mesh);
 		var shader = shaderBank.getLazy(this.select.current.shader);
 
+
+
+		//config shader with mesh
+
+		shader.reconfig({
+			mesh: mesh
+		});
+
+		shader.setUpCtr();
+
 		//export
 		this.last.mesh = mesh;
 		this.last.shader = shader;
-		this.last.shaderUpdater = this.last.shader.prebind.update;
-
-		//config shader with mesh
-		shader.reconfig({
-			mesh: mesh,
-			url: 'textures/disturb.jpg'
-		});
-
-		this.scene.add( mesh );
-
 	};
 
 	/* ============================================
@@ -200,13 +200,14 @@ angular.module('artpopApp')
 	/* ============================================
 		Shaders
 	   ============================================ */
-
-
 	APWGLAPP.fn.update = function(){
 		this.parent.update.apply(this,arguments);
-		if (typeof this.last.shaderUpdater === 'function'){
-			this.last.shaderUpdater();
+		if (typeof this.last.shader.update === 'function'){
+			this.last.shader.update();
 		}
+
+		meshControl.update();
+
 	};
 
 
