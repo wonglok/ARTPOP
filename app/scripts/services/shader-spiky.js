@@ -98,7 +98,7 @@ angular.module('artpopApp')
 
 				//assign texture, and color
 				uniforms.color.value =  param.color || (new THREE.Color( 0xff00ff ));
-				uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/disturb.jpg' );
+				uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/chrome.png' );
 				uniforms.texture.value.wrapS = THREE.RepeatWrapping;
 				uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 

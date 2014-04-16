@@ -127,11 +127,8 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
 
   $templateCache.put('shaders/sun.fs',
+    "//https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html\n" +
     "//http://stackoverflow.com/questions/8088475/how-to-customise-file-type-to-syntax-associations-in-sublime-2\n" +
-    "\n" +
-    "\n" +
-    "\n" +
-    "\n" +
     "uniform sampler2D baseTexture;\n" +
     "uniform float baseSpeed;\n" +
     "\n" +
@@ -145,68 +142,41 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
     "{\n" +
     "\n" +
     "\n" +
+    "    vec4 noiseColor = texture2D( noiseTexture , vUv );\n" +
+    "    vec4 baseColor = texture2D( baseTexture , vUv );\n" +
     "\n" +
-    "\tvec2 uvTimeShift = \t\tvUv\n" +
-    "\t\t\t\t\t\t+\n" +
-    "\t\t\t\t\t\t\t  vec2( -0.7, 1.5 )\n" +
-    "\t\t\t\t\t\t\t* time\n" +
-    "\t\t\t\t\t\t\t* baseSpeed;\n" +
+    "    vec2 noiseCoord = vUv + vec2( 2, 4 ) * 0.1 * time  * baseSpeed;\n" +
+    "    noiseCoord.x += noiseColor.g * 0.2;\n" +
+    "    noiseCoord.y -= noiseColor.r * 0.3;\n" +
     "\n" +
-    "\tvec4 noiseGeneratorTimeShift = texture2D(\n" +
-    "\t\t\t\t\t\t\t\t\t\tnoiseTexture,\n" +
-    "\t\t\t\t\t\t\t\t\t\tuvTimeShift\n" +
-    "\t\t\t\t\t\t\t\t\t);\n" +
+    "    vec2 noiseCoord2 = vUv + vec2( 1, 0 ) * 0.1 * time  * baseSpeed;\n" +
+    "    noiseCoord2.x -= noiseColor.r * 4.0;\n" +
+    "    noiseCoord2.y += noiseColor.g * 1.5;\n" +
     "\n" +
-    "\tvec2 uvNoiseTimeShift = \tvUv\n" +
+    "\n" +
+    "    vec2 uvNoiseTimeShift = \t\tvUv\n" +
     "\t\t\t\t\t\t\t\t+\n" +
     "\n" +
     "\t\t\t\t\t\t\t\t\tnoiseScale\n" +
-    "\t\t\t\t\t\t\t\t* \tvec2(\n" +
-    "\t\t\t\t\t\t\t\t\t\tnoiseGeneratorTimeShift.r,\n" +
-    "\t\t\t\t\t\t\t\t\t\tnoiseGeneratorTimeShift.b\n" +
-    "\t\t\t\t\t\t\t\t);\n" +
+    "                                *   noiseCoord2\n" +
+    "                                ;\n" +
     "\n" +
-    "\tvec4 baseColor = texture2D(\n" +
+    "    float fog = texture2D( noiseTexture, noiseCoord2 * 3.0 ).a * 0.5 ;\n" +
+    "\n" +
+    "\tvec4 tempColor = texture2D(\n" +
     "\t\t\t\t\t\t\t\tbaseTexture,\n" +
     "\t\t\t\t\t\t\t\tuvNoiseTimeShift\n" +
     "\t\t\t\t\t\t\t);\n" +
-    "\n" +
-    "\n" +
-    "\tbaseColor.a = alpha;\n" +
-    "\n" +
-    "\tgl_FragColor = baseColor;\n" +
-    "}\n" +
+    "    tempColor.a = alpha;\n" +
     "\n" +
     "\n" +
     "\n" +
+    "    tempColor += tempColor * 0.45;\n" +
     "\n" +
-    "//https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html\n" +
-    "// uniform float time;\n" +
+    "    tempColor -= vec4 (fog) / 0.6;\n" +
     "\n" +
-    "// uniform sampler2D texture1;\n" +
-    "// uniform sampler2D texture2;\n" +
-    "\n" +
-    "// varying vec2 texCoord;\n" +
-    "\n" +
-    "// void main( void ) {\n" +
-    "\n" +
-    "// \tvec4 noise = texture2D( texture1, texCoord );\n" +
-    "\n" +
-    "// \tvec2 T1 = texCoord + vec2( 1.5, -1.5 ) * time  * 0.01;\n" +
-    "// \tvec2 T2 = texCoord + vec2( -0.5, 2.0 ) * time *  0.01;\n" +
-    "\n" +
-    "// \tT1.x -= noise.r * 2.0;\n" +
-    "// \tT1.y += noise.g * 4.0;\n" +
-    "\n" +
-    "// \tT2.x += noise.g * 0.2;\n" +
-    "// \tT2.y += noise.b * 0.2;\n" +
-    "\n" +
-    "// \tfloat p = texture2D( texture1, T1 * 2.0 ).a + 0.25;\n" +
-    "\n" +
-    "// \tvec4 color = texture2D( texture2, T2 );\n" +
-    "// \tvec4 temp = color * 2.0 * ( vec4( p, p, p, p ) ) + ( color * color );\n" +
-    "// \tgl_FragColor = temp;\n" +
-    "// }"
+    "\tgl_FragColor = tempColor;\n" +
+    "}"
   );
 
 

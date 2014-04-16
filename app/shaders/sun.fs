@@ -1,8 +1,5 @@
+//https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html
 //http://stackoverflow.com/questions/8088475/how-to-customise-file-type-to-syntax-associations-in-sublime-2
-
-
-
-
 uniform sampler2D baseTexture;
 uniform float baseSpeed;
 
@@ -16,65 +13,38 @@ void main()
 {
 
 
+    vec4 noiseColor = texture2D( noiseTexture , vUv );
+    vec4 baseColor = texture2D( baseTexture , vUv );
 
-	vec2 uvTimeShift = 		vUv
-						+
-							  vec2( -0.7, 1.5 )
-							* time
-							* baseSpeed;
+    vec2 noiseCoord = vUv + vec2( 2, 4 ) * 0.1 * time  * baseSpeed;
+    noiseCoord.x += noiseColor.g * 0.2;
+    noiseCoord.y -= noiseColor.r * 0.3;
 
-	vec4 noiseGeneratorTimeShift = texture2D(
-										noiseTexture,
-										uvTimeShift
-									);
+    vec2 noiseCoord2 = vUv + vec2( 1, 0 ) * 0.1 * time  * baseSpeed;
+    noiseCoord2.x -= noiseColor.r * 4.0;
+    noiseCoord2.y += noiseColor.g * 1.5;
 
-	vec2 uvNoiseTimeShift = 	vUv
+
+    vec2 uvNoiseTimeShift = 		vUv
 								+
 
 									noiseScale
-								* 	vec2(
-										noiseGeneratorTimeShift.r,
-										noiseGeneratorTimeShift.b
-								);
+                                *   noiseCoord2
+                                ;
 
-	vec4 baseColor = texture2D(
+    float fog = texture2D( noiseTexture, noiseCoord2 * 3.0 ).a * 0.5 ;
+
+	vec4 tempColor = texture2D(
 								baseTexture,
 								uvNoiseTimeShift
 							);
+    tempColor.a = alpha;
 
 
-	baseColor.a = alpha;
 
-	gl_FragColor = baseColor;
+    tempColor += tempColor * 0.45;
+
+    tempColor -= vec4 (fog) / 0.6;
+
+	gl_FragColor = tempColor;
 }
-
-
-
-
-//https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html
-// uniform float time;
-
-// uniform sampler2D texture1;
-// uniform sampler2D texture2;
-
-// varying vec2 texCoord;
-
-// void main( void ) {
-
-// 	vec4 noise = texture2D( texture1, texCoord );
-
-// 	vec2 T1 = texCoord + vec2( 1.5, -1.5 ) * time  * 0.01;
-// 	vec2 T2 = texCoord + vec2( -0.5, 2.0 ) * time *  0.01;
-
-// 	T1.x -= noise.r * 2.0;
-// 	T1.y += noise.g * 4.0;
-
-// 	T2.x += noise.g * 0.2;
-// 	T2.y += noise.b * 0.2;
-
-// 	float p = texture2D( texture1, T1 * 2.0 ).a + 0.25;
-
-// 	vec4 color = texture2D( texture2, T2 );
-// 	vec4 temp = color * 2.0 * ( vec4( p, p, p, p ) ) + ( color * color );
-// 	gl_FragColor = temp;
-// }

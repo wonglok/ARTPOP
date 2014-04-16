@@ -87,8 +87,7 @@ angular.module('artpopApp')
 			var canvas = document.createElement('canvas');
 			var context = canvas.getContext('2d');
 
-			var ratio = opts.ratio || _getRatio(context);
-			var _ratio = _getRatio(context);
+			var ratio = _getRatio(context);
 
 
 			canvas.width  = opts.gWidth;
@@ -121,8 +120,8 @@ angular.module('artpopApp')
 				//eachDataURL = eachFrame;
 
 				eachSrcImg = eachFrame;
-				// eachSrcImg.width  = opts.sWidth;
-				// eachSrcImg.height = opts.sHeight;
+				eachSrcImg.width  = opts.sWidth;
+				eachSrcImg.height = opts.sHeight;
 
 
 				if (eachRotation !== 0){
@@ -132,7 +131,7 @@ angular.module('artpopApp')
 				context.clearRect(0, 0, canvas.width, canvas.height);
 				context.drawImage(eachSrcImg,
 					0, 0,
-					eachSrcImg.width * _ratio, eachSrcImg.height * _ratio,
+					eachSrcImg.width * ratio, eachSrcImg.height * ratio,
 					0, 0,
 					canvas.width, canvas.height
 				);

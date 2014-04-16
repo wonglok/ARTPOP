@@ -39,12 +39,12 @@ angular.module('artpopApp')
 				source: {
 					//for high dpi devices. use lower logical pixel.
 					//use same pixel amount as the souce.
-					width: (this.ratio > 1) ? 160 : 340,
-					height: (this.ratio > 1) ? 160 : 340
+					width: (this.ratio > 1) ? 256 : 320,
+					height: (this.ratio > 1) ? 256 : 320
 				},
 				gif: {
-					width: (this.ratio > 1) ? 160: 256,
-					height: (this.ratio > 1) ? 160: 256
+					width: (this.ratio > 1) ? 192: 256,
+					height: (this.ratio > 1) ? 192: 256
 				}
 			},
 			autoDownload: false,
@@ -158,7 +158,6 @@ angular.module('artpopApp')
 				throw new Error('requires dataURL');
 			}
 
-			//css width
 			img.onload = fnc;
 			img.src = dataURL;
 			return img;
@@ -169,7 +168,7 @@ angular.module('artpopApp')
 
 			var imgObj = null;
 			imgObj = this.makeImgObj(dataURL, function(){
-				self.frameData[this.state.count](this);
+				self.frameData.push(this);
 				self.rotations.push(0);
 			});
 
