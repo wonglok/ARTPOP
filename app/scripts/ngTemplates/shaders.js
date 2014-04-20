@@ -129,6 +129,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
   $templateCache.put('shaders/sun.fs',
     "//https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html\n" +
     "//http://stackoverflow.com/questions/8088475/how-to-customise-file-type-to-syntax-associations-in-sublime-2\n" +
+    "//modified by lok\n" +
     "uniform sampler2D baseTexture;\n" +
     "uniform float baseSpeed;\n" +
     "\n" +
@@ -182,12 +183,13 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
   $templateCache.put('shaders/sun.vs',
     "//http://localhost:3000/Three.js/index.html#textures\n" +
+    "//\n" +
     "varying vec2 vUv;\n" +
     "void main()\n" +
     "{\n" +
     "\t//varying uv mapping\n" +
     "    vUv = uv;\n" +
     "    gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n" +
-    "}"
+    "}\n"
   );
 }]);

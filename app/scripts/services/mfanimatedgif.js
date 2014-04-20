@@ -1,6 +1,6 @@
 'use strict';
 ///* global base64 */
-/* global $ */
+///* global $ */
 angular.module('artpopApp')
 .factory('MFAnimatedGIF', function (InlineWorkerFactory, $templateCache) {
 	// Service logic
@@ -182,9 +182,10 @@ angular.module('artpopApp')
 				} else if (e.data.type === 'gif') {
 					var info = e.data;
 
-					info.blobURL = _blobURL( e.data.data );
-					info.rawBase64URL = _rawBase64URL( e.data.data );
+					// info.blobURL = _blobURL( e.data.data );
+					// info.rawBase64URL = _rawBase64URL( e.data.data );
 					// info.dataURL = _dataURL( info.rawBase64URL );
+
 
 					//they can use
 					//info.buffer and then blob it. and download it.
@@ -216,21 +217,21 @@ angular.module('artpopApp')
 
 		};
 
-		var _rawBase64URL = function(data) {
-			return $.base64.encode(data);
-		};
-
-		// var _dataURL = function(rawData) {
-		// 	return 'data:image/gif;base64,' + rawData;
+		// var _rawBase64URL = function(data) {
+		// 	return $.base64.encode(data);
 		// };
 
-		var _blobURL = function(data) {
-			window.URL = window.URL || window.webkitURL;
-			var blob = new Blob([data], {type: 'image/gif'});
-			return window.URL.createObjectURL(blob);
-		};
+		// // var _dataURL = function(rawData) {
+		// // 	return 'data:image/gif;base64,' + rawData;
+		// // };
 
-		var _transferableArray = function(data) {
+		// var _blobURL = function(data) {
+		// 	window.URL = window.URL || window.webkitURL;
+		// 	var blob = new Blob([data], {type: 'image/gif'});
+		// 	return window.URL.createObjectURL(blob);
+		// };
+
+		var _transferableArray = function (data) {
 			var uInt8View = new Uint8Array(new ArrayBuffer(data.length));
 			//var viewLength = uInt8View.length;
 			var i;

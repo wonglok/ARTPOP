@@ -1,5 +1,6 @@
 //https://github.com/tparisi/WebGLBook/blob/master/Chapter%203/graphics-solar-system.html
 //http://stackoverflow.com/questions/8088475/how-to-customise-file-type-to-syntax-associations-in-sublime-2
+//modified by lok
 uniform sampler2D baseTexture;
 uniform float baseSpeed;
 

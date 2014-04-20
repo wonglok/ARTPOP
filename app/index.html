@@ -26,7 +26,7 @@
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-
+    
     <!--content-->
     <div class="apwgl-container">
         <div class="view-animate" ng-view="">
@@ -83,6 +83,7 @@
 
     <!--  ================= BUILD START HERE ================= -->
     <!-- build:js scripts/apwgl.js -->
+
     <!-- bower:js -->
     <!-- endbower -->
 
@@ -94,11 +95,7 @@
 
     <!--js tools-->
     <script src="bower_components/base64/index.js"></script>
-
-
-    <!--famework-->
     <script src="bower_components/modernizr/modernizr.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
 
     <!--jquery&plugins-->
     <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -113,6 +110,9 @@
     <script src="bower_components/dat.gui/dat.gui.js"></script>
     <script src="bower_components/webgl-debug/index.js"></script>
 
+
+    <!--famework-->
+    <script src="bower_components/angular/angular.js"></script>
 
     <!--Angular-Modules-->
     <script src="bower_components/angular-touch/angular-touch.js"></script>
@@ -136,25 +136,27 @@
     <script src="scripts/directives/active-link.js"></script>
 
     <!--templateCache-->
+    <script src="scripts/services/shadertext.js"></script>
+    <script src="scripts/ngTemplates/templates.js"></script>
     <script src="scripts/ngTemplates/shaders.js"></script>
     <script src="scripts/ngTemplates/workers.js"></script>
 
-    <!--shaders-->
-    <script src="scripts/services/shader-spiky.js"></script>
 
+    <!--shaders-->
+    <script src="scripts/services/baseshader.js"></script>
+    <script src="scripts/services/shader-spiky.js"></script>
+    <script src="scripts/services/shader-sun.js"></script>
+    
+    <!--controls-->
+    <script src="scripts/services/meshcontrol.js"></script>
+    
     <!--banks-->
     <script src="scripts/services/banker.js"></script>
     <script src="scripts/services/texturebank.js"></script>
     <script src="scripts/services/shaderbank.js"></script>
     <script src="scripts/services/meshbank.js"></script>
 
-    <!--webgl-->
-    <script src="scripts/services/shadertext.js"></script>
-    <script src="scripts/services/corscanvas.js"></script>
-    <script src="scripts/directives/webgl-detector.js"></script>
-
-    <!--stat-->
-    <script src="scripts/services/Stats.js"></script>
+    
 
     <!--objpool-->
     <script src="scripts/services/objpoolitem.js"></script>
@@ -167,16 +169,20 @@
     <script src="scripts/services/framebudgettaskmanager.js"></script>
     <script src="scripts/services/framebudgetestimator.js"></script>
     <script src="scripts/services/framebudget.js"></script>
+    
+    <!--helpers-->
+    <script src="scripts/services/Stats.js"></script>
     <script src="scripts/services/datgui.js"></script>
-
-    <!--worker factory-->
-    <script src="scripts/services/workerfactory.js"></script>
-    <script src="scripts/services/inlineworkerfactory.js"></script>
 
     <!--gif-->
     <script src="scripts/services/gifmaker.js"></script>
     <script src="scripts/directives/gif-maker.js"></script>
     <script src="scripts/services/mfanimatedgif.js"></script>
+
+    <!--worker factory-->
+    <script src="scripts/services/workerfactory.js"></script>
+    <script src="scripts/services/inlineworkerfactory.js"></script>
+
 
     <!--services-->
     <script src="scripts/services/sharedrenderer.js"></script>
@@ -184,18 +190,17 @@
 
     <!--controls-->
     <script src="scripts/services/customcontrol.js"></script>
+    <!--webgl-->
+    <script src="scripts/services/corscanvas.js"></script>
+    <script src="scripts/directives/webgl-detector.js"></script>
+
     <script src="scripts/services/apwglapp.js"></script>
-    <script src="scripts/services/framebudgetpromisemanager.js"></script>
+
+
+
+
+
     <!-- endbuild -->
-
-    <!-- build:js scripts/templates.js -->
-    <script src="scripts/ngTemplates/templates.js"></script>
-    <script src="scripts/services/shader-sun.js"></script>
-    <script src="scripts/services/baseshader.js"></script>
-    <script src="scripts/services/meshcontrol.js"></script>
-    <!-- endbuild -->
-
-
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
