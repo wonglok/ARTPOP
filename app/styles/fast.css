@@ -70,7 +70,7 @@ canvas.wgl-canvas.gl-rendering{
    ============================================ */
 .apwgl-menu {
     /* font-family: Helvetiker; */
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     right:0;
     border: papayawhip dotted 1px;

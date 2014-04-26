@@ -19,8 +19,8 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   grunt.loadNpmTasks('grunt-angular-templates');
-  grunt.loadNpmTasks('grunt-gh-pages');
   grunt.loadNpmTasks('grunt-exec');
+  grunt.loadNpmTasks('grunt-gh-pages');
   //grunt.loadNpmTasks('grunt-open');b
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -137,7 +137,6 @@ module.exports = function (grunt) {
         }
       },
     },
-
     //grunt.loadNpmTasks('grunt-gh-pages');
     'gh-pages': {
       dist:{
@@ -511,6 +510,7 @@ module.exports = function (grunt) {
             'views/{,*/}*.html',
             'workers/{,*/}*.*',
             'images/{,*/}*.{webp}',
+            'textures/{,*/}*.*',
             'fonts/*'
           ]
         }, {
@@ -641,13 +641,13 @@ module.exports = function (grunt) {
     'karma:unit'
   ]);
 
-  grunt.registerTask('testKeep', [
-    'clean:server',
-    'concurrent:test',
-    'autoprefixer',
-    'connect:test',
-    'karma:keep'
-  ]);
+  // grunt.registerTask('testKeep', [
+  //   'clean:server',
+  //   'concurrent:test',
+  //   'autoprefixer',
+  //   'connect:test',
+  //   'karma:keep'
+  // ]);
 
 
   grunt.registerTask('build', [

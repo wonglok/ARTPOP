@@ -5,7 +5,7 @@ angular.module('artpopApp')
 	// Service logic
 	// ...
 
-	function APWGLAPP(){
+	function APWGL(){
 		X3.call(this);
 
 		this.parent = X3.prototype;
@@ -31,15 +31,16 @@ angular.module('artpopApp')
 
 		this.prebind = this.prebind || {};
 	}
-	APWGLAPP.prototype = Object.create(X3.prototype);
-	APWGLAPP.prototype.constructor = APWGLAPP;
+	APWGL.prototype = Object.create(X3.prototype);
+	APWGL.prototype.constructor = APWGL;
 
-	APWGLAPP.fn = APWGLAPP.prototype;
+	//shortcut
+	APWGL.fn = APWGL.prototype;
 
 	/* ============================================
 		init
 	   ============================================ */
-	APWGLAPP.fn.init = function(){
+	APWGL.fn.init = function(){
 		this.parent.init.apply(this, arguments);
 
 		this.addTask(this.setUpCtr);
@@ -49,7 +50,7 @@ angular.module('artpopApp')
 	/* ============================================
 		Directive
 	   ============================================ */
-	APWGLAPP.fn.reconfig = function($scope, $element, container){
+	APWGL.fn.reconfig = function($scope, $element, container){
 		this.parent.reconfig.apply(this, arguments);
 
 		//Gif
@@ -82,7 +83,7 @@ angular.module('artpopApp')
 
 	};
 
-	APWGLAPP.fn.setUpScene = function(){
+	APWGL.fn.setUpScene = function(){
 		var mesh = meshBank.getLazy(this.select.current.mesh);
 		var shader = shaderBank.getLazy(this.select.current.shader);
 
@@ -118,12 +119,12 @@ angular.module('artpopApp')
 	/* ============================================
 		GIF
 	   ============================================ */
-	APWGLAPP.fn.MakeGif = gifMaker.start.bind(gifMaker);
+	APWGL.fn.MakeGif = gifMaker.start.bind(gifMaker);
 
 	/* ============================================
 		Controllers
 	   ============================================ */
-	APWGLAPP.fn.setUpCtr = function(){
+	APWGL.fn.setUpCtr = function(){
 		this.ctr.addFolder('APWGL');
 		this.ctr.folder.add(this.select.current, 'shader', this.select.options.shader).onChange(this.onChangeShader.bind(this));
 		this.ctr.folder.add(this.select.current, 'mesh', this.select.options.mesh).onChange(this.onChangeMesh.bind(this));
@@ -139,14 +140,14 @@ angular.module('artpopApp')
 			gifMaker.config.displayGif = false;
 		}
 	};
-	APWGLAPP.fn.cleanUpCtr = function(){
+	APWGL.fn.cleanUpCtr = function(){
 		this.ctr.removeAll();
 	};
 
 	/* ============================================
 		Selects
 	   ============================================ */
-	APWGLAPP.fn.onChangeMesh = function(){
+	APWGL.fn.onChangeMesh = function(){
 		if (this.last.mesh){
 			//delete last item
 			this.scene.remove( this.last.mesh );
@@ -171,7 +172,7 @@ angular.module('artpopApp')
 		this.last.mesh = mesh;
 		this.last.shader = shader;
 	};
-	APWGLAPP.fn.onChangeShader = function(){
+	APWGL.fn.onChangeShader = function(){
 		if (this.last.shader){
 			this.last.shader.cleanUp();
 		}
@@ -202,7 +203,7 @@ angular.module('artpopApp')
 	/* ============================================
 		Shaders
 	   ============================================ */
-	APWGLAPP.fn.update = function(){
+	APWGL.fn.update = function(){
 		this.parent.update.apply(this,arguments);
 		if (typeof this.last.shader.update === 'function'){
 			this.last.shader.update();
@@ -215,5 +216,5 @@ angular.module('artpopApp')
 
 
 	// Public API here
-	return APWGLAPP;
+	return APWGL;
 });

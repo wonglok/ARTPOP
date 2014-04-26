@@ -11,7 +11,7 @@ angular
   ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/Detecotr', {
+      .when('/Detector', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
 
@@ -19,7 +19,7 @@ angular
         // controller: 'ArtpopCtrl'
 
       })
-      .when('/3DMix', {
+      .when('/', {
         templateUrl: 'views/artpop.html',
         controller: 'ArtpopCtrl'
       })
@@ -32,7 +32,7 @@ angular
         controller: 'CreditCtrl'
       })
       .otherwise({
-        redirectTo: '/Detecotr'
+        redirectTo: '/'
       });
   })
   .run(function ($rootScope, Modernizr){
