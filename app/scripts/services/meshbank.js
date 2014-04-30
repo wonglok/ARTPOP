@@ -22,8 +22,8 @@ angular.module('artpopApp')
 				param = param || {};
 
 				param.radius = param.radius || 40;
-				param.segments = param.segments || 40;
-				param.rings = param.rings || 40;
+				param.segments = param.segments || 50;
+				param.rings = param.rings || 50;
 
 				var geometry = new THREE.SphereGeometry(
 					param.radius,

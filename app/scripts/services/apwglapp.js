@@ -46,9 +46,7 @@ angular.module('artpopApp')
 		this.parent.init.apply(this, arguments);
 
 
-		this.camera.position.x = 48;
-		this.camera.position.y = 59;
-		this.camera.position.z = 47;
+
 
 
 		this.addTask(this.setUpCtr);
@@ -123,6 +121,7 @@ angular.module('artpopApp')
 			mesh: mesh,
 			url: 'textures/disturb.jpg',
 			scene: this.scene,
+			camera: this.camera,
 			renderer: this.renderer
 		});
 
@@ -193,6 +192,7 @@ angular.module('artpopApp')
 			mesh: mesh,
 			url: 'textures/disturb.jpg',
 			scene: this.scene,
+			camera: this.camera,
 			renderer: this.renderer
 		});
 
@@ -216,8 +216,10 @@ angular.module('artpopApp')
 			mesh: mesh,
 			url: 'textures/disturb.jpg',
 			scene: this.scene,
+			camera: this.camera,
 			renderer: this.renderer
 		});
+
 		shader.setUpCtr();
 
 		//export

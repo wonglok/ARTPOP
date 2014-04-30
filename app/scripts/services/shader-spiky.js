@@ -101,10 +101,14 @@ angular.module('artpopApp')
 				this.mesh.geometry.normalsNeedUpdate = true;
 				this.mesh.geometry.colorsNeedUpdate = true;
 				this.mesh.geometry.tangentsNeedUpdate = true;
+				this.mesh.geometry.dynamic = true;
+
 
 
 				//assign texture, and color
 				uniforms.color.value =  param.color || (new THREE.Color( 0xff00ff ));
+
+
 				uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/chrome.png' );
 				uniforms.texture.value.wrapS = THREE.RepeatWrapping;
 				uniforms.texture.value.wrapT = THREE.RepeatWrapping;
@@ -127,6 +131,7 @@ angular.module('artpopApp')
 					displacements[ v ] = 0;
 					noise[ v ] = Math.random() * 5;
 				}
+
 				this.attributes.displacement.needsUpdate = true;
 			},
 			setUpCtr: function(){
@@ -146,7 +151,7 @@ angular.module('artpopApp')
 					},
 					finish: function(){
 						console.log('ballcolr');
-						this.value.offsetHSL(0,2,2);
+						this.value.offsetHSL(0,2,0);
 					},
 				});
 

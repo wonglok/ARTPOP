@@ -80,9 +80,20 @@ angular.module('artpopApp')
 
       //assign object members
       this.mesh = param.mesh || (function(){ throw new Error('Requires Mesh.'); }());
+      this.camera = param.camera || (function(){ throw new Error('Requires Camera.'); }());
       this.scene = param.scene || (function(){ throw new Error('Requires Scene.'); }());
       this.renderer = param.renderer || (function(){ throw new Error('Requires Renderer.'); }());
 
+
+      this.camera.___lastPosition = this.camera.____lastPosition || {};
+
+      this.camera.___lastPosition.x = this.camera.position.x;
+      this.camera.___lastPosition.y = this.camera.position.y;
+      this.camera.___lastPosition.z = this.camera.position.z;
+
+      this.camera.position.x = 48;
+      this.camera.position.y = 59;
+      this.camera.position.z = 47;
 
 
       this.scene.add(this.refractSphereCamera);
@@ -92,6 +103,8 @@ angular.module('artpopApp')
       this.mesh.material = this.material;
 
       this.scene.add(this.floor);
+
+
 
 
 
@@ -120,7 +133,6 @@ angular.module('artpopApp')
       // this.factors.mode = 'spiky';
       // this.factors.moveWave = true;
 
-
     };
     ShaderBubble.prototype.cleanUp = function(){
       if (this.scene){
@@ -132,6 +144,15 @@ angular.module('artpopApp')
         }
       }
 
+      if (this.camera){
+        this.camera.position.x = this.camera.___lastPosition.x;
+        this.camera.position.y = this.camera.___lastPosition.y;
+        this.camera.position.z = this.camera.___lastPosition.z;
+
+        // this.camera.position.x = 0;
+        // this.camera.position.y = 0;
+        // this.camera.position.z = 0;
+      }
       this.parent.cleanUp.call(this);
 
     };

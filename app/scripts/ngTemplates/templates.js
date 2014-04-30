@@ -6,7 +6,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
 
   $templateCache.put('views/bummer.html',
-    "Bummer :( System Error<br>You are suppose to see this image:<br><img src=\"images/d7c00ed6.supposeToSee.gif\" alt=\"\"><br>P.S. Requires WebGL & JavaScript Enabled.<br>Simply use desktop Google Chrome/ Latest 4.4 Andoird Google Chrome."
+    "Bummer :( System Error<br>You are suppose to see this image:<br><img src=\"images/supposeToSee.gif\" alt=\"\"><br>P.S. Requires WebGL & JavaScript Enabled.<br>Simply use desktop Google Chrome/ Latest 4.4 Andoird Google Chrome."
   );
 
 
@@ -26,12 +26,12 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
 
   $templateCache.put('views/demo.html',
-    "<div>Please Wait while downloading {{demoImages.length}} large gif images.</div><div><img ng-repeat=\"eachImg in demoImages\" ng-src=\"{{eachImg}}\" alt=\"\"></div>"
+    "<div>Please Wait while downloading {{totalImages}} large gif images.</div><div><img ng-repeat=\"eachImg in demoImages\" ng-src=\"{{eachImg}}\" alt=\"\"></div>"
   );
 
 
   $templateCache.put('views/loading.html',
-    "<img src=\"images/f88320e1.radr.gif\" alt=\"loading\">"
+    "<img src=\"images/radr.gif\" alt=\"loading\">"
   );
 
 
