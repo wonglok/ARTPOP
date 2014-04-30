@@ -26,7 +26,7 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
 
 
   $templateCache.put('views/demo.html',
-    "<div><img ng-repeat=\"eachImg in demoImages\" ng-src=\"{{eachImg}}\" alt=\"\"></div>"
+    "<div>Please Wait while downloading {{demoImages.length}} large gif images.</div><div><img ng-repeat=\"eachImg in demoImages\" ng-src=\"{{eachImg}}\" alt=\"\"></div>"
   );
 
 
