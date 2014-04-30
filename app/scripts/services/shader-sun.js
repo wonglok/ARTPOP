@@ -6,7 +6,7 @@ angular.module('artpopApp')
 			//Shader Data
 
 
-			var noiseTexture = new THREE.ImageUtils.loadTexture( 'textures/cloud.png' );
+			var noiseTexture = new THREE.ImageUtils.loadTexture( 'textures/skip/cloud.png' );
 			noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;
 
 			var lavaTexture = new THREE.ImageUtils.loadTexture( 'textures/lava.jpg' );
@@ -81,6 +81,7 @@ angular.module('artpopApp')
 
 			//assign mesh
 			this.mesh = param.mesh || (function(){ throw new Error('Requires Mesh.'); }());
+			this.mesh.geometry.dynamic = true;
 
 			this.mesh.material = this.material;
 

@@ -31,11 +31,16 @@ angular
         templateUrl: 'views/credit.html',
         controller: 'CreditCtrl'
       })
+      .when('/Demo', {
+        templateUrl: 'views/demo.html',
+        controller: 'DemoCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
   .run(function ($rootScope, Modernizr){
+
     $rootScope.Modernizr = Modernizr;
     $rootScope.$on('$routeChangeStart', function () {
       console.log('$routeChangeStart');

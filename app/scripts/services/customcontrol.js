@@ -13,18 +13,18 @@ angular.module('artpopApp')
 		init: function(){
 			this.folderName = '';
 			this.folder = null;
-			this.lib = [];
-			this.factors = {};
+			this.paramArr = [];
+			this.factoryProxy = {};
 			this.ctrList = [];
 			this.gui = datGUI.obj;
 
 			return this;
 		},
 		find: function(name){
-			var i, arl = this.lib.length;
+			var i, arl = this.paramArr.length;
 			for (i = 0; i < arl; i++) {
-				if (this.lib[i].name === name){
-					return this.lib[i];
+				if (this.paramArr[i].name === name){
+					return this.paramArr[i];
 				}
 			}
 			return -1;
@@ -37,8 +37,19 @@ angular.module('artpopApp')
 			this.folder = this.gui.addFolder(name);
 		},
 		addCtr: function(param){
-			this.lib.push(param);
+			this.paramArr.push(param);
 			this.configCtr(param);
+		},
+		resetAnimation: function(){
+			var j,
+				paramArr = this.paramArr,
+				param;
+				// factoryProxy = this.factoryProxy;
+
+			for (j = paramArr.length - 1; j >= 0; j--) {
+				param = paramArr[j];
+				param.ctx.___animateControl = true;
+			}
 		},
 		configCtr: function(param){
 			param = param || {};
@@ -47,20 +58,19 @@ angular.module('artpopApp')
 				_getter = param.get || (function(){throw new Error('requires get');}()),
 				_setter = param.set || (function(){throw new Error('requires set');}()),
 				_finish = param.finish || function(){},
-
 				folder = this.folder,
-				factors = this.factors,
+				factoryProxy = this.factoryProxy,
 
 				controller;
 
-			factors[name] = _getter.call(ctx);
+			factoryProxy[name] = _getter.call(ctx);
 
 			ctx.___animateControl = true;
 
 			if (param.type === 'color'){
-				controller = folder.addColor(factors, name);
+				controller = folder.addColor(factoryProxy, name);
 			} else if (param.type === 'slider'){
-				var args = [factors,name];
+				var args = [factoryProxy,name];
 				if (param.min && param.max){
 					args.push(param.min);
 					args.push(param.max);
@@ -71,9 +81,9 @@ angular.module('artpopApp')
 				}
 				args = null;
 			} else if (param.type === 'checkbox'){
-				controller = folder.add(factors, name);
+				controller = folder.add(factoryProxy, name);
 			} else if (param.type === 'select'){
-				controller = folder.add(factors, name);
+				controller = folder.add(factoryProxy, name);
 			}
 
 			controller.onChange( function(val){
@@ -95,24 +105,24 @@ angular.module('artpopApp')
 		// },
 		removeAll: function(){
 			//remove all items from the
-			//this.folder.close();
-			//this.ctrClearInnerItems();
+			this.folder.close();
+			// this.clearInnerItems();
 			this.gui.removeFolder(this.folderName);
 		},
 		syncController: function(){
 			var j,
-				lib = this.lib,
-				factors = this.factors,
+				paramArr = this.paramArr,
+				factoryProxy = this.factoryProxy,
 				param;
 
-			if (this.lib.length === 0){
+			if (this.paramArr.length === 0){
 				return;
 			}
 
-			for (j = lib.length - 1; j >= 0; j--) {
-				param = lib[j];
+			for (j = paramArr.length - 1; j >= 0; j--) {
+				param = paramArr[j];
 				if (param.ctx.___animateControl){
-					factors[param.name] = param.get.call(param.ctx);
+					factoryProxy[param.name] = param.get.call(param.ctx);
 				}
 			}
 

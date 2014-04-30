@@ -295,6 +295,7 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         '<%= yeoman.app %>/scripts/{,*/}*.js',
         '!<%= yeoman.app %>/scripts/ngTemplates/{,*/}*.js',
+        '!<%= yeoman.app %>/scripts/THREE-Shaders/{,*/}*.js',
         '!<%= yeoman.app %>/scripts/polyfill/{,*/}*.js',
         '!<%= yeoman.app %>/scripts/scene/{,*/}*.js'
       ],
@@ -385,6 +386,7 @@ module.exports = function (grunt) {
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+            '!<%= yeoman.dist %>/images/demo/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
             '<%= yeoman.dist %>/styles/fonts/*'
           ]
         }
@@ -430,18 +432,22 @@ module.exports = function (grunt) {
 
     imagemin: {
       dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }
-        // ,{
-        //   expand: true,
-        //   cwd: '<%= yeoman.app %>/textures',
-        //   src: '{,*/}*.{png,jpg,jpeg,gif}',
-        //   dest: '<%= yeoman.dist %>/textures'
-        // }
+        files: [
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>/images',
+            src: '{,*/}*.{png,jpg,jpeg,gif}',
+            dest: '<%= yeoman.dist %>/images'
+          },
+          {
+            expand: true,
+            cwd: '<%= yeoman.app %>/textures',
+            src: [
+              '{,*/}*.{png,jpg,jpeg,gif}',
+              '!skip/{,*/}*.{png,jpg,jpeg,gif}',
+            ],
+            dest: '<%= yeoman.dist %>/textures'
+          }
         ]
       }
     },
@@ -697,15 +703,13 @@ module.exports = function (grunt) {
 
   grunt.registerTask('preview', [
     'gruntdefault',
+    'serve',
     'exec:openDistTest',
   ]);
 
 
-
   grunt.registerTask('deploy', [
-    'newer:jshint',
-    'test',
-    'build',
+    'gruntdefault',
     'gh-pages'
   ]);
 

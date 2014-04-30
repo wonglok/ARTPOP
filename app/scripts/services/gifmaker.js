@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('artpopApp')
-.factory('gifMaker', function (MFAnimatedGIF, frbT, $http, $templateCache, datGUI) {
+.factory('gifMaker', function (MFAnimatedGIF, frbT, $http, $templateCache, datGUI, $rootScope) {
 	// Service logic
 	// ...
 	function GifMaker(){
@@ -133,7 +133,7 @@ angular.module('artpopApp')
 			//reset State
 			this.state.count = 0;
 
-			//
+			//reset State
 			this.setBusy();
 			this.stopLoop();
 			this.updateRendererForGif();
@@ -152,13 +152,13 @@ angular.module('artpopApp')
 		},
 		//firefox doesn't seemed to be able to reuse image...
 		//without this... kinda flaky...
-		makeImgObj: function(dataURL, fnc){
+		makeImgObj: function(dataURL, onLoadHandler){
 			var img = new Image();
 			if (!!!dataURL){
 				throw new Error('requires dataURL');
 			}
 
-			img.onload = fnc;
+			img.onload = onLoadHandler;
 			img.src = dataURL;
 			return img;
 		},
@@ -167,7 +167,7 @@ angular.module('artpopApp')
 			var self = this;
 
 			var imgObj = null;
-			imgObj = this.makeImgObj(dataURL, function(){
+			imgObj = this.makeImgObj(dataURL, function onLoad(){
 				self.frameData.push(this);
 				self.rotations.push(0);
 			});
@@ -179,8 +179,6 @@ angular.module('artpopApp')
 		},
 		requestMakeGif: function(){
 			var self = this;
-
-
 			var timerID = setInterval(function requestGif(){
 				console.log('requestGif');
 				if (self.frameData.length === self.state.count){
@@ -200,7 +198,9 @@ angular.module('artpopApp')
 			}
 			this.setUp();
 			datGUI.obj.close();
-
+			$rootScope.STATE = $rootScope.STATE || {};
+			$rootScope.STATE.EXPORTING = true;
+			$rootScope.$digest();
 
 			var frameID = 0;
 			var startTime = (new Date()).getTime();
@@ -246,7 +246,7 @@ angular.module('artpopApp')
 		},
 
 		//http://stackoverflow.com/questions/19327749/javascript-blob-filename-without-link
-		downloadFile: function(info){
+		autoDownloadFile: function(info){
 			var saveData = (function () {
 				var anchor = document.createElement('a');
 				document.body.appendChild(anchor);
@@ -279,8 +279,6 @@ angular.module('artpopApp')
 				var blob = new Blob([info.buffer], {type: 'octet/stream'}),
 				url = window.URL.createObjectURL(blob);
 
-
-
 				var anchor = document.createElement('a');
 				anchor.href = url;
 				anchor.download = 'gif.gif';
@@ -302,13 +300,15 @@ angular.module('artpopApp')
 		done: function(info){
 			this.cleanUp();
 			if (this.config.autoDownload){
-				this.downloadFile(info);
+				this.autoDownloadFile(info);
 			}
 			if (this.config.displayGif){
 				this.displayResult(info);
 			}
 
 			datGUI.obj.open();
+			$rootScope.STATE.EXPORTING = false;
+			$rootScope.$digest();
 
 			if (!!this.indicator){
 				this.indicator.html('');

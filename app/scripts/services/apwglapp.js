@@ -29,6 +29,8 @@ angular.module('artpopApp')
 			shader: this.select.options.shader[0],
 		};
 
+
+
 		this.prebind = this.prebind || {};
 	}
 	APWGL.prototype = Object.create(X3.prototype);
@@ -43,6 +45,12 @@ angular.module('artpopApp')
 	APWGL.fn.init = function(){
 		this.parent.init.apply(this, arguments);
 
+
+		this.camera.position.x = 48;
+		this.camera.position.y = 59;
+		this.camera.position.z = 47;
+
+
 		this.addTask(this.setUpCtr);
 		this.addTask(this.setUpScene);
 	};
@@ -51,35 +59,51 @@ angular.module('artpopApp')
 		Directive
 	   ============================================ */
 	APWGL.fn.reconfig = function($scope, $element, container){
-		this.parent.reconfig.apply(this, arguments);
 
 		//Gif
 		gifMaker.switchTo(this);
 
-		//Camera
-		var controls = new THREE.TrackballControls( this.camera, container);
+
+		this.resizeRenderer(window.innerWidth, window.innerHeight);
+
+
+		var controls = new THREE.OrbitControls(this.camera, container);
+
 		this.controls = controls;
-
-		controls.rotateSpeed = 1.0;
-		controls.zoomSpeed = 1.2;
-		controls.panSpeed = 0.8;
-
-		this.minDistance = 50;
-		this.maxDistance = 50;
-
-		controls.noZoom = false;
-		controls.noPan = true;
-
-		controls.staticMoving = false;
-		controls.dynamicDampingFactor = 0.2;
-
-		controls.keys = [ 65, 83, 68 ];
-
 		$scope.$on('$destroy', function(){
-			controls._removeEventHandler();
 			controls.camera = null;
 			controls.domElement = null;
 		});
+
+		this.parent.reconfig.apply(this, arguments);
+
+
+		// //Camera
+		// var controls = new THREE.TrackballControls( this.camera, container);
+		// this.controls = controls;
+
+		// controls.rotateSpeed = 1.0;
+		// controls.zoomSpeed = 1.2;
+		// controls.panSpeed = 0.8;
+
+		// this.minDistance = 50;
+		// this.maxDistance = 50;
+
+		// controls.noZoom = false;
+		// controls.noPan = true;
+
+		// controls.staticMoving = false;
+		// controls.dynamicDampingFactor = 0.2;
+
+		// controls.keys = [ 65, 83, 68 ];
+
+		// $scope.$on('$destroy', function(){
+		// 	controls._removeEventHandler();
+		// 	controls.camera = null;
+		// 	controls.domElement = null;
+		// });
+
+
 
 	};
 
@@ -88,14 +112,20 @@ angular.module('artpopApp')
 		var shader = shaderBank.getLazy(this.select.current.shader);
 
 
+		// mesh.rotation.x = 350;
+		// mesh.rotation.y = 350;
+
 		meshControl.reconfig(mesh);
 		meshControl.setUpCtr();
 
 		//config shader with mesh
 		shader.reconfig({
 			mesh: mesh,
-			url: 'textures/disturb.jpg'
+			url: 'textures/disturb.jpg',
+			scene: this.scene,
+			renderer: this.renderer
 		});
+
 
 		shader.setUpCtr();
 
@@ -111,8 +141,6 @@ angular.module('artpopApp')
 		//export
 		this.last.mesh = mesh;
 		this.last.shader = shader;
-
-
 	};
 
 
@@ -131,13 +159,14 @@ angular.module('artpopApp')
 		this.ctr.folder.add(this, 'MakeGif');
 
 		this.ctr.folder.add(gifMaker.config, 'autoDownload').listen();
-		if (!Modernizr.touch){
+		if (Modernizr.touch){
+			gifMaker.config.autoDownload = true;
+			gifMaker.config.displayGif = false;
+		}else{
+			//desktop
 			this.ctr.folder.open();
 			gifMaker.config.displayGif = true;
 			gifMaker.config.autoDownload = false;
-		}else{
-			gifMaker.config.autoDownload = true;
-			gifMaker.config.displayGif = false;
 		}
 	};
 	APWGL.fn.cleanUpCtr = function(){
@@ -154,7 +183,7 @@ angular.module('artpopApp')
 		}
 
 		var mesh = meshBank.getLazy(this.select.current.mesh);
-		var shader = this.last.shader;
+		var shader = shaderBank.getLazy(this.select.current.shader);
 
 
 		meshControl.reconfig(mesh);
@@ -162,7 +191,9 @@ angular.module('artpopApp')
 		//config shader with mesh
 		shader.reconfig({
 			mesh: mesh,
-			url: 'textures/disturb.jpg'
+			url: 'textures/disturb.jpg',
+			scene: this.scene,
+			renderer: this.renderer
 		});
 
 		this.scene.add( mesh );
@@ -180,14 +211,13 @@ angular.module('artpopApp')
 		var mesh = meshBank.getLazy(this.select.current.mesh);
 		var shader = shaderBank.getLazy(this.select.current.shader);
 
-
-
 		//config shader with mesh
-
 		shader.reconfig({
-			mesh: mesh
+			mesh: mesh,
+			url: 'textures/disturb.jpg',
+			scene: this.scene,
+			renderer: this.renderer
 		});
-
 		shader.setUpCtr();
 
 		//export
@@ -205,6 +235,7 @@ angular.module('artpopApp')
 	   ============================================ */
 	APWGL.fn.update = function(){
 		this.parent.update.apply(this,arguments);
+
 		if (typeof this.last.shader.update === 'function'){
 			this.last.shader.update();
 		}

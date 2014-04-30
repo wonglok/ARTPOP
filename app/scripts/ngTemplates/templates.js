@@ -25,6 +25,11 @@ angular.module('artpopApp').run(['$templateCache', function($templateCache) {  '
   );
 
 
+  $templateCache.put('views/demo.html',
+    "<div><img ng-repeat=\"eachImg in demoImages\" ng-src=\"{{eachImg}}\" alt=\"\"></div>"
+  );
+
+
   $templateCache.put('views/loading.html',
     "<img src=\"images/f88320e1.radr.gif\" alt=\"loading\">"
   );

@@ -13,19 +13,22 @@ angular.module('artpopApp')
 
 		},
 		cleanUp: function(){
-			this.cleanUpMesh();
-			this.cleanUpCtr();
-		},
-		cleanUpMesh: function(){
+
 			if (this.mesh){
 				this.mesh.material = null;
 				this.mesh = null;
 			}
-		},
-		cleanUpCtr: function(){
+			if (this.scene){
+				this.scene = null;
+			}
+
+			if (this.renderer){
+				this.renderer = null;
+			}
 			if (this.ctr){
 				this.ctr.removeAll();
 			}
+
 		},
 	};
 

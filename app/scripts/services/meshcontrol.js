@@ -1,5 +1,5 @@
 'use strict';
-/* global Modernizr */
+/* global Modernizr,THREE */
 angular.module('artpopApp')
 .factory('MeshControl', function (CustomControl) {
 	// Service logic
@@ -8,6 +8,7 @@ angular.module('artpopApp')
 		this.mesh = null;
 		this.factors = {};
 		this.ctr = new CustomControl();
+		this.clock = new THREE.Clock();
 	}
 	MeshControl.prototype.constructor = MeshControl;
 
@@ -15,15 +16,19 @@ angular.module('artpopApp')
 	MeshControl.prototype.reconfig = function(mesh) {
 		this.mesh = mesh;
 	};
-	MeshControl.prototype.resetCtr = function() {
+	MeshControl.prototype.resetCtrDefaults = function() {
 		this.factors = this.factors || {};
 		this.factors.speed = 1;
 		this.factors.rotateX = false;
-		this.factors.rotateY = false;
+		this.factors.rotateY = true;
 		this.factors.rotateZ = true;
+
+		this.factors.moveX = false;
+		this.factors.moveY = false;
+		this.factors.moveZ = false;
 	};
 	MeshControl.fn.setUpCtr = function(){
-		this.resetCtr();
+		this.resetCtrDefaults();
 
 		this.ctr.addFolder('Mesh');
 
@@ -33,6 +38,9 @@ angular.module('artpopApp')
 		this.ctr.folder.add(this.factors, 'rotateY').listen();
 		this.ctr.folder.add(this.factors, 'rotateZ').listen();
 
+		this.ctr.folder.add(this.factors, 'moveX').listen();
+		this.ctr.folder.add(this.factors, 'moveY').listen();
+		this.ctr.folder.add(this.factors, 'moveZ').listen();
 
 		if (!Modernizr.touch){
 			this.ctr.folder.open();
@@ -47,17 +55,33 @@ angular.module('artpopApp')
 			return;
 		}
 		var factors = this.factors,
-			mesh = this.mesh;
+			mesh = this.mesh,
+			clock = this.clock,
+
+			elapsed = clock.getElapsedTime();
 
 		if (factors.rotateX){
-			mesh.rotation.x += factors.speed / 50;
+			mesh.rotation.x += factors.speed / 150;
 		}
 		if (factors.rotateY){
-			mesh.rotation.y += factors.speed / 50;
+			mesh.rotation.y += factors.speed / 150;
 		}
 		if (factors.rotateZ){
-			mesh.rotation.z += factors.speed / 50;
+			mesh.rotation.z += factors.speed / 150;
 		}
+
+		if (factors.moveX){
+			mesh.position.x = 10 * Math.sin(factors.speed * 2 * elapsed);
+		}
+		if (factors.moveY){
+			mesh.position.y = 10 * Math.sin(factors.speed * 2 * elapsed);
+		}
+		if (factors.moveZ){
+			mesh.position.z = 10 * Math.sin(factors.speed * 2 * elapsed);
+		}
+
+
+
 	};
 
 	return MeshControl;

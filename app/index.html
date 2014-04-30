@@ -40,11 +40,15 @@
     <!--topright-->
     <div class="apwgl-menu">
       <gif-maker></gif-maker>
-      <div id="apwgl-stats"></div>
-      <a ng-href="#Detector">Detector</a>
-      <a ng-href="#">3DMix v0.1</a>
-      <a ng-href="#Todos">Todos</a>
-      <a ng-href="#Credit">Credit</a>
+
+      <span ng-hide="STATE.EXPORTING === true">
+            <div id="apwgl-stats"></div>
+            <a ng-href="#Demo">Demo</a>
+            <a ng-href="#Detector">Detector</a>
+            <a ng-href="#">3DMix v0.1</a>
+            <a ng-href="#Credit">Credit</a>
+      </span>
+
     </div>
 
 
@@ -105,6 +109,7 @@
     <!--webgl-->
     <script src="bower_components/three.js/three.min.js"></script>
     <script src="bower_components/TrackballControls/index.js"></script>
+    <script src="bower_components/OrbitControls/index.js"></script>
     <script src="bower_components/tween.js/src/Tween.js"></script>
     <script src="bower_components/stats.js/src/Stats.js"></script>
     <script src="bower_components/dat.gui/dat.gui.js"></script>
@@ -143,7 +148,7 @@
 
 
     <!--shaders-->
-    <script src="scripts/services/baseshader.js"></script>
+    <script src="scripts/services/shaderbase.js"></script>
     <script src="scripts/services/shader-spiky.js"></script>
     <script src="scripts/services/shader-sun.js"></script>
 
@@ -200,6 +205,9 @@
 
 
 
+    <script src="scripts/THREE-Shaders/FresnelShader.js"></script>
+    <script src="scripts/services/shader-bubble.js"></script>
+    <script src="scripts/controllers/demo.js"></script>
     <!-- endbuild -->
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->

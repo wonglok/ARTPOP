@@ -82,6 +82,18 @@ angular.module('artpopApp')
 		// 	}
 		// };
 
+		var _transferableArray = function (data) {
+			var uInt8View = new Uint8Array(new ArrayBuffer(data.length));
+			//var viewLength = uInt8View.length;
+			var i;
+			var length = data.length - 1;
+			for (i = 0; i <= length; ++i) {
+				uInt8View[i] = data[i];
+			}
+			data = null;
+			return uInt8View;
+		};
+
 		var _initialize = function(opts) {
 
 			var canvas = document.createElement('canvas');
@@ -147,6 +159,13 @@ angular.module('artpopApp')
 				};
 				frameBucket.push(eachGifFrame);
 				transferableList.push(eachGifFrame.data.buffer);
+
+				// eachGifFrame = {
+				// 	data: eachGifData.data,
+				// 	height: canvas.height,
+				// 	width: canvas.width
+				// };
+				// frameBucket.push(eachGifFrame);
 			}
 
 			var gifWorker;
@@ -185,7 +204,6 @@ angular.module('artpopApp')
 					// info.blobURL = _blobURL( e.data.data );
 					// info.rawBase64URL = _rawBase64URL( e.data.data );
 					// info.dataURL = _dataURL( info.rawBase64URL );
-
 
 					//they can use
 					//info.buffer and then blob it. and download it.
@@ -230,19 +248,6 @@ angular.module('artpopApp')
 		// 	var blob = new Blob([data], {type: 'image/gif'});
 		// 	return window.URL.createObjectURL(blob);
 		// };
-
-		var _transferableArray = function (data) {
-			var uInt8View = new Uint8Array(new ArrayBuffer(data.length));
-			//var viewLength = uInt8View.length;
-			var i;
-			var length = data.length - 1;
-			for (i = 0; i <= length; ++i) {
-				uInt8View[i] = data[i];
-			}
-			data = null;
-			return uInt8View;
-		};
-
 
 		_initialize(opts);
 

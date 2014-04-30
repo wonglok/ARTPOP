@@ -2,7 +2,7 @@
 /* global THREE */
 angular.module('artpopApp')
 	.factory('ShaderSpiky', function (CustomControl, ShaderText) {
-		function SpikySahder(){
+		function ShaderSpiky(){
 			//Shader
 			this.attributes = {
 				displacement: {
@@ -44,8 +44,8 @@ angular.module('artpopApp')
 			this.material = null;
 			window.spiky = this;
 		}
-		SpikySahder.prototype = {
-			consturctor: SpikySahder,
+		ShaderSpiky.prototype = {
+			consturctor: ShaderSpiky,
 			ctr: new CustomControl(),
 			setFactors: function(){
 				this.select = this.select || {};
@@ -61,16 +61,13 @@ angular.module('artpopApp')
 				this.factors.moveWave = true;
 
 
-
 				// this.factors.rotateX = true;
 				// this.factors.rotateY = true;
 				// this.factors.rotateZ = true;
 
 			},
 			resetAnimation: function(){
-				for(var key in this.uniforms){
-					this.uniforms[key].animate = true;
-				}
+				this.ctr.resetAnimation();
 				this.setFactors();
 			},
 			init: function(param){
@@ -96,6 +93,16 @@ angular.module('artpopApp')
 				this.mesh = param.mesh || (function(){ throw new Error('Requires Mesh.'); }());
 				this.mesh.material = this.material;
 
+
+				this.mesh.geometry.verticesNeedUpdate = true;
+				this.mesh.geometry.elementsNeedUpdate = true;
+				this.mesh.geometry.morphTargetsNeedUpdate = true;
+				this.mesh.geometry.uvsNeedUpdate = true;
+				this.mesh.geometry.normalsNeedUpdate = true;
+				this.mesh.geometry.colorsNeedUpdate = true;
+				this.mesh.geometry.tangentsNeedUpdate = true;
+
+
 				//assign texture, and color
 				uniforms.color.value =  param.color || (new THREE.Color( 0xff00ff ));
 				uniforms.texture.value = THREE.ImageUtils.loadTexture( param.url || 'textures/chrome.png' );
@@ -114,16 +121,16 @@ angular.module('artpopApp')
 					displacements = displacement.value,
 					vertices =  this.mesh.geometry.vertices;
 
+
 				//attribute data
 				for (var v = vertices.length - 1; v >= 0; v--) {
 					displacements[ v ] = 0;
 					noise[ v ] = Math.random() * 5;
 				}
 				this.attributes.displacement.needsUpdate = true;
-
 			},
 			setUpCtr: function(){
-				this.ctr.addFolder('SpikySahder');
+				this.ctr.addFolder('ShaderSpiky');
 				this.ctr.folder.add(this.factors, 'mode', this.select.morphMode);
 
 				this.ctr.addCtr({
@@ -139,7 +146,7 @@ angular.module('artpopApp')
 					},
 					finish: function(){
 						console.log('ballcolr');
-						// this.value.offsetHSL(0,2,2);
+						this.value.offsetHSL(0,2,2);
 					},
 				});
 
@@ -192,7 +199,6 @@ angular.module('artpopApp')
 				// this.ctr.folder.add(this.factors, 'rotateY').listen();
 				// this.ctr.folder.add(this.factors, 'rotateZ').listen();
 
-
 				this.ctr.folder.add(this, 'resetAnimation');
 
 				if (typeof window.orientation !== 'undefined'){
@@ -222,14 +228,14 @@ angular.module('artpopApp')
 				//0~1 * 2.5 amplitude
 				// this.ctr.ctrConfig['Amplitude']
 
-				if (uniforms.color.animate){
+				if (uniforms.color.___animateControl){
 					uniforms.color.value.offsetHSL( 0.0010, 0, 0 );
 				}
-				if (uniforms.amplitude.animate){
-					uniforms.amplitude.value = 3 * Math.sin( factors.speed * 0.05 * time);
+				if (uniforms.amplitude.___animateControl){
+					uniforms.amplitude.value = 3 * Math.sin( factors.speed * 0.02 * time);
 				}
 
-				if (uniforms.textureShift.animate){
+				if (uniforms.textureShift.___animateControl){
 					uniforms.textureShift.value = 1 * Math.cos( factors.speed * 0.02 * time);
 				}
 
@@ -270,5 +276,5 @@ angular.module('artpopApp')
 
 		};
 
-		return SpikySahder;
+		return ShaderSpiky;
 	});

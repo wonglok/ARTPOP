@@ -99,7 +99,6 @@ describe('Service: FrameBudgetEstimator', function () {
       var finalEstimation = avg * newEst.config.tightenFactor;
       expect(finalEstimation > 0 && finalEstimation < 100).toBe(true);
 
-
     });
   });
 

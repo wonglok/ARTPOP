@@ -18,6 +18,7 @@ module.exports = function(config) {
       'app/bower_components/modernizr/modernizr.js',
       'app/bower_components/three.js/three.min.js',
       'app/bower_components/TrackballControls/index.js',
+      'app/bower_components/OrbitControls/index.js',
       'app/bower_components/angular/angular.js',
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-resource/angular-resource.js',

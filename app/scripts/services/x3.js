@@ -77,7 +77,7 @@ angular.module('artpopApp')
 
 				//configure camera
 				this.camera.aspect	= window.innerWidth / window.innerHeight;
-				this.camera.position.z = 80;
+				this.camera.position.z = 90;
 
 				// this.animationEndEventName = X3.animationEndEventNames[Modernizr.prefixed('animation')];
 				// this.transitionEndEventName = X3.transitionEndEventNames[Modernizr.prefixed('transition')];
