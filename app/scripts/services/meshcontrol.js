@@ -20,7 +20,7 @@ angular.module('artpopApp')
 		this.factors = this.factors || {};
 		this.factors.speed = 1;
 		this.factors.rotateX = false;
-		this.factors.rotateY = true;
+		this.factors.rotateY = false;
 		this.factors.rotateZ = true;
 
 		this.factors.moveX = false;
