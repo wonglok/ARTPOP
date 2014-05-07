@@ -94,15 +94,6 @@ angular.module('artpopApp')
 				this.mesh.material = this.material;
 
 
-				this.mesh.geometry.verticesNeedUpdate = true;
-				this.mesh.geometry.elementsNeedUpdate = true;
-				this.mesh.geometry.morphTargetsNeedUpdate = true;
-				this.mesh.geometry.uvsNeedUpdate = true;
-				this.mesh.geometry.normalsNeedUpdate = true;
-				this.mesh.geometry.colorsNeedUpdate = true;
-				this.mesh.geometry.tangentsNeedUpdate = true;
-				this.mesh.geometry.dynamic = true;
-
 
 
 				//assign texture, and color
@@ -114,6 +105,17 @@ angular.module('artpopApp')
 				uniforms.texture.value.wrapT = THREE.RepeatWrapping;
 
 				this.loopThroughVerticies();
+
+				this.mesh.geometry.dynamic = true;
+				this.mesh.geometry.verticesNeedUpdate = true;
+				this.mesh.geometry.elementsNeedUpdate = true;
+				this.mesh.geometry.morphTargetsNeedUpdate = true;
+				this.mesh.geometry.uvsNeedUpdate = true;
+				this.mesh.geometry.normalsNeedUpdate = true;
+				this.mesh.geometry.colorsNeedUpdate = true;
+				this.mesh.geometry.tangentsNeedUpdate = true;
+
+
 			},
 			cleanUp: function(){
 				this.cleanUpCtr();

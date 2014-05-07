@@ -152,7 +152,7 @@ module.exports = function (grunt) {
         src: ['**']
       }
     },
-    //http://apwgl.192.168.0.120.xip.io:9000/
+    //http://apwgl.0.0.0.0.xip.io:9000/
     // Project settings
     yeoman: {
       // configurable paths
@@ -240,7 +240,7 @@ module.exports = function (grunt) {
       }
     },
     // open : {
-    //   dev: 'http://APWGL.192.168.0.120.xip.io:9000'
+    //   dev: 'http://APWGL.0.0.0.0.xip.io:9000'
     // },
     // The actual grunt server settings
     connect: {
@@ -248,12 +248,12 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         //localhost
-        hostname: '192.168.0.120',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
         options: {
-          open: '192.168.0.120:9000',
+          open: '0.0.0.0:9000',
           base: [
             '.tmp',
             '<%= yeoman.app %>'
@@ -535,8 +535,8 @@ module.exports = function (grunt) {
     },
 
     exec: {
-      openDev: 'open http://dev-apwgl.192.168.0.120.xip.io:9000',
-      openDistTest: 'open http://dist-apwgl.192.168.0.120.xip.io:9008'
+      openDev: 'open http://dev-apwgl.127.0.0.1.xip.io:9000',
+      openDistTest: 'open http://dist-apwgl.127.0.0.1.xip.io:9008'
     },
 
     // Run some tasks in parallel to speed up the build process

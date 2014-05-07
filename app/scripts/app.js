@@ -40,7 +40,6 @@ angular
       });
   })
   .run(function ($rootScope, Modernizr){
-
     $rootScope.Modernizr = Modernizr;
     $rootScope.$on('$routeChangeStart', function () {
       console.log('$routeChangeStart');
