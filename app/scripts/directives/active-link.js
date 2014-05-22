@@ -3,6 +3,7 @@
 angular.module('artpopApp')
   .directive('activeLink', function ($location) {
     return {
+      //http://jsfiddle.net/p3ZMR/3/
       restrict: 'A',
       link: function(scope, element, attrs) {
         var activeClass = attrs.activeLink;

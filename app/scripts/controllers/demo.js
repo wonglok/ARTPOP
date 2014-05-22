@@ -3,7 +3,7 @@
 angular.module('artpopApp')
 .controller('DemoCtrl', function ($scope) {
 	$scope.demoImages = [];
-	$scope.totalImages = 19;
+	$scope.totalImages = 22;
 	$scope.imageDone = 0;
 
 
