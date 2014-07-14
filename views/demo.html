@@ -1,1 +1,1 @@
-<div ng-hide="finished === true">Please Wait while downloading {{totalImages}} large gif images, {{totalImages-imageDone}} left.</div><div><img ng-repeat="eachImg in demoImages" demo-on-load="" alt=""></div>
+<div ng-hide="finished === true">Please Wait while downloading {{totalImages}} large gif images, {{totalImages-imageDone}} left.</div><div><a ng-repeat="eachImg in demoImages" href="{{eachImg.src}}"><img ng-src="{{eachImg.src}}" alt="" demo-on-load=""></a></div>
